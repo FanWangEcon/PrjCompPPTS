@@ -1,3 +1,7 @@
 ^PrjCompPPTS\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
+^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
