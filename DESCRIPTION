@@ -1,5 +1,5 @@
 Package: PrjCompPPTS
-Title: What the Package Does (One Line, Title Case)
+Title: Global changes in school age popultion, teachers, and schools
 Version: 0.0.0.9000
 Authors@R:
     c(person(given="Emily", 
@@ -9,7 +9,7 @@ Authors@R:
       person(given="Jeonghyeok", 
              family="Kim", 
              role = c("aut"),
-             comment = c(ORCID = "")),
+             comment = c(ORCID = "0009-0001-5127-1789")),
       person(given="Fan", 
              family="Wang", 
              email="fanwecon@gmail.com",
@@ -27,3 +27,7 @@ LazyData: true
 URL: https://github.com/FanWangEcon/PrjCompPPTS,
     https://fanwangecon.github.io/PrjCompPPTS/
 BugReports: https://github.com/FanWangEcon/PrjCompPPTS/issues
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

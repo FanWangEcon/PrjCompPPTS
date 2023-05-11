@@ -1,0 +1,128 @@
+---
+title: "Compute Elasticities of School Resources to Changes in Populations"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Compute Elasticities of School Resources to Changes in Populations}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(tibble)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(kableExtra)
+
+library(PrjCompPPTS)
+```
+
+In this file, we compute all potential elasticities of school resource changes 
+given changes in school age populations. 
+
+Elasticity of schools with respect to (school-age) population is the percentage change 
+in the number of schools divided by percentage change in the school-age population.
+
+Elasticity of teachers with respect to (school-age) population is the percentage change
+in the number of teachers divided by percentage change in the school-age population.
+
+## Load data inputs and review
+
+We load in the global population data. 
+
+```{r}
+# Review all dataframe variables
+ppts_wrk <- ppts_easia_weuro_world_pchg_interp1
+str(ppts_wrk)
+```
+
+We review all unique values in variables. We get all unique "variable" values, drop enroll_ratio
+
+```{r}
+ar_st_vars <- unique(
+    ppts_wrk %>%
+    filter(variable != "enroll_ratio") %>%
+    pull(variable))
+print(ar_st_vars)
+```
+
+## Numerator and denominator percentage changes
+
+We generate separate columns for each of the "variables", containing the percentage change value for each variable. These columns will be numerators, and the original column will be the denominator.
+
+```{r}
+ppts_wrk_jnt <- ppts_wrk %>% select(-value)
+ar_st_cur_col_var <- ar_st_vars
+for (st_cur_col_var in ar_st_cur_col_var) {
+#   st_cur_col_var <- "eleagepop"
+  st_new_col_var <- paste0("pchgnum_", st_cur_col_var)
+  # 20. Generate "variable"-specific dataframes
+  ppts_one_var <- ppts_wrk %>%
+    filter(variable == st_cur_col_var) %>%
+    select(-value, - variable) %>%
+    rename(!!sym(st_new_col_var) := pchg_yrspan_interp1)
+
+  # 30. Merge "variable"-specific dataframe to main
+  ppts_wrk_jnt <- ppts_wrk_jnt %>%
+    left_join(ppts_one_var,
+        by = (c(
+            "country" = "country",
+            "area_in_country" = "area_in_country",
+            "year_bins_type" = "year_bins_type",
+            "year_bins" = "year_bins"
+        )))
+}
+# Show variable names
+print(colnames(ppts_wrk_jnt))
+print(dim(ppts_wrk_jnt))
+```
+
+We reshape the file just created, so that all "numerators" will be in the same column. 
+
+```{r}
+# 60. Reshape from wide to long, rename variable numerator, variable denominator
+ppts_wrk_jnt_long <- ppts_wrk_jnt %>% 
+  pivot_longer(cols = starts_with('pchgnum'),
+               names_to = c('variable_numerator'),
+               names_pattern = paste0("pchgnum_(.*)"),
+               values_to = "pchg_yrspan_interp1_numerator")
+# Display
+print(ppts_wrk_jnt_long[1:40,])
+```
+
+## Compute elasticities
+
+Now, we simply divide the numerator from the variable "pchg_yrspan_interp1_numerator" by the values in "pchg_yrspan_interp1", which is the denominator. 
+
+```{r}
+# Compute elasticities
+ppts_wrk_jnt_elas <- ppts_wrk_jnt_long %>%
+  mutate(elasticity = pchg_yrspan_interp1_numerator/pchg_yrspan_interp1)
+# Keep the elasticity column 
+ppts_wrk_jnt_elas <- ppts_wrk_jnt_elas %>% 
+  select(-contains("pchg"))
+# Display
+print(ppts_wrk_jnt_elas[1:40,])
+```
+
+## Examine elasticities 
+
+We now review the computed elasticity results to make sure things appear as expected. 
+
+## Save elasticity file 
+
+```{r}
+# Review file variable names
+print(colnames(ppts_wrk_jnt_elas))
+print(str(ppts_wrk_jnt_elas))
+# Save file
+write_csv(ppts_wrk_jnt_elas, "../data/ppts_wrk_jnt_elas.csv")
+usethis::use_data(ppts_wrk_jnt_elas, overwrite = TRUE)
+```

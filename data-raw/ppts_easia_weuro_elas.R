@@ -55,7 +55,11 @@ for (st_cur_col_var in ar_st_cur_col_var) {
 }
 
 # 60. Reshape from wide to long, rename variable numerator, variable denominator
-
+ppts_wrk_jnt_ ppts_wrk_jnt %>% 
+  pivot_longer(cols = starts_with('zi'),
+               names_to = c('zi'),
+               names_pattern = paste0("zi(.*)"),
+               values_to = "ev")
 
 # 50. Drop percentages, keep elasticity, rename with prefix
 # 40. Compute elasticity, column id numerator
