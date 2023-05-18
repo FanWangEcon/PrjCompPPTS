@@ -23,6 +23,9 @@ library(readr)
 library(kableExtra)
 
 library(PrjCompPPTS)
+
+# If resave outputs to data, only do this during development
+bl_resave_to_data <- FALSE
 ```
 
 In this file, we compute percentage changes in school resources and population. We interpolate when there is gaps in the data. 
@@ -32,14 +35,25 @@ For all variables, for each country/location, we compute:
 - percentage changes year by year
 - percentage changes every 5, 10, 15, and 20 years. 
 
-<!-- TODO: Something is wrong Afgphanistan teachers 1989 -->
+We interpolate and generate interval changes for all countries. We also extrapolate for up to 3 years, to reach the closest decade break-off points. 
+
+To illustrate what we do, we print results from Afghanistan and Austria, where there are gaps in the data. 
+
+In the case of Afghanistan, we: 
+
+1. Interpolate to fill-in gap years, 1983, 1987, and 1992, for example.
+2. Extrapolate to fill-in value for 2020 given 2018 to 2019 changes.
+
+In the case of Austria, in earlier decades, data is not annual, so we interpolate to obtain more annualized predictions. 
+
+We also show results illustration from Busan Korea. 
 
 ## Load and select
 
 ```{r}
 # A. Load and select ----
 ppts_easia_weuro_sel <- ppts_easia_weuro_world %>%
-  select(countrycode, area_in_country, year,
+  select(location_code, location_level, year,
          contains("stats"), -stats_enroll_ratio)
 ```
 
@@ -55,17 +69,19 @@ ppts_easia_weuro_long <- ppts_easia_weuro_sel %>%
 str(ppts_easia_weuro_long)
 # View(ppts_easia_weuro_long)
 
-
 # C sort and group ----
 ppts_easia_weuro_long <- ppts_easia_weuro_long %>%
-  arrange(countrycode, area_in_country, variable, year) %>%
-  group_by(countrycode, area_in_country, variable)
-print(ppts_easia_weuro_long[1:50,])
+  arrange(location_code, location_level, variable, year) %>%
+  group_by(location_code, location_level, variable)
+# kable(ppts_easia_weuro_long %>% 
+#   filter(location_code == 'AFG' & variable == 'student'))
 ```
 
-## Compute annual percentage changes
+## Annual percentage changes, Interpolate and Extrapolate
 
 ### Raw percentage changes
+
+We compute annual percentage changes below. Note that 
 
 ```{r}
 # D. Annual percentage changes ----
@@ -78,10 +94,32 @@ print(ppts_easia_weuro_long[1:50,])
 # D.1 annual
 ppts_easia_weuro_long <- ppts_easia_weuro_long %>%
   mutate(pchg_yr1 = (value - lag(value)) / lag(value))
-print(ppts_easia_weuro_long[1:50,])
+
+# View(ppts_easia_weuro_long)
+kable(ppts_easia_weuro_long %>% 
+        filter(location_code == 'AFG' & variable == 'student'))
+kable(ppts_easia_weuro_long %>%
+        filter(location_code == 'KOR_Busan' & variable == 'school'))
 ```
 
 ### Interpolating 
+
+We drop all NA values, only keeping the rows where we have observed levels. We then take the difference in levels between consecutive rows and divide by prior level to get percentage changes. This is potential percentage changes across multiple years if there were gaps with NA values. 
+
+We assume constant growth rate in the in-between years, and compute percentage annualized percentage changes. Given these, our annual percentage change formula is shown as below:
+
+$$
+\text{annualPercentChange}_{\left(\text{from } t' \text{ to } t'+1\right)} = 
+\left(\left(
+\frac{\text{schoolTeacherOrStudent}_{t+\tau}}{\text{schoolTeacherOrStudent}_{t}}
+\right)^{\frac{1}{\tau}}
+- 1\right), 
+$$
+where, the percentage change is for all $t \le t' \le t+\tau-1$.
+
+The annual percentage change is exact where we know the level of schools, teachers, or students in the the current year and the year immediately after. But it is based growth trend "linear" interpolation when we have years of missing data in between.
+
+We use the interpolated annual percentage changes to fill in gaps in levels.
 
 ```{r}
 # D.2 annual_interp1
@@ -92,15 +130,16 @@ ppts_easia_weuro_interp1 <- ppts_easia_weuro_long %>%
   drop_na(value) %>%
   # New sorting variable, +1 regardless of year gap
   mutate(year_with_gap_ctr = row_number()) %>%
-  arrange(countrycode, area_in_country, variable, year_with_gap_ctr) %>%
-  group_by(countrycode, area_in_country, variable) %>%
+  arrange(location_code, location_level, variable, year_with_gap_ctr) %>%
+  group_by(location_code, location_level, variable) %>%
   # compute percentage change over span and years gap over span
   mutate(pchg_span_interp1 = (value - lag(value)) / lag(value),
          span_yr = (year - lag(year))) %>%
   # linear-interpolated annualized (with compounding) percentage change
   mutate(pchg_yr1_interp1 = abs(1 + pchg_span_interp1) ^ (1 / span_yr) - 1) %>%
-  select(countrycode, area_in_country,
-         year, variable, span_yr, pchg_yr1_interp1)
+  # adjust values given percentages interpolated
+  select(location_code, location_level,
+         year, variable, span_yr, value, pchg_yr1_interp1)
 
 # D.2.2 expand to all interpolating years
 # the pchg_yr1_interp1 variable is only shown at start year, 
@@ -110,30 +149,222 @@ ppts_easia_weuro_interp1 <- ppts_easia_weuro_interp1 %>%
   ungroup() %>% mutate(span_yr_dup = span_yr) %>%
   drop_na(span_yr) %>%
   tidyr::uncount(span_yr) %>%
-  group_by(countrycode, area_in_country, variable, year) %>%
-  mutate(year_adj = row_number() + year - span_yr_dup) %>%
+  group_by(location_code, location_level, variable, year) %>%
+  mutate(year_adj = row_number() + year - span_yr_dup, 
+         gap_ctr = row_number()) %>%
   ungroup() %>%
-  select(countrycode, area_in_country,
-         year_adj, variable, pchg_yr1_interp1) %>%
+  select(location_code, location_level,
+         year_adj, variable, value, pchg_yr1_interp1, gap_ctr, span_yr_dup) %>%
   rename(year = year_adj)
+
+# D.2.3, Fill in missing values
+ppts_easia_weuro_interp1 <- ppts_easia_weuro_interp1 %>%
+  arrange(location_code, location_level, variable, year) %>%
+  group_by(location_code, location_level, variable) %>%
+  mutate(value_interp1 = case_when(
+    # Conditions A and B are both gap_ctr == span_yr_dup
+    # A. value is correct, originally not NA
+    gap_ctr == 1 & span_yr_dup == 1 ~ value,
+    # B. value is also correct, next available year with non NA
+    gap_ctr == span_yr_dup & span_yr_dup > 1 ~ value,
+    # C. in-between years, where values were NA
+    gap_ctr < span_yr_dup ~ (value/((1+pchg_yr1_interp1)^(span_yr_dup-gap_ctr)))
+    )) %>%
+  ungroup() %>%
+  select(-gap_ctr, -span_yr_dup, -value)
+
+# Print
 str(ppts_easia_weuro_interp1)
-print(ppts_easia_weuro_interp1[1:50,])
+kable(ppts_easia_weuro_interp1 %>% select(-location_level) %>%
+        filter(location_code == 'AFG' & variable == 'student'))
 ```
 
 ### Merge raw and interpolated results together
 
 ```{r}
+# Only consider years in this range
+it_min_year <- 1920
+it_max_year <- 2020
 # D.3 merge together
 ppts_easia_weuro_long <- ppts_easia_weuro_long %>%
   left_join(ppts_easia_weuro_interp1,
-            by = (c('countrycode' = 'countrycode',
-                    'area_in_country' = 'area_in_country',
+            by = (c('location_code' = 'location_code',
+                    'location_level' = 'location_level',
                     'year' = 'year',
-                    'variable' = 'variable')))
-
-str(ppts_easia_weuro_long)
-print(ppts_easia_weuro_long[1:50,])
+                    'variable' = 'variable'))) %>%
+    filter(year <= it_max_year & year >= it_min_year) %>%
+  # add in data from the first year of raw data availability
+  mutate(value_interp1 = case_when(
+    !is.na(value) & is.na(value_interp1) ~ value,
+    TRUE ~ value_interp1
+    ))
 ```
+
+### Extrapolating 
+
+We will extrapolate for several years before the start and after the end of the data timeframes. Extrapolation will not exceed going 5 years forward and going 5 years backwards. And extrapolation will only happen within years in which there is at least one variable, among variables for the country, has non-NA values. In cases where a country's data is available only starting after 1980, we allow for extrapolation back to up to 1980 for 5 years. 
+
+Specifically, because we generally have population data from 1960 to 2020 for all countries, we will not be extrapolating prior to 1960 or after 2020. But data for Korea starts in 1965, so we will not extrapolate to any years before 1965, but if one of the Korean variables has data starting from 1970, we will extrapolate between 1965 and 1970. But if the other variable only has data starting in 1980, we will extrapolate at most five years, back to 1975. For Germany, unification happened in 1992. We do not have data in 1990, preventing us from computing change from 1990 to 2000. We extrapolate from 1992 back 5 years to 1987, generating a value for 1990. 
+
+Extrapolation is meant to help with situations where we have data up to 2019, but for consistency of comparison, would be useful to extend the data to 2020 by extrapolating 1 year forward. 
+
+Compute start and end year for each variable and each country. For the interpolated value column, NaN values are before and after the start and end of available data. First go forward, value = lag(value) x lag(1+change), fill in if value is NaN and current year is less than 5 above terimal data availability time. Then do the same going backwards, but there, value = lead(value, n=1) / lead(1 + change, n=2)
+
+First, we generate end and start years and interpolating percentages, etc.
+
+```{r}
+# Generate start and end times
+ppts_easia_weuro_extrapolate <- ppts_easia_weuro_long %>%
+  drop_na(value) %>%
+  arrange(location_code, location_level, variable, year) %>%
+  group_by(location_code, location_level, variable) %>%
+  mutate(year_start = first(year, na_rm=TRUE), year_end = last(year, na_rm=TRUE),
+         value_start = first(value, na_rm=TRUE), value_end = last(value, na_rm=TRUE),
+         pchg_yr1_interp1_start = first(pchg_yr1_interp1, na_rm=TRUE),
+         pchg_yr1_interp1_end = last(pchg_yr1_interp1, na_rm=TRUE)) %>% 
+  slice(1) %>%
+  select(location_code, location_level, variable, 
+         contains("_start"), contains("_end"))
+
+```
+
+Second extrapolate. 
+
+```{r}
+# How many years to extrapolate back
+it_year_extrplt_backmost <- 5
+it_year_extrplt_fordmost <- 5
+
+# Merge with full skeleton for expansion
+ppts_easia_weuro_extrapolate <- ppts_easia_weuro_long %>%
+  select(location_code, location_level, variable, year, value) %>%
+  left_join(ppts_easia_weuro_extrapolate,
+            by = (c('location_code' = 'location_code',
+                    'location_level' = 'location_level',
+                    'variable' = 'variable'))) 
+
+# Extrapolate forward
+ppts_easia_weuro_extrapolate <- ppts_easia_weuro_extrapolate %>%
+  mutate(value_extrapolate =
+    case_when(
+        is.na(value) & (year_end + it_year_extrplt_fordmost >= year) & (year > year_end) ~
+          (value_end*((1+pchg_yr1_interp1_end)^(year-year_end))),
+        is.na(value) & (year_start - it_year_extrplt_backmost <= year) & (year < year_start) ~
+          (value_start/((1+pchg_yr1_interp1_start)^(year_start - year))),
+        TRUE ~ NA
+      )) %>%
+  mutate(pchg_yr1_interp1_extrapolate =
+    case_when(
+        (year_end + it_year_extrplt_fordmost >= year) & (year >= year_end) ~
+          pchg_yr1_interp1_end,
+        (year_start - it_year_extrplt_backmost <= year) & (year <= year_start) ~
+          pchg_yr1_interp1_start,
+        TRUE ~ NA
+      ))    
+
+# Get extrapolated values
+ppts_easia_weuro_extrapolate <- ppts_easia_weuro_extrapolate %>%
+  drop_na(pchg_yr1_interp1_extrapolate) %>% 
+  select(location_code, location_level, variable, year, 
+         value_extrapolate, pchg_yr1_interp1_extrapolate) %>%
+  rename(value_interp1 = value_extrapolate, 
+         pchg_yr1_interp1 = pchg_yr1_interp1_extrapolate)
+
+# Print
+kable(ppts_easia_weuro_extrapolate %>% select(-location_level) %>%
+        filter(location_code == 'AFG' & variable == 'student'))
+# kable(ppts_easia_weuro_extrapolate %>% select(-location_level) %>%
+#         filter(location_code == 'KOR_Busan' & variable == 'school'))
+```
+
+### Merge raw and interpolated results together with extrapolated results
+
+Merge extrpolated results back to main dataframe.
+
+```{r}
+# Merge
+ppts_easia_weuro_long <- ppts_easia_weuro_long %>%
+  left_join(ppts_easia_weuro_extrapolate,
+            by = (c('location_code' = 'location_code',
+                    'location_level' = 'location_level',
+                    'year' = 'year',
+                    'variable' = 'variable'))) 
+
+# Combine columns
+ppts_easia_weuro_long <- ppts_easia_weuro_long %>%            
+  mutate(value_interp1 = coalesce(value_interp1.x, value_interp1.y)) %>%
+  select(-value_interp1.x, -value_interp1.y) %>%
+  mutate(pchg_yr1_interp1 = coalesce(pchg_yr1_interp1.x, pchg_yr1_interp1.y)) %>%
+  select(-pchg_yr1_interp1.x, -pchg_yr1_interp1.y) %>%
+  drop_na(value_interp1)
+```
+
+## Interpolation and Extrapolation Results Overview 
+
+The results in the **value_interp1** column below contains below interpolation and extrapolation results. 
+
+### Afghanistan Interpolate and Extrapolate Results
+
+We illustrate the interpolation results by showing outputs from Afghanistan for student counts. Here, we are extrapolating several years back to 1965, and forward 1 year to 2020. And we fill in several years of missing data. 
+
+By extrapolating data in 2020, we are able to generate percentage change between 2000 and 2020, 2010 and 2020, etc. We are also able to see levels in 2020. These percentages and levels were not available without interpolation/extrapolation. We can see that our data for Afghanistan is much more complete after interpolating/extrapolating. 
+
+```{r}
+# str(ppts_easia_weuro_long)
+# print
+kable(ppts_easia_weuro_long %>% 
+        filter(location_code == 'AFG' & variable == 'student') %>%
+        ungroup() %>%
+        select(location_code, year, variable, 
+          value, value_interp1, pchg_yr1, pchg_yr1_interp1), 
+      caption="Raw and interpolated Afghanistan students results")
+```
+
+### Austria Interpolate and Extrapolate Results
+
+The Austrian data starts in 1923, and school count is available in that year. Hence, we do not extrapolate prior to that. If the data starts in 1923 (meaning any measures of any information is available in 1923), but the school count data starts in 1925, we would extrapolate back 2 years to 1923. Austrian data for initial decades is spotty, hence we interpolate to fill in the gaps.
+
+```{r}
+# str(ppts_easia_weuro_long)
+# print
+kable(ppts_easia_weuro_long %>% 
+        filter(location_code == 'AUT' & variable == 'school') %>%
+        ungroup() %>%
+        select(location_code, year, variable, 
+          value, value_interp1, pchg_yr1, pchg_yr1_interp1), 
+      caption="Raw and interpolated Austria schools results")
+```
+
+### Germany Example
+
+Germany reunified in 1992, we extrapolate to obtain data predictions for 1990 to facilitate computing percentage changes. 
+
+```{r}
+# str(ppts_easia_weuro_long)
+# print
+kable(ppts_easia_weuro_long %>% 
+        filter(location_code == 'DEU' & variable == 'school') %>%
+        ungroup() %>%
+        select(location_code, year, variable, 
+          value, value_interp1, pchg_yr1, pchg_yr1_interp1), 
+      caption="Raw and interpolated Germany schools results")
+```
+
+### Korean Busan Interpolate and Extrapolate Results
+
+We do not do any extrapolation or interpolation in Busan Korea, because the data is available for school counts between 1965 and 2020, the min and max years of the Korean data, and data is available every single year. 
+
+```{r}
+# str(ppts_easia_weuro_long)
+# print
+kable(ppts_easia_weuro_long %>% 
+        filter(location_code == 'KOR_Busan' & variable == 'school') %>%
+        ungroup() %>%
+        select(location_code, year, variable, 
+          value, value_interp1, pchg_yr1, pchg_yr1_interp1), 
+      caption="Raw and interpolated Korean Busan province schools results")
+```
+
 
 ## Generate percentage changes every 5, 10, 15, 20 years 
 
@@ -141,17 +372,17 @@ We now consider several different cuts, over the end-points of which we compute 
 
 ```{r}
 # Every five years from 1940 until 2020
-ar_it_cuts_1940t2020_i05 <- seq(1940, 2020, length.out = 17)
-st_cuts_1940t2020_i05 <- "1940t2020i05"
+ar_it_cuts_1940t2020_i05 <- seq(1920, 2020, length.out = 21)
+st_cuts_1940t2020_i05 <- "1920t2020i05"
 # Every ten years from 1940 until 2020
-ar_it_cuts_1940t2020_i10 <- seq(1940, 2020, length.out = 9)
-st_cuts_1940t2020_i10 <- "1940t2020i10"
+ar_it_cuts_1940t2020_i10 <- seq(1920, 2020, length.out = 11)
+st_cuts_1940t2020_i10 <- "1920t2020i10"
 # Every 15 years from 1940 until 2020
-ar_it_cuts_1940t2020_i15 <- seq(1945, 2020, length.out = 6)
-st_cuts_1940t2020_i15 <- "1940t2020i15"
+ar_it_cuts_1940t2020_i15 <- seq(1930, 2020, length.out = 7)
+st_cuts_1940t2020_i15 <- "1920t2020i15"
 # Every 20 years from 1940 until 2020
-ar_it_cuts_1940t2020_i20 <- seq(1940, 2020, length.out = 5)
-st_cuts_1940t2020_i20 <- "1940t2020i20"
+ar_it_cuts_1940t2020_i20 <- seq(1920, 2020, length.out = 6)
+st_cuts_1940t2020_i20 <- "1920t2020i20"
 ```
 
 We put the cuts and the associated string names into two lists. 
@@ -179,7 +410,7 @@ for (st_cuts_name in names(ls_ar_it_cuts)) {
 }
 ```
 
-Generate percentage changes across start end end points of each bin, for bins of varying length. 
+Generate percentage changes across start end end points of each bin, for bins of varying length. For both raw and interpolated data. 
 
 ```{r}
 # E. Generate cuts -----
@@ -191,21 +422,23 @@ for (it_avg_type in c(1, 2)) {
     svr_chg_var <- "pchg_yr1"
     # common var across all spans
     svr_chg_var_new <- "pchg"
+    svr_var_val <- "value"
   } else if (it_avg_type == 2) {
     svr_chg_var <- "pchg_yr1_interp1"
     # common var across all spans
     svr_chg_var_new <- "pchg_interp1"
+    svr_var_val <- "value_interp1"
   }
   
   # Add to stack the annual results
   ppts_easia_weuro_pchg <- ppts_easia_weuro_long %>%
-    select(countrycode, area_in_country,
-           variable, year, one_of(svr_chg_var), value) %>%
-    drop_na(one_of(svr_chg_var)) %>%
+    select(location_code, location_level,
+           variable, year, one_of(svr_chg_var, svr_var_val)) %>%
+    filter(!is.na(!!sym(svr_chg_var)) | !is.na(!!sym(svr_var_val))) %>%
     rename(!!sym(svr_chg_var_new) := !!sym(svr_chg_var),
            year_bins = year) %>%
     mutate(year_bins = as.factor(year_bins)) %>%
-    mutate(year_bins_type = "i01_annual") %>%
+    mutate(year_bins_type = "1940t2020i01") %>%
     ungroup()
   
   # Loop over cut types    
@@ -216,10 +449,9 @@ for (it_avg_type in c(1, 2)) {
     
     # temp dataframe
     ppts_easia_weuro_long_cut <- ppts_easia_weuro_long %>%
-      select(countrycode, area_in_country,
+      select(location_code, location_level,
              variable, year,
-             one_of(svr_chg_var), value) %>%
-      drop_na(one_of(svr_chg_var))
+             one_of(svr_chg_var, svr_var_val))
     
     # E.1 Cut types
     ar_it_cuts <- ls_ar_it_cuts[[st_cuts_name]]
@@ -235,27 +467,31 @@ for (it_avg_type in c(1, 2)) {
                              breaks = ar_it_cuts,
                              labels = ar_st_lab,
                              right = TRUE)) %>%
-      group_by(countrycode, area_in_country,
+      group_by(location_code, location_level,
                variable, year_bins) %>%
-      mutate(val_n_in_bin = n()) %>%
-      # if gap is 5 years, all 5 years has annual chagne
-      filter(val_n_in_bin == it_gap)
+      mutate(val_n_in_bin = sum(!is.na(!!sym(svr_chg_var))))
+    # filter(val_n_in_bin == it_gap)
     
     # E.3 cumulative product
     ppts_easia_weuro_long_cut <- ppts_easia_weuro_long_cut %>%
-      group_by(countrycode, area_in_country,
-               variable, year_bins) %>%
-      mutate(!!sym(svr_chg_var_new) :=
-               cumprod(1 + !!sym(svr_chg_var)) - 1)
+      arrange(location_code, location_level, variable, year_bins, year) %>%
+      group_by(location_code, location_level, variable, year_bins) %>%
+      mutate(!!sym(svr_chg_var_new) := cumprod(1 + !!sym(svr_chg_var)) - 1) %>% 
+      mutate(!!sym(svr_chg_var_new) := 
+        case_when(val_n_in_bin == it_gap ~ !!sym(svr_chg_var_new),
+                  TRUE ~ NA))
+
     # View(ppts_easia_weuro_long_cut)
     
     # E.4, slices last row
     ppts_easia_weuro_long_cut <- ppts_easia_weuro_long_cut %>%
       slice(n()) %>%
-      select(countrycode, area_in_country,
-             variable, year_bins, one_of(svr_chg_var_new), value) %>%
+      select(location_code, location_level,
+             variable, year_bins, one_of(svr_chg_var_new, svr_var_val)) %>%
       ungroup() %>%
-      mutate(year_bins_type = st_cuts_name)
+      mutate(year_bins_type = st_cuts_name) %>%
+      filter(!is.na(!!sym(svr_chg_var_new)) | !is.na(!!sym(svr_var_val))) %>% 
+      drop_na(year_bins)
     
     # E.5 Stack
     ppts_easia_weuro_pchg <- bind_rows(
@@ -266,11 +502,14 @@ for (it_avg_type in c(1, 2)) {
   if (it_avg_type == 1) {
     ppts_easia_weuro_pchg_raw <- ppts_easia_weuro_pchg
   } else if (it_avg_type == 2) {
-    ppts_easia_weuro_pchg_interp1 <- ppts_easia_weuro_pchg %>%
-      rename(value_interp1 = value)
+    ppts_easia_weuro_pchg_interp1 <- ppts_easia_weuro_pchg
   }
+  
+  # # Print results
+  # print(kable(ppts_easia_weuro_long %>% 
+  #         filter(location_code == 'AFG' & variable == 'student'), 
+  #        caption= paste0("breaks=", st_cuts_name, ", variable=", svr_chg_var_new)))
 }
-print(ppts_easia_weuro_pchg_interp1[1:50,])
 ```
 
 ### Merge raw and interpolated results together, again 
@@ -282,31 +521,102 @@ After generating percentage changes over different spans, merge again.
 # full_join same as left_join, 
 ppts_easia_weuro_world_pchg <- ppts_easia_weuro_pchg_interp1 %>%
   full_join(ppts_easia_weuro_pchg_raw,
-            by = (c('countrycode' = 'countrycode',
-                    'area_in_country' = 'area_in_country',
+            by = (c('location_code' = 'location_code',
+                    'location_level' = 'location_level',
                     'variable' = 'variable', 
                     'year_bins_type' = 'year_bins_type',
                     'year_bins' = 'year_bins'
             ))) %>% 
   mutate(variable = as.factor(variable), 
-         year_bins_type = as.factor(year_bins_type)) %>%
-  select(countrycode, area_in_country, 
+         year_bins_type = as.factor(year_bins_type), 
+         # year_bins as string to allow for correct sorting
+         year_bins = as.character(year_bins)) %>%
+  select(location_code, location_level, 
          variable, 
          year_bins_type, year_bins, 
          pchg, pchg_interp1, 
-         value, value_interp1)
+         value, value_interp1) 
+# %>% 
+  # value has missing data at the start year of each perentage calculation
+  # value_interp1 is just raw data but complete
+  # select(-value) %>% rename(value = value_interp1)
 
 str(ppts_easia_weuro_world_pchg)
-print(ppts_easia_weuro_world_pchg[1:50,])
+# print(ppts_easia_weuro_world_pchg[1:50,])
+```
+
+## Sort and Display
+
+We sort variables for more clearly organized output file. 
+
+```{R}
+# Arrange results 
+ppts_easia_weuro_world_pchg <- ppts_easia_weuro_world_pchg %>%
+  arrange(year_bins_type, 
+          location_level, location_code, 
+          variable, year_bins)
+```
+
+### Afghanistan as Example 
+
+We print results from year year group aggregation. The Afghanistan example demonstrates that we are able to compute more interval-percentage changes after interpolation, given filled out values at key years. We use student count as example.
+
+Note that the "value" column shows value at the last year in the interval, if this was observed.
+
+```{r, results='asis'}
+# print
+for (st_cuts_name in names(ls_ar_it_cuts)) {
+  print(
+    kable(ppts_easia_weuro_world_pchg %>% 
+            filter(location_code == 'AFG' & 
+                     variable == 'student' &
+                     year_bins_type == st_cuts_name) %>% 
+            select(-location_level, -year_bins_type),
+          caption = paste0("Afghanistan example, aggregate=", st_cuts_name)))
+}
+```
+
+### Austria as Example
+
+Below we illustrate with Austria as example, showing data for school count. We are able to fill out some initial decades/years a little bit more with interpolation. 
+
+```{r, results='asis'}
+# print
+for (st_cuts_name in names(ls_ar_it_cuts)) {
+  print(
+    kable(ppts_easia_weuro_world_pchg %>% 
+            filter(location_code == 'AUT' & 
+                     variable == 'school' &
+                     year_bins_type == st_cuts_name) %>%
+            select(-location_level, -year_bins_type), 
+          caption = paste0("Austria example, aggregate=", st_cuts_name)))
+}
+```
+
+### Germany as Example 
+
+Below we illustrate with Germany as example, where we filled in values.  
+
+```{r, results='asis'}
+# print
+for (st_cuts_name in names(ls_ar_it_cuts)) {
+  print(
+    kable(ppts_easia_weuro_world_pchg %>% 
+            filter(location_code == 'DEU' & 
+                     variable == 'school' &
+                     year_bins_type == st_cuts_name) %>%
+            select(-location_level, -year_bins_type), 
+          caption = paste0("Germany example, aggregate=", st_cuts_name)))
+}
 ```
 
 
 ## Store to file 
-
-We save both the raw file without interpolation and the file with gaps filled in by interpolation.
-
-```{R}
+Finally, we save results to file in the data folder. 
+```{r}
 # Write to CSV and write to rda
-write_csv(ppts_easia_weuro_world_pchg, "../data/ppts_easia_weuro_world_pchg.csv")
-usethis::use_data(ppts_easia_weuro_world_pchg, overwrite = TRUE)
+if (bl_resave_to_data) {
+  write_csv(ppts_easia_weuro_world_pchg, "../data/ppts_easia_weuro_world_pchg.csv", na="")
+  usethis::use_data(ppts_easia_weuro_world_pchg, overwrite = TRUE)
+}
 ```
