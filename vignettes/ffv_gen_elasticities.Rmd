@@ -18,10 +18,13 @@ knitr::opts_chunk$set(
 library(tibble)
 library(dplyr)
 library(tidyr)
+library(stringr)
 library(readr)
 library(kableExtra)
 
 library(PrjCompPPTS)
+# If resave outputs to data, only do this during development
+bl_resave_to_data <- FALSE
 ```
 
 In this file, we compute all potential elasticities of school resource changes 
@@ -38,8 +41,11 @@ in the number of teachers divided by percentage change in the school-age populat
 We load in the global population data. 
 
 ```{r}
-# Review all dataframe variables
-ppts_wrk <- ppts_easia_weuro_world_pchg_interp1
+# File use
+bl_interp <- FALSE
+ppts_wrk <- ppts_easia_weuro_world_pchg %>% 
+  filter(!str_detect(year_bins_type, "1940t2020i01"))
+
 str(ppts_wrk)
 ```
 
@@ -48,68 +54,95 @@ We review all unique values in variables. We get all unique "variable" values, d
 ```{r}
 ar_st_vars <- unique(
     ppts_wrk %>%
-    filter(variable != "enroll_ratio") %>%
     pull(variable))
 print(ar_st_vars)
 ```
 
-## Numerator and denominator percentage changes
+## Numerator and denominator percentage changes and Elasticity
 
-We generate separate columns for each of the "variables", containing the percentage change value for each variable. These columns will be numerators, and the original column will be the denominator.
+We generate separate columns for each of the "variables", containing the percentage change value for each variable. These columns will be numerators, and the original column will be the denominator. 
+
+Then, we reshape the file just created, so that all "numerators" will be in the same column. 
+
+We compute elasticities after 
 
 ```{r}
-ppts_wrk_jnt <- ppts_wrk %>% select(-value)
-ar_st_cur_col_var <- ar_st_vars
-for (st_cur_col_var in ar_st_cur_col_var) {
-#   st_cur_col_var <- "eleagepop"
-  st_new_col_var <- paste0("pchgnum_", st_cur_col_var)
-  # 20. Generate "variable"-specific dataframes
-  ppts_one_var <- ppts_wrk %>%
-    filter(variable == st_cur_col_var) %>%
-    select(-value, - variable) %>%
-    rename(!!sym(st_new_col_var) := pchg_yrspan_interp1)
+it_avg_type <- 1
+for (it_avg_type in c(1, 2)) {
+  
+  if (it_avg_type == 1) {
+    svr_var_val_exclude <- c("value_interp1", "pchg_interp1")
+    svr_var_val <- "value"
+    svr_chg_var <- "pchg"
+    svr_chg_var_num <- "pchg_numerator"
+    svr_elas_var <- "elasticity"
+  } else if (it_avg_type == 2) {
+    svr_var_val_exclude <- c("value", "pchg")
+    svr_var_val <- "value_interp1"
+    svr_chg_var <- "pchg_interp1"
+    svr_chg_var_num <- "pchg_interp1_numerator"
+    svr_elas_var <- "elasticity_interp1"
+  }  
+ 
+  ppts_wrk_jnt <- ppts_wrk %>% 
+    select(-one_of(svr_var_val_exclude))
+  ar_st_cur_col_var <- ar_st_vars
+  for (st_cur_col_var in ar_st_cur_col_var) {
+  #   st_cur_col_var <- "school"
+    st_new_col_var <- paste0("pchgnum_", st_cur_col_var)
+    # 20. Generate "variable"-specific dataframes
+    ppts_one_var <- ppts_wrk %>%
+      select(-one_of(svr_var_val_exclude)) %>%
+      filter(variable == st_cur_col_var) %>%
+      select(-!!sym(svr_var_val), - variable) %>%
+      rename(!!sym(st_new_col_var) := !!sym(svr_chg_var))
 
-  # 30. Merge "variable"-specific dataframe to main
-  ppts_wrk_jnt <- ppts_wrk_jnt %>%
-    left_join(ppts_one_var,
-        by = (c(
-            "country" = "country",
-            "area_in_country" = "area_in_country",
-            "year_bins_type" = "year_bins_type",
-            "year_bins" = "year_bins"
-        )))
+    # 30. Merge "variable"-specific dataframe to main
+    ppts_wrk_jnt <- ppts_wrk_jnt %>%
+      left_join(ppts_one_var,
+          by = (c(
+              "location_code" = "location_code",
+              "location_level" = "location_level",
+              "year_bins_type" = "year_bins_type",
+              "year_bins" = "year_bins"
+          )))
+  }
+
+  # Show variable names
+  print(colnames(ppts_wrk_jnt))
+  print(dim(ppts_wrk_jnt))
+
+  # 60. Reshape from wide to long, rename variable numerator, variable denominator
+  ppts_wrk_jnt_long <- ppts_wrk_jnt %>% 
+    pivot_longer(cols = starts_with('pchgnum'),
+                names_to = c('variable_numerator'),
+                names_pattern = paste0("pchgnum_(.*)"),
+                values_to = svr_chg_var_num)
+
+  # 70. Compute elasticity
+  # Now, we simply divide the numerator from the variable "pchg_yrspan_interp1_numerator" by the values in "pchg_yrspan_interp1", which is the denominator. 
+  # Compute elasticities
+  ppts_wrk_jnt_long <- ppts_wrk_jnt_long %>%
+    mutate(!!sym(svr_elas_var) :=   
+      !!sym(svr_chg_var_num)/!!sym(svr_chg_var))
+  # Keep the elasticity column 
+  # ppts_wrk_jnt_long <- ppts_wrk_jnt_long %>% 
+  #   select(-contains("value"))
+
+  # 61. save files 
+  if (it_avg_type == 1) {
+    ppts_wrk_jnt_long_val <- ppts_wrk_jnt_long
+  } else if (it_avg_type == 2) {
+    ppts_wrk_jnt_long_interp1 <- ppts_wrk_jnt_long
+  }  
 }
-# Show variable names
-print(colnames(ppts_wrk_jnt))
-print(dim(ppts_wrk_jnt))
-```
 
-We reshape the file just created, so that all "numerators" will be in the same column. 
-
-```{r}
-# 60. Reshape from wide to long, rename variable numerator, variable denominator
-ppts_wrk_jnt_long <- ppts_wrk_jnt %>% 
-  pivot_longer(cols = starts_with('pchgnum'),
-               names_to = c('variable_numerator'),
-               names_pattern = paste0("pchgnum_(.*)"),
-               values_to = "pchg_yrspan_interp1_numerator")
 # Display
-print(ppts_wrk_jnt_long[1:40,])
-```
-
-## Compute elasticities
-
-Now, we simply divide the numerator from the variable "pchg_yrspan_interp1_numerator" by the values in "pchg_yrspan_interp1", which is the denominator. 
-
-```{r}
-# Compute elasticities
-ppts_wrk_jnt_elas <- ppts_wrk_jnt_long %>%
-  mutate(elasticity = pchg_yrspan_interp1_numerator/pchg_yrspan_interp1)
-# Keep the elasticity column 
-ppts_wrk_jnt_elas <- ppts_wrk_jnt_elas %>% 
-  select(-contains("pchg"))
-# Display
-print(ppts_wrk_jnt_elas[1:40,])
+# print(ppts_wrk_jnt_long[1:50,])
+kable(ppts_wrk_jnt_long_interp1 %>% select(-location_level) %>%
+        filter(location_code == 'AFG' & 
+          variable == 'student' & 
+          variable_numerator == 'youthpop'))
 ```
 
 ## Examine elasticities 
@@ -120,9 +153,16 @@ We now review the computed elasticity results to make sure things appear as expe
 
 ```{r}
 # Review file variable names
-print(colnames(ppts_wrk_jnt_elas))
-print(str(ppts_wrk_jnt_elas))
+print(colnames(ppts_wrk_jnt_long))
+print(str(ppts_wrk_jnt_long))
 # Save file
-write_csv(ppts_wrk_jnt_elas, "../data/ppts_wrk_jnt_elas.csv")
-usethis::use_data(ppts_wrk_jnt_elas, overwrite = TRUE)
+if (bl_resave_to_data) {
+  ppts_easia_weuro_world_elas_interp1 <- ppts_wrk_jnt_long_interp1
+  write_csv(ppts_easia_weuro_world_elas_interp1, "../data/ppts_easia_weuro_world_elas_interp1.csv")
+  usethis::use_data(ppts_easia_weuro_world_elas_interp1, overwrite = TRUE)
+  
+  ppts_easia_weuro_world_elas_raw <- ppts_wrk_jnt_long_val
+  write_csv(ppts_easia_weuro_world_elas_raw, "../data/ppts_easia_weuro_world_elas_raw.csv")
+  usethis::use_data(ppts_easia_weuro_world_elas_raw, overwrite = TRUE)
+}
 ```

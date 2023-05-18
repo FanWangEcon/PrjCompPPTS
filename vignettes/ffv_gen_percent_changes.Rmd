@@ -392,14 +392,14 @@ We put the cuts and the associated string names into two lists.
 ls_ar_it_cuts <- list(
   ar_it_cuts_1940t2020_i05,
   ar_it_cuts_1940t2020_i10,
-  ar_it_cuts_1940t2020_i15,
+  # ar_it_cuts_1940t2020_i15,
   ar_it_cuts_1940t2020_i20
 )
 # Add names
 names(ls_ar_it_cuts) <- c(
   st_cuts_1940t2020_i05,
   st_cuts_1940t2020_i10,
-  st_cuts_1940t2020_i15,
+  # st_cuts_1940t2020_i15,
   st_cuts_1940t2020_i20
 )
 # Display
