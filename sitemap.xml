@@ -7,6 +7,15 @@
     <loc>https://fanwangecon.github.io/PrjCompPPTS/LICENSE-text.html</loc>
   </url>
   <url>
+    <loc>https://fanwangecon.github.io/PrjCompPPTS/articles/ffv_gen_elasticities.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/PrjCompPPTS/articles/ffv_gen_percent_changes.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/PrjCompPPTS/articles/index.html</loc>
+  </url>
+  <url>
     <loc>https://fanwangecon.github.io/PrjCompPPTS/authors.html</loc>
   </url>
   <url>
@@ -14,5 +23,8 @@
   </url>
   <url>
     <loc>https://fanwangecon.github.io/PrjCompPPTS/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://fanwangecon.github.io/PrjCompPPTS/reference/ppts_easia_weuro_world.html</loc>
   </url>
 </urlset>
