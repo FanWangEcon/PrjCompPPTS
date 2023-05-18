@@ -2,6 +2,9 @@
 # Load library
 library(tidyverse)
 
+# Generate skeleton frame for countries, starting year for all countries frame
+it_min_year <- 1980
+
 # A. Load the raw input file
 ppts_global <- read_csv("data-raw/ppts_easia_weuro_world_raw.csv")
 
@@ -16,7 +19,7 @@ ppts_global <- ppts_global %>%
 
 # C. re-order variables
 ppts_global <- ppts_global %>%
-    select(country, countrycode, area_in_country,
+    select(location_name, location_code, location_level,
            year,
            stats_youthpop,
            stats_student,
@@ -25,40 +28,42 @@ ppts_global <- ppts_global %>%
            stats_gdp,
            stats_enroll_ratio)
 
-# D. country code, add for all, and within country name
-ppts_global %>% distinct(country, countrycode)
+# D. location_name code, add for all, and within location_name name
+# ppts_global %>% distinct(location_name, location_code)
 # ppts_global <- ppts_global %>%
-#   mutate(countrycode =
-#            case_when(country == "Austria" ~ "AUT",
-#                      country == "China" ~ "CHN",
-#                      country == "France" ~ "FRA",
-#                      country == "Germany" ~ "DEU",
-#                      country == "Japan" ~ "JPN",
-#                      country == "Korea" ~ "KOR",
-#                      country == "Taiwan" ~ "TWN"))
-ppts_global <- ppts_global %>%
-  mutate(area_in_country =
-           case_when(area_in_country == "urban" ~ "urban",
-                     area_in_country == "Non-urban" ~ "non-urban",
-                     TRUE ~ area_in_country))
+#   mutate(location_code =
+#            case_when(location_name == "Austria" ~ "AUT",
+#                      location_name == "China" ~ "CHN",
+#                      location_name == "France" ~ "FRA",
+#                      location_name == "Germany" ~ "DEU",
+#                      location_name == "Japan" ~ "JPN",
+#                      location_name == "Korea" ~ "KOR",
+#                      location_name == "Taiwan" ~ "TWN"))
+# ppts_global <- ppts_global %>%
+#   mutate(location_level =
+#            case_when(location_level == "urban" ~ "urban",
+#                      location_level == "Non-urban" ~ "non-urban",
+#                      TRUE ~ location_level))
 
 # E. order rows
-ppts_global %>%
-    group_by(country, countrycode, area_in_country) %>% tally()
+print(ppts_global %>%
+    arrange(location_level, location_code) %>%
+    group_by(location_level, location_name, location_code) %>% tally(),
+    n= 300)
 ppts_global <- ppts_global %>%
-    arrange(country, area_in_country, year)
+    group_by(location_level, location_name, location_code)
 str(ppts_global)
 
 # F. Skeleton years and merge
-# Construct skeleton data-frame with entries for each country
+# Construct skeleton data-frame with entries for each location_name
 # and spanning minimum to maximum years
 # F.1 Countries with start and end years
 ppts_global_dist <- ppts_global %>%
-    arrange(country, area_in_country, year) %>%
-    group_by(country, area_in_country) %>%
-    mutate(year_start = dplyr::first(year),
+    arrange(location_name, location_level, year) %>%
+    group_by(location_name, location_level) %>%
+    mutate(year_start = min(dplyr::first(year), it_min_year),
            year_end = dplyr::last(year)) %>%
-    select(country, countrycode, area_in_country,
+    select(location_name, location_code, location_level,
            year_start, year_end) %>%
     slice_head(n=1) %>%
     mutate(year_span = year_end - year_start + 1)
@@ -74,21 +79,22 @@ ppts_global_skeleton <- ppts_global_dist %>%
 # F.3 Merge skeleton with dataset
 ppts_global <- ppts_global_skeleton %>%
   left_join(ppts_global,
-            by=(c('country'='country',
-                  'countrycode'='countrycode',
-                  'area_in_country'='area_in_country',
+            by=(c('location_name'='location_name',
+                  'location_code'='location_code',
+                  'location_level'='location_level',
                   'year'='year'))) %>%
   ungroup()
 ppts_global %>%
-    group_by(country, countrycode, area_in_country) %>% tally()
+    group_by(location_level, location_name, location_code) %>% tally()
 # View(ppts_global)
 
 # G. Variable to Factors
-ppts_easia_weuro_world <- ppts_global %>% 
-    mutate(country = as.factor(country),
-           countrycode = as.factor(countrycode),
-           area_in_country = as.factor(area_in_country))
+ppts_easia_weuro_world <- ppts_global %>%
+    mutate(location_name = as.factor(location_name),
+           location_code = as.factor(location_code),
+           location_level = as.factor(location_level)) %>%
+    arrange(location_level, location_code, location_name)
 
 # Convert the csv file to a r file in the data folder
-write_csv(ppts_easia_weuro_world, "data/ppts_easia_weuro_world.csv")
+write_csv(ppts_easia_weuro_world, "data/ppts_easia_weuro_world.csv", na = "")
 usethis::use_data(ppts_easia_weuro_world, overwrite = TRUE)
