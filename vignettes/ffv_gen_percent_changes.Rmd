@@ -378,8 +378,8 @@ st_cuts_1940t2020_i05 <- "1920t2020i05"
 ar_it_cuts_1940t2020_i10 <- seq(1920, 2020, length.out = 11)
 st_cuts_1940t2020_i10 <- "1920t2020i10"
 # Every 15 years from 1940 until 2020
-ar_it_cuts_1940t2020_i15 <- seq(1930, 2020, length.out = 7)
-st_cuts_1940t2020_i15 <- "1920t2020i15"
+ar_it_cuts_1940t2020_i15 <- seq(1925, 2015, length.out = 7)
+st_cuts_1940t2020_i15 <- "1925t2015i15"
 # Every 20 years from 1940 until 2020
 ar_it_cuts_1940t2020_i20 <- seq(1920, 2020, length.out = 6)
 st_cuts_1940t2020_i20 <- "1920t2020i20"
@@ -392,14 +392,14 @@ We put the cuts and the associated string names into two lists.
 ls_ar_it_cuts <- list(
   ar_it_cuts_1940t2020_i05,
   ar_it_cuts_1940t2020_i10,
-  # ar_it_cuts_1940t2020_i15,
+  ar_it_cuts_1940t2020_i15,
   ar_it_cuts_1940t2020_i20
 )
 # Add names
 names(ls_ar_it_cuts) <- c(
   st_cuts_1940t2020_i05,
   st_cuts_1940t2020_i10,
-  # st_cuts_1940t2020_i15,
+  st_cuts_1940t2020_i15,
   st_cuts_1940t2020_i20
 )
 # Display

@@ -31,3 +31,10 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Imports: 
+    dplyr,
+    kableExtra,
+    readr,
+    stringr,
+    tibble,
+    tidyr

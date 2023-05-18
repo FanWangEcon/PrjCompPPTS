@@ -309,68 +309,6 @@ Andorra,AND,country,2018,,4325,412,,38301,
 Andorra,AND,country,2019,,4322,411,,39003,
 Andorra,AND,country,2020,,4246,411,,34289,
 Andorra,AND,country,2021,,,,,,
-Arab World,ARB,country,1960,39900270,,,,,
-Arab World,ARB,country,1961,41339716,,,,,
-Arab World,ARB,country,1962,42792876,,,,,
-Arab World,ARB,country,1963,44248953,,,,,
-Arab World,ARB,country,1964,45685299,,,,,
-Arab World,ARB,country,1965,47089854,,,,,
-Arab World,ARB,country,1966,48668390,,,,,
-Arab World,ARB,country,1967,50184667,,,,,
-Arab World,ARB,country,1968,51657731,,,,,
-Arab World,ARB,country,1969,53108292,,,,,
-Arab World,ARB,country,1970,54542152,14668765,468550,,,67
-Arab World,ARB,country,1971,56131697,15069746,482418,,,67
-Arab World,ARB,country,1972,57668217,15792403,506620,,,69
-Arab World,ARB,country,1973,59201111,16479753,528110,,,70
-Arab World,ARB,country,1974,60796854,16972330,546493,,,70
-Arab World,ARB,country,1975,62505713,17715124,570003,,3930,72
-Arab World,ARB,country,1976,64409125,18560724,604204,,4409,74
-Arab World,ARB,country,1977,66410996,19261354,638196,,4617,74
-Arab World,ARB,country,1978,68487230,19846400,662401,,4446,75
-Arab World,ARB,country,1979,70588850,20843882,696471,,4788,76
-Arab World,ARB,country,1980,72676348,21657186,734188,,5060,78
-Arab World,ARB,country,1981,74875303,22190008,761863,,5066,78
-Arab World,ARB,country,1982,77043667,22934010,797504,,4494,79
-Arab World,ARB,country,1983,79185984,23735068,857284,,4081,80
-Arab World,ARB,country,1984,81313147,24616556,898790,,4016,80
-Arab World,ARB,country,1985,83427522,25219372,949162,,3822,80
-Arab World,ARB,country,1986,85737660,26081436,997359,,3879,81
-Arab World,ARB,country,1987,87977462,27155074,1054468,,3758,82
-Arab World,ARB,country,1988,90161760,28051460,1094416,,3869,83
-Arab World,ARB,country,1989,92284423,28783602,1271214,,3841,83
-Arab World,ARB,country,1990,95276980,28690352,1191970,,4163,83
-Arab World,ARB,country,1991,97242681,30087310,1251457,,4147,84
-Arab World,ARB,country,1992,98468251,29877748,1269702,,4282,81
-Arab World,ARB,country,1993,100222465,30774312,1334307,,4301,82
-Arab World,ARB,country,1994,101768197,32376134,1373137,,4331,85
-Arab World,ARB,country,1995,103575345,32446856,1413691,,4326,83
-Arab World,ARB,country,1996,104805785,33749812,1455204,,4426,86
-Arab World,ARB,country,1997,105886673,34365972,1531541,,4516,86
-Arab World,ARB,country,1998,106845219,34940092,1548510,,4647,87
-Arab World,ARB,country,1999,107752374,35597168,1554111,,4632,88
-Arab World,ARB,country,2000,108631574,36143540,1614222,,4833,89
-Arab World,ARB,country,2001,109435314,36776400,1673986,,4811,89
-Arab World,ARB,country,2002,110205569,37517560,1721442,,4738,91
-Arab World,ARB,country,2003,110994608,37339268,1734642,,4855,92
-Arab World,ARB,country,2004,111871393,37734444,1776160,,5176,92
-Arab World,ARB,country,2005,112886663,39707148,1838953,,5333,93
-Arab World,ARB,country,2006,113979488,40289680,1887167,,5525,94
-Arab World,ARB,country,2007,115231491,40682680,1913622,,5638,94
-Arab World,ARB,country,2008,116661764,41293268,1975278,,5821,95
-Arab World,ARB,country,2009,118267385,41136452,1956488,,5719,95
-Arab World,ARB,country,2010,120038961,41836868,1986583,,5853,96
-Arab World,ARB,country,2011,121933879,42111396,2068075,,5938,96
-Arab World,ARB,country,2012,124005611,43447616,2231272,,6098,98
-Arab World,ARB,country,2013,126210619,43561852,2266855,,6142,96
-Arab World,ARB,country,2014,128447163,44953900,2315003,,6166,96
-Arab World,ARB,country,2015,130629545,45545024,2313493,,6221,95
-Arab World,ARB,country,2016,133196474,46378904,2302263,,6292,95
-Arab World,ARB,country,2017,135482326,47415468,2302189,,6229,95
-Arab World,ARB,country,2018,137628016,48693064,2347556,,6258,96
-Arab World,ARB,country,2019,139782894,50097480,2420010,,6267,96
-Arab World,ARB,country,2020,142003455,,,,5824,96
-Arab World,ARB,country,2021,,,,,,
 United Arab Emirates,ARE,country,1960,41184,,,,,
 United Arab Emirates,ARE,country,1961,43747,,,,,
 United Arab Emirates,ARE,country,1962,47181,,,,,
@@ -3684,68 +3622,6 @@ Ecuador,ECU,country,2021,,,,,,98
 "Egypt, Arab Rep.",EGY,country,2019,33966135,13265036,530666,,3965,106
 "Egypt, Arab Rep.",EGY,country,2020,34712880,,,,4028,
 "Egypt, Arab Rep.",EGY,country,2021,,,,,,
-Euro area,EMU,country,1960,66718361,,,,,
-Euro area,EMU,country,1961,67559655,,,,,
-Euro area,EMU,country,1962,68258040,,,,,
-Euro area,EMU,country,1963,68855188,,,,,
-Euro area,EMU,country,1964,69425738,,,,,
-Euro area,EMU,country,1965,70005609,,,,,
-Euro area,EMU,country,1966,70677676,,,,,
-Euro area,EMU,country,1967,71185414,,,,,
-Euro area,EMU,country,1968,71589453,,,,,
-Euro area,EMU,country,1969,71916784,,,,,
-Euro area,EMU,country,1970,72078332,25141592,1134471,,15569,107
-Euro area,EMU,country,1971,72045295,25460140,1149977,,16068,107
-Euro area,EMU,country,1972,72022162,25657218,1183838,,16741,107
-Euro area,EMU,country,1973,71871104,25441720,1179783,,17658,106
-Euro area,EMU,country,1974,71537076,25480884,1197213,,18122,106
-Euro area,EMU,country,1975,71019144,25301486,1204193,,17889,106
-Euro area,EMU,country,1976,70296948,25045242,1202453,,18705,106
-Euro area,EMU,country,1977,69420782,24697498,1215030,,19205,105
-Euro area,EMU,country,1978,68429244,24341016,1214250,,19725,105
-Euro area,EMU,country,1979,67350206,23888242,1207906,,20405,105
-Euro area,EMU,country,1980,66231296,23392066,1197460,,20756,105
-Euro area,EMU,country,1981,65168675,22854182,1177401,,20785,105
-Euro area,EMU,country,1982,64025352,22321410,1159298,,20876,104
-Euro area,EMU,country,1983,62856138,21746506,1137033,,21123,104
-Euro area,EMU,country,1984,61717587,21267402,1123325,,21590,103
-Euro area,EMU,country,1985,60658303,20947434,1129079,,22047,104
-Euro area,EMU,country,1986,59818993,20650510,1149609,,22544,104
-Euro area,EMU,country,1987,59015751,20425638,1143326,,23051,105
-Euro area,EMU,country,1988,58287248,20163698,1146866,,23964,105
-Euro area,EMU,country,1989,57667367,19917042,1141834,,24840,105
-Euro area,EMU,country,1990,57130402,19578846,1148956,,25617,104
-Euro area,EMU,country,1991,56703319,19339288,1173333,,26181,103
-Euro area,EMU,country,1992,56329550,19008060,1168086,,26429,102
-Euro area,EMU,country,1993,55966984,18901250,1186082,,26147,102
-Euro area,EMU,country,1994,55553634,18823548,1225697,,26713,102
-Euro area,EMU,country,1995,55109807,18707214,1196440,,27289,103
-Euro area,EMU,country,1996,54610718,19160660,1232970,,27678,103
-Euro area,EMU,country,1997,54122835,19025288,1237144,,28360,103
-Euro area,EMU,country,1998,53628503,19064890,1232046,,29159,104
-Euro area,EMU,country,1999,53171254,18913656,1241253,,29946,104
-Euro area,EMU,country,2000,52778018,18658912,1272022,,31001,104
-Euro area,EMU,country,2001,52459890,18364116,1277155,,31560,104
-Euro area,EMU,country,2002,52202653,18079102,1288650,,31702,103
-Euro area,EMU,country,2003,52000743,17927866,1285004,,31745,103
-Euro area,EMU,country,2004,51851544,17842328,1286557,,32295,103
-Euro area,EMU,country,2005,51732802,17985480,1314540,,32669,104
-Euro area,EMU,country,2006,51760521,18029304,1328759,,33567,104
-Euro area,EMU,country,2007,51845940,18187344,1361471,,34395,104
-Euro area,EMU,country,2008,51934225,18205668,1371892,,34370,104
-Euro area,EMU,country,2009,51927137,18154284,1379342,,32710,104
-Euro area,EMU,country,2010,51837648,18096532,1398201,,33344,103
-Euro area,EMU,country,2011,51734491,18062904,1414911,,33991,103
-Euro area,EMU,country,2012,51721749,18011430,1395225,,33631,103
-Euro area,EMU,country,2013,51695445,18145458,1379965,,33443,103
-Euro area,EMU,country,2014,51658106,18143002,1361572,,33796,102
-Euro area,EMU,country,2015,51617233,18272148,1374416,,34388,102
-Euro area,EMU,country,2016,51573315,18325406,1399356,,34927,102
-Euro area,EMU,country,2017,51541331,18533022,1410647,,35763,103
-Euro area,EMU,country,2018,51534228,18543732,1429981,,36337,103
-Euro area,EMU,country,2019,51430127,18509660,1446426,,36873,102
-Euro area,EMU,country,2020,51256853,,,,34472,102
-Euro area,EMU,country,2021,,,,,,
 Eritrea,ERI,country,1960,437716,,,,,
 Eritrea,ERI,country,1961,450242,,,,,
 Eritrea,ERI,country,1962,461289,,,,,
@@ -9438,68 +9314,6 @@ Oman,OMN,country,2018,1074390,278745,28814,,17394,103
 Oman,OMN,country,2019,1115313,290045,28044,,16694,103
 Oman,OMN,country,2020,1148320,303890,28143,,15743,105
 Oman,OMN,country,2021,,,,,,104
-Other small states,OSS,country,1960,3497880,,,,,
-Other small states,OSS,country,1961,3581121,,,,,
-Other small states,OSS,country,1962,3662009,,,,,
-Other small states,OSS,country,1963,3740323,,,,,
-Other small states,OSS,country,1964,3815715,,,,,
-Other small states,OSS,country,1965,3887203,,,,,
-Other small states,OSS,country,1966,3967793,,,,,
-Other small states,OSS,country,1967,4041367,,,,,
-Other small states,OSS,country,1968,4112171,,,,,
-Other small states,OSS,country,1969,4183880,,,,,
-Other small states,OSS,country,1970,4258564,1419519,45070,,,86
-Other small states,OSS,country,1971,4340822,1432277,46044,,,85
-Other small states,OSS,country,1972,4426756,1479728,47526,,,86
-Other small states,OSS,country,1973,4515149,1550586,49020,,,89
-Other small states,OSS,country,1974,4603808,1622160,50915,,,91
-Other small states,OSS,country,1975,4692428,1689184,52974,,,94
-Other small states,OSS,country,1976,4799255,1745348,55068,,,95
-Other small states,OSS,country,1977,4902156,1781867,57309,,,95
-Other small states,OSS,country,1978,5005468,1827821,60094,,,96
-Other small states,OSS,country,1979,5117666,1866477,62373,,,95
-Other small states,OSS,country,1980,5239908,1930913,65004,,,96
-Other small states,OSS,country,1981,5364758,2007421,67738,,,98
-Other small states,OSS,country,1982,5497938,2072980,69565,,,99
-Other small states,OSS,country,1983,5636625,2135967,72503,,,99
-Other small states,OSS,country,1984,5779395,2202215,74055,,,100
-Other small states,OSS,country,1985,5926311,2275401,75154,,,101
-Other small states,OSS,country,1986,6090816,2339614,76987,,,101
-Other small states,OSS,country,1987,6251044,2412378,79228,,,101
-Other small states,OSS,country,1988,6405045,2473907,82133,,,101
-Other small states,OSS,country,1989,6551190,2525419,83690,,,100
-Other small states,OSS,country,1990,6683746,2551510,84174,,,98
-Other small states,OSS,country,1991,6815643,2641316,87602,,,98
-Other small states,OSS,country,1992,6931876,2674670,89763,,,97
-Other small states,OSS,country,1993,7034459,2705132,92161,,,97
-Other small states,OSS,country,1994,7126752,2799584,94976,,,99
-Other small states,OSS,country,1995,7206013,2874754,97486,,,100
-Other small states,OSS,country,1996,7302528,2923265,99594,,,100
-Other small states,OSS,country,1997,7384758,2980032,101459,,,100
-Other small states,OSS,country,1998,7455925,3057805,103747,,,101
-Other small states,OSS,country,1999,7524942,3118842,103985,,,101
-Other small states,OSS,country,2000,7589200,3210027,107788,,7519,103
-Other small states,OSS,country,2001,7627369,3281287,110007,,7698,105
-Other small states,OSS,country,2002,7667151,3322418,114133,,7911,105
-Other small states,OSS,country,2003,7710828,3352664,118123,,8124,106
-Other small states,OSS,country,2004,7762257,3369055,119139,,8694,107
-Other small states,OSS,country,2005,7825176,3381930,123067,,9000,107
-Other small states,OSS,country,2006,7872914,3422037,125784,,9741,108
-Other small states,OSS,country,2007,7928416,3436514,129275,,10438,108
-Other small states,OSS,country,2008,7993953,3447901,132771,,10919,109
-Other small states,OSS,country,2009,8068001,3467013,137551,,10840,109
-Other small states,OSS,country,2010,8149473,3506562,140363,,11491,109
-Other small states,OSS,country,2011,8271497,3548212,144646,,12079,109
-Other small states,OSS,country,2012,8390818,3542536,149094,,12245,108
-Other small states,OSS,country,2013,8515154,3574396,150978,,12440,108
-Other small states,OSS,country,2014,8647072,3628710,151755,,12652,108
-Other small states,OSS,country,2015,8784418,3693173,156763,,12780,108
-Other small states,OSS,country,2016,8924002,3751890,161126,,12896,108
-Other small states,OSS,country,2017,9062064,3823432,165714,,12794,108
-Other small states,OSS,country,2018,9199124,3895434,168589,,12816,108
-Other small states,OSS,country,2019,9330736,3977359,172906,,12834,108
-Other small states,OSS,country,2020,9449978,,,,11962,108
-Other small states,OSS,country,2021,,,,,,
 Pakistan,PAK,country,1960,17667690,,,,379,
 Pakistan,PAK,country,1961,18228144,,,,392,
 Pakistan,PAK,country,1962,18774813,,,,400,
@@ -13763,6 +13577,68 @@ Africa Western and Central,AFW,multicountry,2018,189619289,,,,1844,92
 Africa Western and Central,AFW,multicountry,2019,193768241,,,,1853,91
 Africa Western and Central,AFW,multicountry,2020,197861564,,,,1789,89
 Africa Western and Central,AFW,multicountry,2021,,,,,,
+Arab World,ARB,multicountry,1960,39900270,,,,,
+Arab World,ARB,multicountry,1961,41339716,,,,,
+Arab World,ARB,multicountry,1962,42792876,,,,,
+Arab World,ARB,multicountry,1963,44248953,,,,,
+Arab World,ARB,multicountry,1964,45685299,,,,,
+Arab World,ARB,multicountry,1965,47089854,,,,,
+Arab World,ARB,multicountry,1966,48668390,,,,,
+Arab World,ARB,multicountry,1967,50184667,,,,,
+Arab World,ARB,multicountry,1968,51657731,,,,,
+Arab World,ARB,multicountry,1969,53108292,,,,,
+Arab World,ARB,multicountry,1970,54542152,14668765,468550,,,67
+Arab World,ARB,multicountry,1971,56131697,15069746,482418,,,67
+Arab World,ARB,multicountry,1972,57668217,15792403,506620,,,69
+Arab World,ARB,multicountry,1973,59201111,16479753,528110,,,70
+Arab World,ARB,multicountry,1974,60796854,16972330,546493,,,70
+Arab World,ARB,multicountry,1975,62505713,17715124,570003,,3930,72
+Arab World,ARB,multicountry,1976,64409125,18560724,604204,,4409,74
+Arab World,ARB,multicountry,1977,66410996,19261354,638196,,4617,74
+Arab World,ARB,multicountry,1978,68487230,19846400,662401,,4446,75
+Arab World,ARB,multicountry,1979,70588850,20843882,696471,,4788,76
+Arab World,ARB,multicountry,1980,72676348,21657186,734188,,5060,78
+Arab World,ARB,multicountry,1981,74875303,22190008,761863,,5066,78
+Arab World,ARB,multicountry,1982,77043667,22934010,797504,,4494,79
+Arab World,ARB,multicountry,1983,79185984,23735068,857284,,4081,80
+Arab World,ARB,multicountry,1984,81313147,24616556,898790,,4016,80
+Arab World,ARB,multicountry,1985,83427522,25219372,949162,,3822,80
+Arab World,ARB,multicountry,1986,85737660,26081436,997359,,3879,81
+Arab World,ARB,multicountry,1987,87977462,27155074,1054468,,3758,82
+Arab World,ARB,multicountry,1988,90161760,28051460,1094416,,3869,83
+Arab World,ARB,multicountry,1989,92284423,28783602,1271214,,3841,83
+Arab World,ARB,multicountry,1990,95276980,28690352,1191970,,4163,83
+Arab World,ARB,multicountry,1991,97242681,30087310,1251457,,4147,84
+Arab World,ARB,multicountry,1992,98468251,29877748,1269702,,4282,81
+Arab World,ARB,multicountry,1993,100222465,30774312,1334307,,4301,82
+Arab World,ARB,multicountry,1994,101768197,32376134,1373137,,4331,85
+Arab World,ARB,multicountry,1995,103575345,32446856,1413691,,4326,83
+Arab World,ARB,multicountry,1996,104805785,33749812,1455204,,4426,86
+Arab World,ARB,multicountry,1997,105886673,34365972,1531541,,4516,86
+Arab World,ARB,multicountry,1998,106845219,34940092,1548510,,4647,87
+Arab World,ARB,multicountry,1999,107752374,35597168,1554111,,4632,88
+Arab World,ARB,multicountry,2000,108631574,36143540,1614222,,4833,89
+Arab World,ARB,multicountry,2001,109435314,36776400,1673986,,4811,89
+Arab World,ARB,multicountry,2002,110205569,37517560,1721442,,4738,91
+Arab World,ARB,multicountry,2003,110994608,37339268,1734642,,4855,92
+Arab World,ARB,multicountry,2004,111871393,37734444,1776160,,5176,92
+Arab World,ARB,multicountry,2005,112886663,39707148,1838953,,5333,93
+Arab World,ARB,multicountry,2006,113979488,40289680,1887167,,5525,94
+Arab World,ARB,multicountry,2007,115231491,40682680,1913622,,5638,94
+Arab World,ARB,multicountry,2008,116661764,41293268,1975278,,5821,95
+Arab World,ARB,multicountry,2009,118267385,41136452,1956488,,5719,95
+Arab World,ARB,multicountry,2010,120038961,41836868,1986583,,5853,96
+Arab World,ARB,multicountry,2011,121933879,42111396,2068075,,5938,96
+Arab World,ARB,multicountry,2012,124005611,43447616,2231272,,6098,98
+Arab World,ARB,multicountry,2013,126210619,43561852,2266855,,6142,96
+Arab World,ARB,multicountry,2014,128447163,44953900,2315003,,6166,96
+Arab World,ARB,multicountry,2015,130629545,45545024,2313493,,6221,95
+Arab World,ARB,multicountry,2016,133196474,46378904,2302263,,6292,95
+Arab World,ARB,multicountry,2017,135482326,47415468,2302189,,6229,95
+Arab World,ARB,multicountry,2018,137628016,48693064,2347556,,6258,96
+Arab World,ARB,multicountry,2019,139782894,50097480,2420010,,6267,96
+Arab World,ARB,multicountry,2020,142003455,,,,5824,96
+Arab World,ARB,multicountry,2021,,,,,,
 Central Europe and the Baltics,CEB,multicountry,1960,26671417,,,,,
 Central Europe and the Baltics,CEB,multicountry,1961,26777340,,,,,
 Central Europe and the Baltics,CEB,multicountry,1962,26719172,,,,,
@@ -14197,6 +14073,68 @@ Europe & Central Asia,ECS,multicountry,2018,165005865,52255276,3539686,,23936,10
 Europe & Central Asia,ECS,multicountry,2019,165954730,52847556,3539197,,24295,101
 Europe & Central Asia,ECS,multicountry,2020,166457552,,,,22881,100
 Europe & Central Asia,ECS,multicountry,2021,,,,,,
+Euro area,EMU,multicountry,1960,66718361,,,,,
+Euro area,EMU,multicountry,1961,67559655,,,,,
+Euro area,EMU,multicountry,1962,68258040,,,,,
+Euro area,EMU,multicountry,1963,68855188,,,,,
+Euro area,EMU,multicountry,1964,69425738,,,,,
+Euro area,EMU,multicountry,1965,70005609,,,,,
+Euro area,EMU,multicountry,1966,70677676,,,,,
+Euro area,EMU,multicountry,1967,71185414,,,,,
+Euro area,EMU,multicountry,1968,71589453,,,,,
+Euro area,EMU,multicountry,1969,71916784,,,,,
+Euro area,EMU,multicountry,1970,72078332,25141592,1134471,,15569,107
+Euro area,EMU,multicountry,1971,72045295,25460140,1149977,,16068,107
+Euro area,EMU,multicountry,1972,72022162,25657218,1183838,,16741,107
+Euro area,EMU,multicountry,1973,71871104,25441720,1179783,,17658,106
+Euro area,EMU,multicountry,1974,71537076,25480884,1197213,,18122,106
+Euro area,EMU,multicountry,1975,71019144,25301486,1204193,,17889,106
+Euro area,EMU,multicountry,1976,70296948,25045242,1202453,,18705,106
+Euro area,EMU,multicountry,1977,69420782,24697498,1215030,,19205,105
+Euro area,EMU,multicountry,1978,68429244,24341016,1214250,,19725,105
+Euro area,EMU,multicountry,1979,67350206,23888242,1207906,,20405,105
+Euro area,EMU,multicountry,1980,66231296,23392066,1197460,,20756,105
+Euro area,EMU,multicountry,1981,65168675,22854182,1177401,,20785,105
+Euro area,EMU,multicountry,1982,64025352,22321410,1159298,,20876,104
+Euro area,EMU,multicountry,1983,62856138,21746506,1137033,,21123,104
+Euro area,EMU,multicountry,1984,61717587,21267402,1123325,,21590,103
+Euro area,EMU,multicountry,1985,60658303,20947434,1129079,,22047,104
+Euro area,EMU,multicountry,1986,59818993,20650510,1149609,,22544,104
+Euro area,EMU,multicountry,1987,59015751,20425638,1143326,,23051,105
+Euro area,EMU,multicountry,1988,58287248,20163698,1146866,,23964,105
+Euro area,EMU,multicountry,1989,57667367,19917042,1141834,,24840,105
+Euro area,EMU,multicountry,1990,57130402,19578846,1148956,,25617,104
+Euro area,EMU,multicountry,1991,56703319,19339288,1173333,,26181,103
+Euro area,EMU,multicountry,1992,56329550,19008060,1168086,,26429,102
+Euro area,EMU,multicountry,1993,55966984,18901250,1186082,,26147,102
+Euro area,EMU,multicountry,1994,55553634,18823548,1225697,,26713,102
+Euro area,EMU,multicountry,1995,55109807,18707214,1196440,,27289,103
+Euro area,EMU,multicountry,1996,54610718,19160660,1232970,,27678,103
+Euro area,EMU,multicountry,1997,54122835,19025288,1237144,,28360,103
+Euro area,EMU,multicountry,1998,53628503,19064890,1232046,,29159,104
+Euro area,EMU,multicountry,1999,53171254,18913656,1241253,,29946,104
+Euro area,EMU,multicountry,2000,52778018,18658912,1272022,,31001,104
+Euro area,EMU,multicountry,2001,52459890,18364116,1277155,,31560,104
+Euro area,EMU,multicountry,2002,52202653,18079102,1288650,,31702,103
+Euro area,EMU,multicountry,2003,52000743,17927866,1285004,,31745,103
+Euro area,EMU,multicountry,2004,51851544,17842328,1286557,,32295,103
+Euro area,EMU,multicountry,2005,51732802,17985480,1314540,,32669,104
+Euro area,EMU,multicountry,2006,51760521,18029304,1328759,,33567,104
+Euro area,EMU,multicountry,2007,51845940,18187344,1361471,,34395,104
+Euro area,EMU,multicountry,2008,51934225,18205668,1371892,,34370,104
+Euro area,EMU,multicountry,2009,51927137,18154284,1379342,,32710,104
+Euro area,EMU,multicountry,2010,51837648,18096532,1398201,,33344,103
+Euro area,EMU,multicountry,2011,51734491,18062904,1414911,,33991,103
+Euro area,EMU,multicountry,2012,51721749,18011430,1395225,,33631,103
+Euro area,EMU,multicountry,2013,51695445,18145458,1379965,,33443,103
+Euro area,EMU,multicountry,2014,51658106,18143002,1361572,,33796,102
+Euro area,EMU,multicountry,2015,51617233,18272148,1374416,,34388,102
+Euro area,EMU,multicountry,2016,51573315,18325406,1399356,,34927,102
+Euro area,EMU,multicountry,2017,51541331,18533022,1410647,,35763,103
+Euro area,EMU,multicountry,2018,51534228,18543732,1429981,,36337,103
+Euro area,EMU,multicountry,2019,51430127,18509660,1446426,,36873,102
+Euro area,EMU,multicountry,2020,51256853,,,,34472,102
+Euro area,EMU,multicountry,2021,,,,,,
 European Union,EUU,multicountry,1960,93003482,,,,,
 European Union,EUU,multicountry,1961,93881296,,,,,
 European Union,EUU,multicountry,1962,94467814,,,,,
@@ -15561,6 +15499,68 @@ OECD members,OED,multicountry,2018,244871645,94598640,6146680,,37361,102
 OECD members,OED,multicountry,2019,244427192,94602848,6122558,,37820,102
 OECD members,OED,multicountry,2020,243895414,,,,35925,101
 OECD members,OED,multicountry,2021,,,,,,
+Other small states,OSS,multicountry,1960,3497880,,,,,
+Other small states,OSS,multicountry,1961,3581121,,,,,
+Other small states,OSS,multicountry,1962,3662009,,,,,
+Other small states,OSS,multicountry,1963,3740323,,,,,
+Other small states,OSS,multicountry,1964,3815715,,,,,
+Other small states,OSS,multicountry,1965,3887203,,,,,
+Other small states,OSS,multicountry,1966,3967793,,,,,
+Other small states,OSS,multicountry,1967,4041367,,,,,
+Other small states,OSS,multicountry,1968,4112171,,,,,
+Other small states,OSS,multicountry,1969,4183880,,,,,
+Other small states,OSS,multicountry,1970,4258564,1419519,45070,,,86
+Other small states,OSS,multicountry,1971,4340822,1432277,46044,,,85
+Other small states,OSS,multicountry,1972,4426756,1479728,47526,,,86
+Other small states,OSS,multicountry,1973,4515149,1550586,49020,,,89
+Other small states,OSS,multicountry,1974,4603808,1622160,50915,,,91
+Other small states,OSS,multicountry,1975,4692428,1689184,52974,,,94
+Other small states,OSS,multicountry,1976,4799255,1745348,55068,,,95
+Other small states,OSS,multicountry,1977,4902156,1781867,57309,,,95
+Other small states,OSS,multicountry,1978,5005468,1827821,60094,,,96
+Other small states,OSS,multicountry,1979,5117666,1866477,62373,,,95
+Other small states,OSS,multicountry,1980,5239908,1930913,65004,,,96
+Other small states,OSS,multicountry,1981,5364758,2007421,67738,,,98
+Other small states,OSS,multicountry,1982,5497938,2072980,69565,,,99
+Other small states,OSS,multicountry,1983,5636625,2135967,72503,,,99
+Other small states,OSS,multicountry,1984,5779395,2202215,74055,,,100
+Other small states,OSS,multicountry,1985,5926311,2275401,75154,,,101
+Other small states,OSS,multicountry,1986,6090816,2339614,76987,,,101
+Other small states,OSS,multicountry,1987,6251044,2412378,79228,,,101
+Other small states,OSS,multicountry,1988,6405045,2473907,82133,,,101
+Other small states,OSS,multicountry,1989,6551190,2525419,83690,,,100
+Other small states,OSS,multicountry,1990,6683746,2551510,84174,,,98
+Other small states,OSS,multicountry,1991,6815643,2641316,87602,,,98
+Other small states,OSS,multicountry,1992,6931876,2674670,89763,,,97
+Other small states,OSS,multicountry,1993,7034459,2705132,92161,,,97
+Other small states,OSS,multicountry,1994,7126752,2799584,94976,,,99
+Other small states,OSS,multicountry,1995,7206013,2874754,97486,,,100
+Other small states,OSS,multicountry,1996,7302528,2923265,99594,,,100
+Other small states,OSS,multicountry,1997,7384758,2980032,101459,,,100
+Other small states,OSS,multicountry,1998,7455925,3057805,103747,,,101
+Other small states,OSS,multicountry,1999,7524942,3118842,103985,,,101
+Other small states,OSS,multicountry,2000,7589200,3210027,107788,,7519,103
+Other small states,OSS,multicountry,2001,7627369,3281287,110007,,7698,105
+Other small states,OSS,multicountry,2002,7667151,3322418,114133,,7911,105
+Other small states,OSS,multicountry,2003,7710828,3352664,118123,,8124,106
+Other small states,OSS,multicountry,2004,7762257,3369055,119139,,8694,107
+Other small states,OSS,multicountry,2005,7825176,3381930,123067,,9000,107
+Other small states,OSS,multicountry,2006,7872914,3422037,125784,,9741,108
+Other small states,OSS,multicountry,2007,7928416,3436514,129275,,10438,108
+Other small states,OSS,multicountry,2008,7993953,3447901,132771,,10919,109
+Other small states,OSS,multicountry,2009,8068001,3467013,137551,,10840,109
+Other small states,OSS,multicountry,2010,8149473,3506562,140363,,11491,109
+Other small states,OSS,multicountry,2011,8271497,3548212,144646,,12079,109
+Other small states,OSS,multicountry,2012,8390818,3542536,149094,,12245,108
+Other small states,OSS,multicountry,2013,8515154,3574396,150978,,12440,108
+Other small states,OSS,multicountry,2014,8647072,3628710,151755,,12652,108
+Other small states,OSS,multicountry,2015,8784418,3693173,156763,,12780,108
+Other small states,OSS,multicountry,2016,8924002,3751890,161126,,12896,108
+Other small states,OSS,multicountry,2017,9062064,3823432,165714,,12794,108
+Other small states,OSS,multicountry,2018,9199124,3895434,168589,,12816,108
+Other small states,OSS,multicountry,2019,9330736,3977359,172906,,12834,108
+Other small states,OSS,multicountry,2020,9449978,,,,11962,108
+Other small states,OSS,multicountry,2021,,,,,,
 Pre-demographic dividend,PRE,multicountry,1960,80084542,,,,,
 Pre-demographic dividend,PRE,multicountry,1961,82408679,,,,,
 Pre-demographic dividend,PRE,multicountry,1962,84750074,,,,,

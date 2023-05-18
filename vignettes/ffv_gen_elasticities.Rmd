@@ -52,10 +52,10 @@ str(ppts_wrk)
 We review all unique values in variables. We get all unique "variable" values, drop enroll_ratio
 
 ```{r}
-ar_st_vars <- unique(
-    ppts_wrk %>%
-    pull(variable))
+ar_st_vars <- unique(ppts_wrk %>% pull(variable))
+ar_year_bins_type <- unique(ppts_wrk %>% pull(year_bins_type))
 print(ar_st_vars)
+print(ar_year_bins_type)
 ```
 
 ## Numerator and denominator percentage changes and Elasticity
@@ -83,12 +83,12 @@ for (it_avg_type in c(1, 2)) {
     svr_chg_var_num <- "pchg_interp1_numerator"
     svr_elas_var <- "elasticity_interp1"
   }  
- 
+  
   ppts_wrk_jnt <- ppts_wrk %>% 
     select(-one_of(svr_var_val_exclude))
   ar_st_cur_col_var <- ar_st_vars
   for (st_cur_col_var in ar_st_cur_col_var) {
-  #   st_cur_col_var <- "school"
+    #   st_cur_col_var <- "school"
     st_new_col_var <- paste0("pchgnum_", st_cur_col_var)
     # 20. Generate "variable"-specific dataframes
     ppts_one_var <- ppts_wrk %>%
@@ -96,39 +96,39 @@ for (it_avg_type in c(1, 2)) {
       filter(variable == st_cur_col_var) %>%
       select(-!!sym(svr_var_val), - variable) %>%
       rename(!!sym(st_new_col_var) := !!sym(svr_chg_var))
-
+    
     # 30. Merge "variable"-specific dataframe to main
     ppts_wrk_jnt <- ppts_wrk_jnt %>%
       left_join(ppts_one_var,
-          by = (c(
-              "location_code" = "location_code",
-              "location_level" = "location_level",
-              "year_bins_type" = "year_bins_type",
-              "year_bins" = "year_bins"
-          )))
+                by = (c(
+                  "location_code" = "location_code",
+                  "location_level" = "location_level",
+                  "year_bins_type" = "year_bins_type",
+                  "year_bins" = "year_bins"
+                )))
   }
-
+  
   # Show variable names
   print(colnames(ppts_wrk_jnt))
   print(dim(ppts_wrk_jnt))
-
+  
   # 60. Reshape from wide to long, rename variable numerator, variable denominator
   ppts_wrk_jnt_long <- ppts_wrk_jnt %>% 
     pivot_longer(cols = starts_with('pchgnum'),
-                names_to = c('variable_numerator'),
-                names_pattern = paste0("pchgnum_(.*)"),
-                values_to = svr_chg_var_num)
-
+                 names_to = c('variable_numerator'),
+                 names_pattern = paste0("pchgnum_(.*)"),
+                 values_to = svr_chg_var_num)
+  
   # 70. Compute elasticity
   # Now, we simply divide the numerator from the variable "pchg_yrspan_interp1_numerator" by the values in "pchg_yrspan_interp1", which is the denominator. 
   # Compute elasticities
   ppts_wrk_jnt_long <- ppts_wrk_jnt_long %>%
     mutate(!!sym(svr_elas_var) :=   
-      !!sym(svr_chg_var_num)/!!sym(svr_chg_var))
+             !!sym(svr_chg_var_num)/!!sym(svr_chg_var))
   # Keep the elasticity column 
   # ppts_wrk_jnt_long <- ppts_wrk_jnt_long %>% 
   #   select(-contains("value"))
-
+  
   # 61. save files 
   if (it_avg_type == 1) {
     ppts_wrk_jnt_long_val <- ppts_wrk_jnt_long
@@ -136,18 +136,101 @@ for (it_avg_type in c(1, 2)) {
     ppts_wrk_jnt_long_interp1 <- ppts_wrk_jnt_long
   }  
 }
-
-# Display
-# print(ppts_wrk_jnt_long[1:50,])
-kable(ppts_wrk_jnt_long_interp1 %>% select(-location_level) %>%
-        filter(location_code == 'AFG' & 
-          variable == 'student' & 
-          variable_numerator == 'youthpop'))
 ```
 
 ## Examine elasticities 
 
-We now review the computed elasticity results to make sure things appear as expected. 
+We now examine elasticity results. We show the percentage changes in schools and teachers, divided by the percentage change in students, these are the elasticity measures. 
+
+### Elasticities in Afghanistan
+
+We do not have data on schools. We show elasticity of teachers with respect to students, per decade.
+
+```{r}
+# Display
+st_year_bin_type <- "1920t2020i10"
+st_cur_col_var <- c("teacher")
+# print(ppts_wrk_jnt_long[1:50,])
+st_caption <- paste0(
+  "Afghanistan:",
+  "Elastiicty with percentage change in students in the denominator ", 
+  "and percentage change in ", st_cur_col_var, " in the numerator, ", 
+  "using as bin-type=", st_year_bin_type)
+kable(ppts_wrk_jnt_long_interp1 %>% 
+        filter(location_code == 'AFG' & 
+                 variable == 'student' & 
+                 year_bins_type == st_year_bin_type &
+                 variable_numerator == st_cur_col_var) %>%
+        select(-location_level, -year_bins_type, 
+               -value_interp1),
+      caption = st_caption)
+```
+
+### Elasticities in Germany
+
+```{r}
+# Display
+st_year_bin_type <- "1920t2020i10"
+st_cur_col_var <- "school"
+# print(ppts_wrk_jnt_long[1:50,])
+st_caption <- paste0(
+  "Germany:",
+  "Elastiicty with percentage change in students in the denominator ", 
+  "and percentage change in ", st_cur_col_var, " in the numerator, ", 
+  "using as bin-type=", st_year_bin_type)
+kable(ppts_wrk_jnt_long_interp1 %>% 
+        filter(location_code == 'DEU' & 
+                 variable == 'student' & 
+                 year_bins_type == st_year_bin_type &
+                 variable_numerator == st_cur_col_var) %>%
+        select(-location_level, -year_bins_type, 
+               -value_interp1),
+      caption = st_caption)
+```
+
+
+### Elasticities in Austria
+
+In Austria, elasticity of teachers to students, schools to students, every 20 years
+
+```{r}
+# Display
+st_year_bin_type <- "1920t2020i20"
+st_cur_col_var <- "school"
+# print(ppts_wrk_jnt_long[1:50,])
+st_caption <- paste0(
+  "Austria:",
+  "Elastiicty with percentage change in students in the denominator ", 
+  "and percentage change in ", st_cur_col_var, " in the numerator, ", 
+  "using as bin-type=", st_year_bin_type)
+kable(ppts_wrk_jnt_long_interp1 %>% 
+        filter(location_code == 'AUT' & 
+                 variable == 'student' & 
+                 year_bins_type == st_year_bin_type &
+                 variable_numerator == st_cur_col_var) %>%
+        select(-location_level, -year_bins_type, 
+               -value_interp1),
+      caption = st_caption)
+```
+
+### Elasticities in Busan, Korea
+
+In Busan, Korea, elasticity of teachers to students, schools to students, every 10 years
+
+```{r}
+# Display
+st_year_bin_type <- "1920t2020i10"
+st_cur_col_var <- "teacher"
+# print(ppts_wrk_jnt_long[1:50,])
+kable(ppts_wrk_jnt_long_interp1 %>% 
+        filter(location_code == 'KOR_Busan' & 
+                 variable == 'student' & 
+                 year_bins_type == st_year_bin_type &
+                 variable_numerator == st_cur_col_var) %>%
+        select(-location_level, -year_bins_type, 
+               -value_interp1),
+      caption = "Busan Korea Elastiicty of teachers with respect to students")
+```
 
 ## Save elasticity file 
 
