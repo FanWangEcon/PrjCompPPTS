@@ -335,6 +335,20 @@ kable(ppts_easia_weuro_long %>%
       caption="Raw and interpolated Austria schools results")
 ```
 
+### Switzerland Example
+
+We have some historical data on Switzerland, and also some recent data. 
+
+```{r}
+# str(ppts_easia_weuro_long)
+# print
+kable(ppts_easia_weuro_long %>% 
+        filter(location_code == 'CHE' & variable == 'teacher') %>%
+        ungroup() %>%
+        select(location_code, year, variable, 
+          value, value_interp1, pchg_yr1, pchg_yr1_interp1), 
+      caption="Raw and interpolated Switzerland schools results")
+```
 ### Germany Example
 
 Germany reunified in 1992, we extrapolate to obtain data predictions for 1990 to facilitate computing percentage changes. 
@@ -593,6 +607,22 @@ for (st_cuts_name in names(ls_ar_it_cuts)) {
 }
 ```
 
+### Switerland as Example 
+
+Below we illustrate with Germany as example, where we filled in values.  
+
+```{r, results='asis'}
+# print
+for (st_cuts_name in names(ls_ar_it_cuts)) {
+  print(
+    kable(ppts_easia_weuro_world_pchg %>% 
+            filter(location_code == 'CHE' & 
+                     variable == 'teacher' &
+                     year_bins_type == st_cuts_name) %>%
+            select(-location_level, -year_bins_type), 
+          caption = paste0("Germany example, aggregate=", st_cuts_name)))
+}
+```
 ### Germany as Example 
 
 Below we illustrate with Germany as example, where we filled in values.  
