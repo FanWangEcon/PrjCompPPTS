@@ -2,9 +2,10 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  ffv_dev_child_teacher_ratio: ffv_dev_child_teacher_ratio.html
   ffv_gen_elasticities: ffv_gen_elasticities.html
   ffv_gen_percent_changes: ffv_gen_percent_changes.html
-last_built: 2024-01-27T19:39Z
+last_built: 2024-01-28T18:37Z
 urls:
   reference: https://fanwangecon.github.io/PrjCompPPTS/reference
   article: https://fanwangecon.github.io/PrjCompPPTS/articles
