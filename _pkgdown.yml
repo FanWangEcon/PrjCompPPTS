@@ -2,3 +2,12 @@ url: https://fanwangecon.github.io/PrjCompPPTS/
 template:
   bootstrap: 5
 
+reference:
+- title: Change statistics
+  desc: Generate ratios, percentage changes, and elasticities
+  contents:
+  - starts_with("ff_ppts_lrce")
+- title: Data files 
+  desc: Input data and benchmark analysis data
+  contents:
+  - starts_with("ppts")

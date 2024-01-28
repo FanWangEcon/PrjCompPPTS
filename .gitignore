@@ -6,3 +6,12 @@
 .DS_Store
 docs
 inst/doc
+
+data-temp/
+_notes/
+R-sandbox/
+vignettes-sandbox/
+vignettes/*.R
+vignettes/*.html
+/doc/
+/Meta/
