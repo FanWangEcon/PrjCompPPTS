@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">PrjCompPPTS</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,16 +122,16 @@ in the school-age population.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="va">year_bins_type</span>, <span class="st">"1940t2020i01"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">ppts_wrk</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [25,687 × 9] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [25,765 × 9] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ location_code : Factor w/ 286 levels "ABW","AFE","AFG",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ location_level: Factor w/ 4 levels "country","multicountry",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ variable      : Factor w/ 5 levels "gdp","school",..: 1 1 1 1 1 1 1 1 3 3 ...</span></span>
 <span><span class="co">#&gt;  $ year_bins_type: Factor w/ 5 levels "1920t2020i05",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ year_bins     : chr [1:25687] "1981-1985" "1986-1990" "1991-1995" "1996-2000" ...</span></span>
-<span><span class="co">#&gt;  $ pchg          : num [1:25687] NA NA 0.0532 0.064 -0.0504 ...</span></span>
-<span><span class="co">#&gt;  $ pchg_interp1  : num [1:25687] 1.2489 0.903 0.0532 0.064 -0.0504 ...</span></span>
-<span><span class="co">#&gt;  $ value         : num [1:25687] NA 27884 29367 31246 29670 ...</span></span>
-<span><span class="co">#&gt;  $ value_interp1 : num [1:25687] 14653 27884 29367 31246 29670 ...</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ year_bins     : chr [1:25765] "1981-1985" "1986-1990" "1991-1995" "1996-2000" ...</span></span>
+<span><span class="co">#&gt;  $ pchg          : num [1:25765] NA NA 0.0532 0.064 -0.0504 ...</span></span>
+<span><span class="co">#&gt;  $ pchg_interp1  : num [1:25765] 1.2489 0.903 0.0532 0.064 -0.0504 ...</span></span>
+<span><span class="co">#&gt;  $ value         : num [1:25765] NA 27884 29367 31246 29670 ...</span></span>
+<span><span class="co">#&gt;  $ value_interp1 : num [1:25765] 14653 27884 29367 31246 29670 ...</span></span></code></pre></div>
 <p>We review all unique values in variables. We get all unique
 “variable” values, drop enroll_ratio</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -226,11 +226,11 @@ be in the same column.</p>
 <span><span class="co">#&gt;  [1] "location_code"    "location_level"   "variable"         "year_bins_type"  </span></span>
 <span><span class="co">#&gt;  [5] "year_bins"        "pchg"             "value"            "pchgnum_gdp"     </span></span>
 <span><span class="co">#&gt;  [9] "pchgnum_student"  "pchgnum_teacher"  "pchgnum_youthpop" "pchgnum_school"  </span></span>
-<span><span class="co">#&gt; [1] 25687    12</span></span>
+<span><span class="co">#&gt; [1] 25765    12</span></span>
 <span><span class="co">#&gt;  [1] "location_code"    "location_level"   "variable"         "year_bins_type"  </span></span>
 <span><span class="co">#&gt;  [5] "year_bins"        "pchg_interp1"     "value_interp1"    "pchgnum_gdp"     </span></span>
 <span><span class="co">#&gt;  [9] "pchgnum_student"  "pchgnum_teacher"  "pchgnum_youthpop" "pchgnum_school"  </span></span>
-<span><span class="co">#&gt; [1] 25687    12</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 25765    12</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="examine-elasticities">Examine elasticities<a class="anchor" aria-label="anchor" href="#examine-elasticities"></a>
@@ -398,19 +398,19 @@ bin-type=1920t2020i10</caption>
 <td align="left">DEU</td>
 <td align="left">student</td>
 <td align="left">2001-2010</td>
-<td align="right">0.0735623</td>
+<td align="right">-0.1536558</td>
 <td align="left">school</td>
 <td align="right">-0.0570188</td>
-<td align="right">-0.7751091</td>
+<td align="right">0.3710814</td>
 </tr>
 <tr class="odd">
 <td align="left">DEU</td>
 <td align="left">student</td>
 <td align="left">2011-2020</td>
-<td align="right">0.1967307</td>
+<td align="right">0.0016087</td>
 <td align="left">school</td>
 <td align="right">-0.0517495</td>
-<td align="right">-0.2630476</td>
+<td align="right">-32.1690215</td>
 </tr>
 </tbody>
 </table>
@@ -618,17 +618,17 @@ students</caption>
 <span><span class="co">#&gt;  [7] "value_interp1"          "variable_numerator"     "pchg_interp1_numerator"</span></span>
 <span><span class="co">#&gt; [10] "elasticity_interp1"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">ppts_wrk_jnt_long</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [128,435 × 10] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [128,825 × 10] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ location_code         : Factor w/ 286 levels "ABW","AFE","AFG",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ location_level        : Factor w/ 4 levels "country","multicountry",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ variable              : Factor w/ 5 levels "gdp","school",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ year_bins_type        : Factor w/ 5 levels "1920t2020i05",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ year_bins             : chr [1:128435] "1981-1985" "1981-1985" "1981-1985" "1981-1985" ...</span></span>
-<span><span class="co">#&gt;  $ pchg_interp1          : num [1:128435] 1.25 1.25 1.25 1.25 1.25 ...</span></span>
-<span><span class="co">#&gt;  $ value_interp1         : num [1:128435] 14653 14653 14653 14653 14653 ...</span></span>
-<span><span class="co">#&gt;  $ variable_numerator    : chr [1:128435] "gdp" "student" "teacher" "youthpop" ...</span></span>
-<span><span class="co">#&gt;  $ pchg_interp1_numerator: num [1:128435] 1.2489 NA NA -0.0298 NA ...</span></span>
-<span><span class="co">#&gt;  $ elasticity_interp1    : num [1:128435] 1 NA NA -0.0239 NA ...</span></span>
+<span><span class="co">#&gt;  $ year_bins             : chr [1:128825] "1981-1985" "1981-1985" "1981-1985" "1981-1985" ...</span></span>
+<span><span class="co">#&gt;  $ pchg_interp1          : num [1:128825] 1.25 1.25 1.25 1.25 1.25 ...</span></span>
+<span><span class="co">#&gt;  $ value_interp1         : num [1:128825] 14653 14653 14653 14653 14653 ...</span></span>
+<span><span class="co">#&gt;  $ variable_numerator    : chr [1:128825] "gdp" "student" "teacher" "youthpop" ...</span></span>
+<span><span class="co">#&gt;  $ pchg_interp1_numerator: num [1:128825] 1.2489 NA NA -0.0298 NA ...</span></span>
+<span><span class="co">#&gt;  $ elasticity_interp1    : num [1:128825] 1 NA NA -0.0239 NA ...</span></span>
 <span><span class="co">#&gt; NULL</span></span>
 <span><span class="co"># Save file</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">bl_resave_to_data</span><span class="op">)</span> <span class="op">{</span></span>

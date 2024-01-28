@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">PrjCompPPTS</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -3305,11 +3305,175 @@ we interpolate to fill in the gaps.</p>
 </table>
 </div>
 <div class="section level3">
+<h3 id="switzerland-example">Switzerland Example<a class="anchor" aria-label="anchor" href="#switzerland-example"></a>
+</h3>
+<p>We have some historical data on Switzerland, and also some recent
+data.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># str(ppts_easia_weuro_long)</span></span>
+<span><span class="co"># print</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">location_code</span> <span class="op">==</span> <span class="st">'CHE'</span> <span class="op">&amp;</span> <span class="va">variable</span> <span class="op">==</span> <span class="st">'teacher'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">location_code</span>, <span class="va">year</span>, <span class="va">variable</span>, </span>
+<span>          <span class="va">value</span>, <span class="va">value_interp1</span>, <span class="va">pchg_yr1</span>, <span class="va">pchg_yr1_interp1</span><span class="op">)</span>, </span>
+<span>      caption<span class="op">=</span><span class="st">"Raw and interpolated Switzerland schools results"</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<caption>Raw and interpolated Switzerland schools results</caption>
+<colgroup>
+<col width="18%">
+<col width="6%">
+<col width="12%">
+<col width="8%">
+<col width="18%">
+<col width="13%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">location_code</th>
+<th align="right">year</th>
+<th align="left">variable</th>
+<th align="right">value</th>
+<th align="right">value_interp1</th>
+<th align="right">pchg_yr1</th>
+<th align="right">pchg_yr1_interp1</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">2007</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">38773.91</td>
+<td align="right">NA</td>
+<td align="right">0.0300294</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">2008</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">39938.27</td>
+<td align="right">NA</td>
+<td align="right">0.0300294</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">2009</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">41137.59</td>
+<td align="right">NA</td>
+<td align="right">0.0300294</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">2010</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">42372.93</td>
+<td align="right">NA</td>
+<td align="right">0.0300294</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">2011</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">43645.36</td>
+<td align="right">NA</td>
+<td align="right">0.0300294</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">2012</td>
+<td align="left">teacher</td>
+<td align="right">44956</td>
+<td align="right">44956.00</td>
+<td align="right">NA</td>
+<td align="right">0.0300294</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">2013</td>
+<td align="left">teacher</td>
+<td align="right">46306</td>
+<td align="right">46306.00</td>
+<td align="right">0.0300294</td>
+<td align="right">0.0300294</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">2014</td>
+<td align="left">teacher</td>
+<td align="right">47889</td>
+<td align="right">47889.00</td>
+<td align="right">0.0341856</td>
+<td align="right">0.0341856</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">2015</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">48523.79</td>
+<td align="right">NA</td>
+<td align="right">0.0132555</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">2016</td>
+<td align="left">teacher</td>
+<td align="right">49167</td>
+<td align="right">49167.00</td>
+<td align="right">NA</td>
+<td align="right">0.0132555</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">2017</td>
+<td align="left">teacher</td>
+<td align="right">51133</td>
+<td align="right">51133.00</td>
+<td align="right">0.0399862</td>
+<td align="right">0.0399862</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">2018</td>
+<td align="left">teacher</td>
+<td align="right">51655</td>
+<td align="right">51655.00</td>
+<td align="right">0.0102087</td>
+<td align="right">0.0102087</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">2019</td>
+<td align="left">teacher</td>
+<td align="right">52635</td>
+<td align="right">52635.00</td>
+<td align="right">0.0189720</td>
+<td align="right">0.0189720</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">2020</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">53633.59</td>
+<td align="right">NA</td>
+<td align="right">0.0189720</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
 <h3 id="germany-example">Germany Example<a class="anchor" aria-label="anchor" href="#germany-example"></a>
 </h3>
 <p>Germany reunified in 1992, we extrapolate to obtain data predictions
 for 1990 to facilitate computing percentage changes.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># str(ppts_easia_weuro_long)</span></span>
 <span><span class="co"># print</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -3655,7 +3819,7 @@ for 1990 to facilitate computing percentage changes.</p>
 because the data is available for school counts between 1965 and 2020,
 the min and max years of the Korean data, and data is available every
 single year.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># str(ppts_easia_weuro_long)</span></span>
 <span><span class="co"># print</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -4199,7 +4363,7 @@ results</caption>
 </h2>
 <p>We now consider several different cuts, over the end-points of which
 we compute percentage changes.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Every five years from 1940 until 2020</span></span>
 <span><span class="va">ar_it_cuts_1940t2020_i05</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1920</span>, <span class="fl">2020</span>, length.out <span class="op">=</span> <span class="fl">21</span><span class="op">)</span></span>
 <span><span class="va">st_cuts_1940t2020_i05</span> <span class="op">&lt;-</span> <span class="st">"1920t2020i05"</span></span>
@@ -4213,7 +4377,7 @@ we compute percentage changes.</p>
 <span><span class="va">ar_it_cuts_1940t2020_i20</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1920</span>, <span class="fl">2020</span>, length.out <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">st_cuts_1940t2020_i20</span> <span class="op">&lt;-</span> <span class="st">"1920t2020i20"</span></span></code></pre></div>
 <p>We put the cuts and the associated string names into two lists.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List of cuts</span></span>
 <span><span class="va">ls_ar_it_cuts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  <span class="va">ar_it_cuts_1940t2020_i05</span>,</span>
@@ -4244,7 +4408,7 @@ we compute percentage changes.</p>
 <span><span class="co">#&gt; bins=c(1920, 1940, 1960, 1980, 2000, 2020)</span></span></code></pre></div>
 <p>Generate percentage changes across start end end points of each bin,
 for bins of varying length. For both raw and interpolated data.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># E. Generate cuts -----</span></span>
 <span><span class="va">it_avg_type</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="va">it_cut_type</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
@@ -4363,7 +4527,7 @@ for bins of varying length. For both raw and interpolated data.</p>
 </h3>
 <p>After generating percentage changes over different spans, merge
 again.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># D.3 merge together</span></span>
 <span><span class="co"># full_join same as left_join, </span></span>
 <span><span class="va">ppts_easia_weuro_world_pchg</span> <span class="op">&lt;-</span> <span class="va">ppts_easia_weuro_pchg_interp1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -4406,7 +4570,7 @@ again.</p>
 <h2 id="sort-and-display">Sort and Display<a class="anchor" aria-label="anchor" href="#sort-and-display"></a>
 </h2>
 <p>We sort variables for more clearly organized output file.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Arrange results </span></span>
 <span><span class="va">ppts_easia_weuro_world_pchg</span> <span class="op">&lt;-</span> <span class="va">ppts_easia_weuro_world_pchg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">year_bins_type</span>, </span>
@@ -4421,7 +4585,7 @@ interval-percentage changes after interpolation, given filled out values
 at key years. We use student count as example.</p>
 <p>Note that the “value” column shows value at the last year in the
 interval, if this was observed.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># print</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">st_cuts_name</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ls_ar_it_cuts</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
@@ -4756,7 +4920,7 @@ interval, if this was observed.</p>
 <p>Below we illustrate with Austria as example, showing data for school
 count. We are able to fill out some initial decades/years a little bit
 more with interpolation.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># print</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">st_cuts_name</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ls_ar_it_cuts</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
@@ -5230,11 +5394,179 @@ more with interpolation.</p>
 </table>
 </div>
 <div class="section level3">
+<h3 id="switerland-as-example">Switerland as Example<a class="anchor" aria-label="anchor" href="#switerland-as-example"></a>
+</h3>
+<p>Below we illustrate with Germany as example, where we filled in
+values.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># print</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">st_cuts_name</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ls_ar_it_cuts</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_world_pchg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">location_code</span> <span class="op">==</span> <span class="st">'CHE'</span> <span class="op">&amp;</span> </span>
+<span>                     <span class="va">variable</span> <span class="op">==</span> <span class="st">'teacher'</span> <span class="op">&amp;</span></span>
+<span>                     <span class="va">year_bins_type</span> <span class="op">==</span> <span class="va">st_cuts_name</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">location_level</span>, <span class="op">-</span><span class="va">year_bins_type</span><span class="op">)</span>, </span>
+<span>          caption <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Germany example, aggregate="</span>, <span class="va">st_cuts_name</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<table class="table">
+<caption>Germany example, aggregate=1920t2020i05</caption>
+<colgroup>
+<col width="19%">
+<col width="12%">
+<col width="14%">
+<col width="7%">
+<col width="18%">
+<col width="8%">
+<col width="19%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">location_code</th>
+<th align="left">variable</th>
+<th align="left">year_bins</th>
+<th align="right">pchg</th>
+<th align="right">pchg_interp1</th>
+<th align="right">value</th>
+<th align="right">value_interp1</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">2006-2010</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">42372.93</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">2011-2015</td>
+<td align="right">NA</td>
+<td align="right">0.1451603</td>
+<td align="right">NA</td>
+<td align="right">48523.79</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">2016-2020</td>
+<td align="right">NA</td>
+<td align="right">0.1053050</td>
+<td align="right">NA</td>
+<td align="right">53633.59</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<caption>Germany example, aggregate=1920t2020i10</caption>
+<colgroup>
+<col width="19%">
+<col width="12%">
+<col width="14%">
+<col width="7%">
+<col width="18%">
+<col width="8%">
+<col width="19%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">location_code</th>
+<th align="left">variable</th>
+<th align="left">year_bins</th>
+<th align="right">pchg</th>
+<th align="right">pchg_interp1</th>
+<th align="right">value</th>
+<th align="right">value_interp1</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">2001-2010</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">42372.93</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">2011-2020</td>
+<td align="right">NA</td>
+<td align="right">0.2657515</td>
+<td align="right">NA</td>
+<td align="right">53633.59</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<caption>Germany example, aggregate=1925t2015i15</caption>
+<colgroup>
+<col width="19%">
+<col width="12%">
+<col width="14%">
+<col width="7%">
+<col width="18%">
+<col width="8%">
+<col width="19%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">location_code</th>
+<th align="left">variable</th>
+<th align="left">year_bins</th>
+<th align="right">pchg</th>
+<th align="right">pchg_interp1</th>
+<th align="right">value</th>
+<th align="right">value_interp1</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">2001-2015</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">48523.79</td>
+</tr></tbody>
+</table>
+<table class="table">
+<caption>Germany example, aggregate=1920t2020i20</caption>
+<colgroup>
+<col width="19%">
+<col width="12%">
+<col width="14%">
+<col width="7%">
+<col width="18%">
+<col width="8%">
+<col width="19%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">location_code</th>
+<th align="left">variable</th>
+<th align="left">year_bins</th>
+<th align="right">pchg</th>
+<th align="right">pchg_interp1</th>
+<th align="right">value</th>
+<th align="right">value_interp1</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">2001-2020</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">53633.59</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level3">
 <h3 id="germany-as-example">Germany as Example<a class="anchor" aria-label="anchor" href="#germany-as-example"></a>
 </h3>
 <p>Below we illustrate with Germany as example, where we filled in
 values.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># print</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">st_cuts_name</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ls_ar_it_cuts</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
@@ -5478,7 +5810,7 @@ values.</p>
 <h2 id="store-to-file">Store to file<a class="anchor" aria-label="anchor" href="#store-to-file"></a>
 </h2>
 <p>Finally, we save results to file in the data folder.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Write to CSV and write to rda</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">bl_resave_to_data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_world_pchg</span>, <span class="st">"../data/ppts_easia_weuro_world_pchg.csv"</span>, na<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
