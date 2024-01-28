@@ -1,0 +1,334 @@
+---
+title: "Table: Global population"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Table: Global population}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(tibble)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(readr)
+library(kableExtra)
+
+library(PrjCompPPTS)
+# If resave outputs to data, only do this during development
+st_kableformat <- "html"
+# st_kableformat <- "latex"
+```
+
+[Implement PrjCompPPTS-5](https://github.com/FanWangEcon/PrjCompPPTS/issues/5), Summ: Global child population.
+
+We generate a table with 11 variables: 
+
+- Unit of observation: country at selected years
+- var country
+- var (3) children to teacher ratio in 1980, 2000, 2020
+- var (3) children to teacher ranking in 1980 vs 2020
+- var (1) children to teacher ratio change over time 1980 to 2020
+- var (1) percentage change in children 1980 to 2020
+- var (1) percentage change in teachers 1980 to 2020
+- var (1) teacher-children elasticity over time
+
+## Generate input file 
+
+### Load prepped all location level files
+
+Load file with interpolated data. 
+
+```{r}
+# Locaiton codes
+ppts_code_wrk <- ppts_country_code
+# We load in the global population data.
+df_ppts <- ppts_easia_weuro_world_pchg
+```
+
+### Run PrjCompPPTS functions
+
+Run functions to generate FLR, FPC, and FEL files. Run FLR. 
+
+```{r}
+# Generate PLR
+df_flr <- PrjCompPPTS::ff_ppts_lrce_flr(
+  df_ppts,
+  st_year_bins_type = "1940t2020i01",
+  ar_it_years = c(1960, 1980, 1990, 2000, 2010, 2020),
+  verbose = TRUE
+)
+```
+
+Run FPC.
+
+```{r}
+# Generate FPC
+df_fpc <- PrjCompPPTS::ff_ppts_lrce_fpc(
+  df_flr,
+  ar_it_years_chg = c(1960, 1980, 2000, 2020),
+  ls_chg_years = list(
+    "chg_80v60" = c(1960, 1980),
+    "chg_00v80" = c(1980, 2000),
+    "chg_20v00" = c(2000, 2020),
+    "chg_20v80" = c(1980, 2020)
+  ), verbose = TRUE
+)
+```
+
+Run FEL. 
+
+```{r}
+# Generate FEL
+df_fel <- PrjCompPPTS::ff_ppts_lrce_fel(
+  df_fpc,
+  verbose = TRUE
+)
+```
+
+### Merge FPC and FEL, country and region
+
+Now we combine the level and change information from FPC with the elasticity results from FEL. 
+
+We have the LRCE file, level, ratio, change, and elasticity.
+
+```{r}
+df_lrce <- df_fpc %>% left_join(
+  df_fel %>% mutate(vartype = "rat"),
+  by = (c(
+    "location_code" = "location_code",
+    "location_level" = "location_level",
+    "variable" = "variable",
+    "vartype" = "vartype"
+  ))
+)
+print(glue::glue("dim df_lrce: {dim(df_lrce)}"))
+```
+
+Finally, merge in country key info to FPC, country-level information.
+
+```{r}
+df_lrce_country <- df_lrce %>%
+  filter(location_level != "multicountry") %>%
+  left_join(
+    ppts_code_wrk %>%
+      select(
+        location_name, location_code,
+        location_region_group, location_region_group_code
+      ),
+    by = c("location_code" = "location_code")
+  ) %>%
+  # mutate(location_name_full = paste0(location_name, " (", location_code, ")")) %>%
+  mutate(location_name_full = paste0(location_name)) %>%
+  select(-location_name) %>%
+  select(location_name_full, location_region_group, everything()) %>%
+  arrange(location_region_group_code, location_name_full)
+```
+
+FPC regional information, same variables.
+
+```{r}
+ar_st_wb7 <- c("SSF", "MEA", "LCN", "NAC", "SAS", "ECS", "EAS")
+df_lrce_region <- df_lrce %>%
+  filter(location_level == "multicountry") %>%
+  filter(location_code %in% ar_st_wb7) %>%
+  left_join(
+    ppts_code_wrk %>%
+      select(
+        location_name, location_code, location_code_adj,
+        location_region_group, location_region_group_code
+      ),
+    by = c("location_code" = "location_code")
+  ) %>%
+  select(-location_code) %>%
+  rename(location_code = location_code_adj) %>%
+  # mutate(location_name_full = paste0(location_name, " (", location_code, ")")) %>%
+  mutate(location_name_full = paste0(location_name)) %>%
+  select(-location_name) %>%
+  select(location_name_full, location_region_group, everything()) %>%
+  mutate(
+    location_region_group_code = "0WORLD",
+    location_region_group = "Global regions"
+  ) %>%
+  arrange(location_region_group_code, location_code)
+```
+
+Combine region and country.
+
+```{r}
+df_lrce_region_country <- bind_rows(
+  df_lrce_region,
+  df_lrce_country %>% filter(location_level == "country"),
+)
+```
+
+## Global Population Table
+
+### Prep Table inputs
+
+Select and prep Table 1. Combine national and regional data together.
+
+```{r}
+# Select variables
+tab1_global_pop <- df_lrce_region_country %>%
+  filter(
+    vartype == "lvl",
+    variable == "youthpop"
+  ) %>%
+  select(
+    -vartype, -variable, -location_level, -location_code,
+    -chg_80v60, -contains("elas_")
+  )
+```
+
+Second, count variables in regional groups.
+
+```{r}
+df_region_counts <- tab1_global_pop %>%
+  group_by(
+    location_region_group_code, location_region_group
+  ) %>%
+  summarize(region_count = n()) %>%
+  ungroup() %>%
+  mutate(region_count_start = cumsum(region_count) - region_count + 1) %>%
+  mutate(region_count_end = cumsum(region_count)) %>%
+  select(region_count_start, region_count_end, everything())
+```
+
+Third, format variables.
+
+```{r}
+# Format variables
+tab1_global_pop <- tab1_global_pop %>%
+  select(-location_region_group, -location_region_group_code) %>%
+  mutate_at(
+    vars(contains("year")),
+    list(~ paste0(
+      format(round(. / 1000, 0), nsmall = 0, big.mark = ",")
+    ))
+  ) %>%
+  mutate_at(
+    vars(contains("chg")),
+    list(~ paste0(
+      format(round(., 2) * 100,
+        nsmall = 0,
+        big.mark = ","
+      ),
+      "%"
+    ))
+  )
+```
+
+### Generate table 
+
+Now we generate the table. 
+
+```{r}
+# Column names
+ar_st_col_names <- c(
+  "Country by region",
+  "1960",
+  "1980",
+  "2000",
+  "2020",
+  # "1980/1960",
+  "2000/1980",
+  "2020/2000",
+  "2020/1980"
+)
+# Define column groups, grouping the names above
+# =1/3/2 are number of columns group title covers
+ar_st_col_groups <- c(
+  " " = 1,
+  "Age 0-14 population (1000s)" = 4,
+  "Age 0-14 pop. changes (%)" = 3
+)
+
+# Second, we construct main table, and add styling.
+bk_youthpop <- kbl(
+  tab1_global_pop %>%
+    select(
+      location_name_full,
+      year1960, year1980, year2000, year2020,
+      chg_00v80, chg_20v00, chg_20v80
+    ),
+  format = st_kableformat,
+  # escape = F,
+  linesep = "",
+  booktabs = T,
+  longtable = T,
+  align = "c",
+  caption = "Global youth population",
+  col.names = ar_st_col_names
+) %>%
+  # see https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html#Bootstrap_table_classes
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    full_width = F, position = "left"
+  )
+
+# Third, we add in column groups.
+bk_youthpop <- bk_youthpop %>% add_header_above(ar_st_col_groups)
+
+# Fourth, we add in row groups.
+for (it_region in seq(1, dim(df_region_counts)[1])) {
+  # Reion full name info
+  st_loc <- as.character(df_region_counts[[it_region, "location_region_group"]])
+
+  # Regions start and end
+  it_region_count_start <- df_region_counts[[it_region, "region_count_start"]]
+  it_region_count_end <- df_region_counts[[it_region, "region_count_end"]]
+
+  # Add to table
+  bk_youthpop <- bk_youthpop %>%
+    pack_rows(
+      st_loc, it_region_count_start, it_region_count_end,
+      latex_gap_space = "1em",
+      latex_align = "c",
+      hline_after = TRUE
+    )
+}
+
+# Fifth, column formatting.
+fl_width_country <- 3.4
+st_width_country <- paste0(fl_width_country, "cm")
+bk_youthpop <- bk_youthpop %>%
+  column_spec(1, width = st_width_country) %>%
+  column_spec(2:8, width = "1.3cm")
+
+# Final adjustments
+# Headings on all pages, note use `sub` to replace first midrule
+st_headend <- paste0(
+  "\\midrule\\endhead\n",
+  "\\addlinespace[0.2em]\\hline\\addlinespace[0.2em]\n",
+  "\\multicolumn{8}{r}{\\emph{Continued on next page}}\\\\\n",
+  "\\endfoot\\endlastfoot"
+)
+bk_youthpop <- sub(bk_youthpop,
+  pattern = "\\midrule", replacement = st_headend,
+  fixed = TRUE
+)
+# country-names left-align
+bk_youthpop <- gsub(bk_youthpop,
+  pattern = paste0("\\centering\\arraybackslash}p{", st_width_country, "}"),
+  replacement = paste0("\\raggedright\\arraybackslash}p{", st_width_country, "}"),
+  fixed = TRUE
+)
+# midrule replacing hline
+bk_youthpop <- gsub(bk_youthpop,
+  pattern = "hline",
+  replacement = "midrule", fixed = TRUE
+)
+
+# Sixth, display.
+# pl_bk_asset_count <- bk_asset_count %>% as_image()
+bk_youthpop
+```
