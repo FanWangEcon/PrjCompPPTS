@@ -147,12 +147,12 @@ interpolate to obtain more annualized predictions.</p>
 <span>               names_pattern <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"stats_(.*)"</span><span class="op">)</span>,</span>
 <span>               values_to <span class="op">=</span> <span class="st">"value"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_long</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [88,185 × 5] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [88,560 × 5] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ location_code : Factor w/ 286 levels "ABW","AFE","AFG",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ location_level: Factor w/ 4 levels "country","multicountry",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ year          : num [1:88185] 1960 1960 1960 1960 1960 ...</span></span>
-<span><span class="co">#&gt;  $ variable      : chr [1:88185] "youthpop" "student" "teacher" "school" ...</span></span>
-<span><span class="co">#&gt;  $ value         : num [1:88185] 23769 NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ year          : num [1:88560] 1960 1960 1960 1960 1960 ...</span></span>
+<span><span class="co">#&gt;  $ variable      : chr [1:88560] "youthpop" "student" "teacher" "school" ...</span></span>
+<span><span class="co">#&gt;  $ value         : num [1:88560] 23769 NA NA NA NA ...</span></span>
 <span><span class="co"># View(ppts_easia_weuro_long)</span></span>
 <span></span>
 <span><span class="co"># C sort and group ----</span></span>
@@ -1243,13 +1243,13 @@ levels.</p>
 <span></span>
 <span><span class="co"># Print</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_interp1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [51,817 × 6] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [52,118 × 6] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ location_code   : Factor w/ 286 levels "ABW","AFE","AFG",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ location_level  : Factor w/ 4 levels "country","multicountry",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ year            : num [1:51817] 1987 1988 1989 1990 1991 ...</span></span>
-<span><span class="co">#&gt;  $ variable        : chr [1:51817] "gdp" "gdp" "gdp" "gdp" ...</span></span>
-<span><span class="co">#&gt;  $ pchg_yr1_interp1: num [1:51817] 0.176 0.2014 0.122 0.0209 0.0384 ...</span></span>
-<span><span class="co">#&gt;  $ value_interp1   : num [1:51817] 20263 24343 27313 27884 28954 ...</span></span>
+<span><span class="co">#&gt;  $ year            : num [1:52118] 1987 1988 1989 1990 1991 ...</span></span>
+<span><span class="co">#&gt;  $ variable        : chr [1:52118] "gdp" "gdp" "gdp" "gdp" ...</span></span>
+<span><span class="co">#&gt;  $ pchg_yr1_interp1: num [1:52118] 0.176 0.2014 0.122 0.0209 0.0384 ...</span></span>
+<span><span class="co">#&gt;  $ value_interp1   : num [1:52118] 20263 24343 27313 27884 28954 ...</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_interp1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">location_level</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">location_code</span> <span class="op">==</span> <span class="st">'AFG'</span> <span class="op">&amp;</span> <span class="va">variable</span> <span class="op">==</span> <span class="st">'student'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -3325,10 +3325,10 @@ data.</p>
 <colgroup>
 <col width="18%">
 <col width="6%">
-<col width="12%">
-<col width="8%">
+<col width="11%">
+<col width="7%">
 <col width="18%">
-<col width="13%">
+<col width="14%">
 <col width="22%">
 </colgroup>
 <thead><tr class="header">
@@ -3343,129 +3343,912 @@ data.</p>
 <tbody>
 <tr class="odd">
 <td align="left">CHE</td>
+<td align="right">1920</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13497.39</td>
+<td align="right">NA</td>
+<td align="right">-0.0023365</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1921</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13465.85</td>
+<td align="right">NA</td>
+<td align="right">-0.0023365</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1922</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13434.39</td>
+<td align="right">NA</td>
+<td align="right">-0.0023365</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1923</td>
+<td align="left">teacher</td>
+<td align="right">13403</td>
+<td align="right">13403.00</td>
+<td align="right">NA</td>
+<td align="right">-0.0023365</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1924</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13345.89</td>
+<td align="right">NA</td>
+<td align="right">-0.0042613</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1925</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13289.02</td>
+<td align="right">NA</td>
+<td align="right">-0.0042613</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1926</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13232.39</td>
+<td align="right">NA</td>
+<td align="right">-0.0042613</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1927</td>
+<td align="left">teacher</td>
+<td align="right">13176</td>
+<td align="right">13176.00</td>
+<td align="right">NA</td>
+<td align="right">-0.0042613</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1928</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13207.88</td>
+<td align="right">NA</td>
+<td align="right">0.0024199</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1929</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13239.85</td>
+<td align="right">NA</td>
+<td align="right">0.0024199</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1930</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13271.88</td>
+<td align="right">NA</td>
+<td align="right">0.0024199</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1931</td>
+<td align="left">teacher</td>
+<td align="right">13304</td>
+<td align="right">13304.00</td>
+<td align="right">NA</td>
+<td align="right">0.0024199</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1932</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13371.73</td>
+<td align="right">NA</td>
+<td align="right">0.0050910</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1933</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13439.81</td>
+<td align="right">NA</td>
+<td align="right">0.0050910</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1934</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13508.23</td>
+<td align="right">NA</td>
+<td align="right">0.0050910</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1935</td>
+<td align="left">teacher</td>
+<td align="right">13577</td>
+<td align="right">13577.00</td>
+<td align="right">NA</td>
+<td align="right">0.0050910</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1936</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13572.50</td>
+<td align="right">NA</td>
+<td align="right">-0.0003316</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1937</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13568.00</td>
+<td align="right">NA</td>
+<td align="right">-0.0003316</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1938</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13563.50</td>
+<td align="right">NA</td>
+<td align="right">-0.0003316</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1939</td>
+<td align="left">teacher</td>
+<td align="right">13559</td>
+<td align="right">13559.00</td>
+<td align="right">NA</td>
+<td align="right">-0.0003316</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1940</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13533.93</td>
+<td align="right">NA</td>
+<td align="right">-0.0018489</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1941</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13508.91</td>
+<td align="right">NA</td>
+<td align="right">-0.0018489</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1942</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13483.93</td>
+<td align="right">NA</td>
+<td align="right">-0.0018489</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1943</td>
+<td align="left">teacher</td>
+<td align="right">13459</td>
+<td align="right">13459.00</td>
+<td align="right">NA</td>
+<td align="right">-0.0018489</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1944</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13575.72</td>
+<td align="right">NA</td>
+<td align="right">0.0086725</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1945</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13693.46</td>
+<td align="right">NA</td>
+<td align="right">0.0086725</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1946</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">13812.21</td>
+<td align="right">NA</td>
+<td align="right">0.0086725</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1947</td>
+<td align="left">teacher</td>
+<td align="right">13932</td>
+<td align="right">13932.00</td>
+<td align="right">NA</td>
+<td align="right">0.0086725</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1948</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">14066.05</td>
+<td align="right">NA</td>
+<td align="right">0.0096219</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1949</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">14201.40</td>
+<td align="right">NA</td>
+<td align="right">0.0096219</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1950</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">14338.04</td>
+<td align="right">NA</td>
+<td align="right">0.0096219</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1951</td>
+<td align="left">teacher</td>
+<td align="right">14476</td>
+<td align="right">14476.00</td>
+<td align="right">NA</td>
+<td align="right">0.0096219</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1952</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">14847.08</td>
+<td align="right">NA</td>
+<td align="right">0.0256342</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1953</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">15227.67</td>
+<td align="right">NA</td>
+<td align="right">0.0256342</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1954</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">15618.02</td>
+<td align="right">NA</td>
+<td align="right">0.0256342</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1955</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">16018.38</td>
+<td align="right">NA</td>
+<td align="right">0.0256342</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1956</td>
+<td align="left">teacher</td>
+<td align="right">16429</td>
+<td align="right">16429.00</td>
+<td align="right">NA</td>
+<td align="right">0.0256342</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1957</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">16678.32</td>
+<td align="right">NA</td>
+<td align="right">0.0151754</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1958</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">16931.42</td>
+<td align="right">NA</td>
+<td align="right">0.0151754</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1959</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">17188.36</td>
+<td align="right">NA</td>
+<td align="right">0.0151754</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1960</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">17449.20</td>
+<td align="right">NA</td>
+<td align="right">0.0151754</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1961</td>
+<td align="left">teacher</td>
+<td align="right">17714</td>
+<td align="right">17714.00</td>
+<td align="right">NA</td>
+<td align="right">0.0151754</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1962</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">18046.84</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1963</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">18385.93</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1964</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">18731.40</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1965</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">19083.36</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1966</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">19441.92</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1967</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">19807.23</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1968</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">20179.40</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1969</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">20558.57</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1970</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">20944.85</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1971</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">21338.40</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1972</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">21739.34</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1973</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">22147.82</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1974</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">22563.97</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1975</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">22987.94</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1976</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">23419.87</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1977</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">23859.92</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1978</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">24308.24</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1979</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">24764.98</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1980</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">25230.31</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1981</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">25704.38</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1982</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">26187.35</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1983</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">26679.41</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1984</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">27180.70</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1985</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">27691.42</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1986</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">28211.73</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1987</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">28741.82</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1988</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">29281.87</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1989</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">29832.06</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1990</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">30392.60</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1991</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">30963.66</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1992</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">31545.46</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1993</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">32138.19</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1994</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">32742.05</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1995</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">33357.26</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1996</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">33984.04</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1997</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">34622.58</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">1998</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">35273.13</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">1999</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">35935.90</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">2000</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">36611.12</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">2001</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">37299.03</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">2002</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">37999.87</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">2003</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">38713.87</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">2004</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">39441.29</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="right">2005</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">40182.38</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="right">2006</td>
+<td align="left">teacher</td>
+<td align="right">NA</td>
+<td align="right">40937.39</td>
+<td align="right">NA</td>
+<td align="right">0.0187896</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
 <td align="right">2007</td>
 <td align="left">teacher</td>
 <td align="right">NA</td>
-<td align="right">38773.91</td>
+<td align="right">41706.59</td>
 <td align="right">NA</td>
-<td align="right">0.0300294</td>
+<td align="right">0.0187896</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">CHE</td>
 <td align="right">2008</td>
 <td align="left">teacher</td>
 <td align="right">NA</td>
-<td align="right">39938.27</td>
+<td align="right">42490.25</td>
 <td align="right">NA</td>
-<td align="right">0.0300294</td>
+<td align="right">0.0187896</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">CHE</td>
 <td align="right">2009</td>
 <td align="left">teacher</td>
 <td align="right">NA</td>
-<td align="right">41137.59</td>
+<td align="right">43288.62</td>
 <td align="right">NA</td>
-<td align="right">0.0300294</td>
+<td align="right">0.0187896</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">CHE</td>
 <td align="right">2010</td>
 <td align="left">teacher</td>
+<td align="right">44102</td>
+<td align="right">44102.00</td>
 <td align="right">NA</td>
-<td align="right">42372.93</td>
-<td align="right">NA</td>
-<td align="right">0.0300294</td>
+<td align="right">0.0187896</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">CHE</td>
 <td align="right">2011</td>
 <td align="left">teacher</td>
-<td align="right">NA</td>
-<td align="right">43645.36</td>
-<td align="right">NA</td>
-<td align="right">0.0300294</td>
+<td align="right">45666</td>
+<td align="right">45666.00</td>
+<td align="right">0.0354632</td>
+<td align="right">0.0354632</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">CHE</td>
 <td align="right">2012</td>
 <td align="left">teacher</td>
-<td align="right">44956</td>
-<td align="right">44956.00</td>
-<td align="right">NA</td>
-<td align="right">0.0300294</td>
+<td align="right">46104</td>
+<td align="right">46104.00</td>
+<td align="right">0.0095914</td>
+<td align="right">0.0095914</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">CHE</td>
 <td align="right">2013</td>
 <td align="left">teacher</td>
-<td align="right">46306</td>
-<td align="right">46306.00</td>
-<td align="right">0.0300294</td>
-<td align="right">0.0300294</td>
+<td align="right">48345</td>
+<td align="right">48345.00</td>
+<td align="right">0.0486075</td>
+<td align="right">0.0486075</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">CHE</td>
 <td align="right">2014</td>
 <td align="left">teacher</td>
-<td align="right">47889</td>
-<td align="right">47889.00</td>
-<td align="right">0.0341856</td>
-<td align="right">0.0341856</td>
+<td align="right">47223</td>
+<td align="right">47223.00</td>
+<td align="right">-0.0232082</td>
+<td align="right">-0.0232082</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">CHE</td>
 <td align="right">2015</td>
 <td align="left">teacher</td>
-<td align="right">NA</td>
-<td align="right">48523.79</td>
-<td align="right">NA</td>
-<td align="right">0.0132555</td>
+<td align="right">48595</td>
+<td align="right">48595.00</td>
+<td align="right">0.0290536</td>
+<td align="right">0.0290536</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">CHE</td>
 <td align="right">2016</td>
 <td align="left">teacher</td>
-<td align="right">49167</td>
-<td align="right">49167.00</td>
-<td align="right">NA</td>
-<td align="right">0.0132555</td>
+<td align="right">50672</td>
+<td align="right">50672.00</td>
+<td align="right">0.0427410</td>
+<td align="right">0.0427410</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">CHE</td>
 <td align="right">2017</td>
 <td align="left">teacher</td>
-<td align="right">51133</td>
-<td align="right">51133.00</td>
-<td align="right">0.0399862</td>
-<td align="right">0.0399862</td>
-</tr>
-<tr class="even">
-<td align="left">CHE</td>
-<td align="right">2018</td>
-<td align="left">teacher</td>
-<td align="right">51655</td>
-<td align="right">51655.00</td>
-<td align="right">0.0102087</td>
-<td align="right">0.0102087</td>
+<td align="right">50879</td>
+<td align="right">50879.00</td>
+<td align="right">0.0040851</td>
+<td align="right">0.0040851</td>
 </tr>
 <tr class="odd">
 <td align="left">CHE</td>
-<td align="right">2019</td>
+<td align="right">2018</td>
 <td align="left">teacher</td>
-<td align="right">52635</td>
-<td align="right">52635.00</td>
-<td align="right">0.0189720</td>
-<td align="right">0.0189720</td>
+<td align="right">51844</td>
+<td align="right">51844.00</td>
+<td align="right">0.0189666</td>
+<td align="right">0.0189666</td>
 </tr>
 <tr class="even">
 <td align="left">CHE</td>
+<td align="right">2019</td>
+<td align="left">teacher</td>
+<td align="right">52738</td>
+<td align="right">52738.00</td>
+<td align="right">0.0172440</td>
+<td align="right">0.0172440</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
 <td align="right">2020</td>
 <td align="left">teacher</td>
-<td align="right">NA</td>
-<td align="right">53633.59</td>
-<td align="right">NA</td>
-<td align="right">0.0189720</td>
+<td align="right">54777</td>
+<td align="right">54777.00</td>
+<td align="right">0.0386628</td>
+<td align="right">0.0386628</td>
 </tr>
 </tbody>
 </table>
@@ -4555,16 +5338,16 @@ again.</p>
 <span>  <span class="co"># select(-value) %&gt;% rename(value = value_interp1)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_world_pchg</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [82,428 × 9] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [82,685 × 9] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ location_code : Factor w/ 286 levels "ABW","AFE","AFG",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ location_level: Factor w/ 4 levels "country","multicountry",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ variable      : Factor w/ 5 levels "gdp","school",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ year_bins_type: Factor w/ 5 levels "1920t2020i05",..: 5 5 5 5 5 5 5 5 5 5 ...</span></span>
-<span><span class="co">#&gt;  $ year_bins     : chr [1:82428] "1981" "1982" "1983" "1984" ...</span></span>
-<span><span class="co">#&gt;  $ pchg          : num [1:82428] NA NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ pchg_interp1  : num [1:82428] 0.176 0.176 0.176 0.176 0.176 ...</span></span>
-<span><span class="co">#&gt;  $ value         : num [1:82428] NA NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ value_interp1 : num [1:82428] 7662 9010 10596 12460 14653 ...</span></span>
+<span><span class="co">#&gt;  $ year_bins     : chr [1:82685] "1981" "1982" "1983" "1984" ...</span></span>
+<span><span class="co">#&gt;  $ pchg          : num [1:82685] NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ pchg_interp1  : num [1:82685] 0.176 0.176 0.176 0.176 0.176 ...</span></span>
+<span><span class="co">#&gt;  $ value         : num [1:82685] NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ value_interp1 : num [1:82685] 7662 9010 10596 12460 14653 ...</span></span>
 <span><span class="co"># print(ppts_easia_weuro_world_pchg[1:50,])</span></span></code></pre></div>
 </div>
 </div>
@@ -5414,13 +6197,13 @@ values.</p>
 <table class="table">
 <caption>Germany example, aggregate=1920t2020i05</caption>
 <colgroup>
-<col width="19%">
-<col width="12%">
-<col width="14%">
+<col width="18%">
+<col width="11%">
+<col width="13%">
+<col width="13%">
+<col width="17%">
 <col width="7%">
 <col width="18%">
-<col width="8%">
-<col width="19%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">location_code</th>
@@ -5435,42 +6218,195 @@ values.</p>
 <tr class="odd">
 <td align="left">CHE</td>
 <td align="left">teacher</td>
-<td align="left">2006-2010</td>
+<td align="left">1921-1925</td>
 <td align="right">NA</td>
+<td align="right">-0.0154381</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">42372.93</td>
+<td align="right">13289.02</td>
 </tr>
 <tr class="even">
 <td align="left">CHE</td>
 <td align="left">teacher</td>
-<td align="left">2011-2015</td>
+<td align="left">1926-1930</td>
 <td align="right">NA</td>
-<td align="right">0.1451603</td>
+<td align="right">-0.0012891</td>
 <td align="right">NA</td>
-<td align="right">48523.79</td>
+<td align="right">13271.88</td>
 </tr>
 <tr class="odd">
 <td align="left">CHE</td>
 <td align="left">teacher</td>
+<td align="left">1931-1935</td>
+<td align="right">NA</td>
+<td align="right">0.0229897</td>
+<td align="right">13577</td>
+<td align="right">13577.00</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1936-1940</td>
+<td align="right">NA</td>
+<td align="right">-0.0031722</td>
+<td align="right">NA</td>
+<td align="right">13533.93</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1941-1945</td>
+<td align="right">NA</td>
+<td align="right">0.0117872</td>
+<td align="right">NA</td>
+<td align="right">13693.46</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1946-1950</td>
+<td align="right">NA</td>
+<td align="right">0.0470723</td>
+<td align="right">NA</td>
+<td align="right">14338.04</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1951-1955</td>
+<td align="right">NA</td>
+<td align="right">0.1171946</td>
+<td align="right">NA</td>
+<td align="right">16018.38</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1956-1960</td>
+<td align="right">NA</td>
+<td align="right">0.0893236</td>
+<td align="right">NA</td>
+<td align="right">17449.20</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1961-1965</td>
+<td align="right">NA</td>
+<td align="right">0.0936521</td>
+<td align="right">NA</td>
+<td align="right">19083.36</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1966-1970</td>
+<td align="right">NA</td>
+<td align="right">0.0975457</td>
+<td align="right">NA</td>
+<td align="right">20944.85</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1971-1975</td>
+<td align="right">NA</td>
+<td align="right">0.0975457</td>
+<td align="right">NA</td>
+<td align="right">22987.94</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1976-1980</td>
+<td align="right">NA</td>
+<td align="right">0.0975457</td>
+<td align="right">NA</td>
+<td align="right">25230.31</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1981-1985</td>
+<td align="right">NA</td>
+<td align="right">0.0975457</td>
+<td align="right">NA</td>
+<td align="right">27691.42</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1986-1990</td>
+<td align="right">NA</td>
+<td align="right">0.0975457</td>
+<td align="right">NA</td>
+<td align="right">30392.60</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1991-1995</td>
+<td align="right">NA</td>
+<td align="right">0.0975457</td>
+<td align="right">NA</td>
+<td align="right">33357.26</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1996-2000</td>
+<td align="right">NA</td>
+<td align="right">0.0975457</td>
+<td align="right">NA</td>
+<td align="right">36611.12</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">2001-2005</td>
+<td align="right">NA</td>
+<td align="right">0.0975457</td>
+<td align="right">NA</td>
+<td align="right">40182.38</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">2006-2010</td>
+<td align="right">NA</td>
+<td align="right">0.0975457</td>
+<td align="right">44102</td>
+<td align="right">44102.00</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">2011-2015</td>
+<td align="right">0.1018775</td>
+<td align="right">0.1018775</td>
+<td align="right">48595</td>
+<td align="right">48595.00</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
 <td align="left">2016-2020</td>
-<td align="right">NA</td>
-<td align="right">0.1053050</td>
-<td align="right">NA</td>
-<td align="right">53633.59</td>
+<td align="right">0.1272147</td>
+<td align="right">0.1272147</td>
+<td align="right">54777</td>
+<td align="right">54777.00</td>
 </tr>
 </tbody>
 </table>
 <table class="table">
 <caption>Germany example, aggregate=1920t2020i10</caption>
 <colgroup>
-<col width="19%">
-<col width="12%">
-<col width="14%">
+<col width="18%">
+<col width="11%">
+<col width="13%">
+<col width="13%">
+<col width="17%">
 <col width="7%">
 <col width="18%">
-<col width="8%">
-<col width="19%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">location_code</th>
@@ -5485,20 +6421,92 @@ values.</p>
 <tr class="odd">
 <td align="left">CHE</td>
 <td align="left">teacher</td>
+<td align="left">1921-1930</td>
+<td align="right">NA</td>
+<td align="right">-0.0167073</td>
+<td align="right">NA</td>
+<td align="right">13271.88</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1931-1940</td>
+<td align="right">NA</td>
+<td align="right">0.0197445</td>
+<td align="right">NA</td>
+<td align="right">13533.93</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1941-1950</td>
+<td align="right">NA</td>
+<td align="right">0.0594144</td>
+<td align="right">NA</td>
+<td align="right">14338.04</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1951-1960</td>
+<td align="right">NA</td>
+<td align="right">0.2169864</td>
+<td align="right">NA</td>
+<td align="right">17449.20</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1961-1970</td>
+<td align="right">NA</td>
+<td align="right">0.2003332</td>
+<td align="right">NA</td>
+<td align="right">20944.85</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1971-1980</td>
+<td align="right">NA</td>
+<td align="right">0.2046066</td>
+<td align="right">NA</td>
+<td align="right">25230.31</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1981-1990</td>
+<td align="right">NA</td>
+<td align="right">0.2046066</td>
+<td align="right">NA</td>
+<td align="right">30392.60</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1991-2000</td>
+<td align="right">NA</td>
+<td align="right">0.2046066</td>
+<td align="right">NA</td>
+<td align="right">36611.12</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
 <td align="left">2001-2010</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">42372.93</td>
+<td align="right">0.2046066</td>
+<td align="right">44102</td>
+<td align="right">44102.00</td>
 </tr>
 <tr class="even">
 <td align="left">CHE</td>
 <td align="left">teacher</td>
 <td align="left">2011-2020</td>
-<td align="right">NA</td>
-<td align="right">0.2657515</td>
-<td align="right">NA</td>
-<td align="right">53633.59</td>
+<td align="right">0.2420525</td>
+<td align="right">0.2420525</td>
+<td align="right">54777</td>
+<td align="right">54777.00</td>
 </tr>
 </tbody>
 </table>
@@ -5522,15 +6530,62 @@ values.</p>
 <th align="right">value</th>
 <th align="right">value_interp1</th>
 </tr></thead>
-<tbody><tr class="odd">
+<tbody>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1926-1940</td>
+<td align="right">NA</td>
+<td align="right">0.0184299</td>
+<td align="right">NA</td>
+<td align="right">13533.93</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1941-1955</td>
+<td align="right">NA</td>
+<td align="right">0.1835720</td>
+<td align="right">NA</td>
+<td align="right">16018.38</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1956-1970</td>
+<td align="right">NA</td>
+<td align="right">0.3075513</td>
+<td align="right">NA</td>
+<td align="right">20944.85</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1971-1985</td>
+<td align="right">NA</td>
+<td align="right">0.3221108</td>
+<td align="right">NA</td>
+<td align="right">27691.42</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1986-2000</td>
+<td align="right">NA</td>
+<td align="right">0.3221108</td>
+<td align="right">NA</td>
+<td align="right">36611.12</td>
+</tr>
+<tr class="even">
 <td align="left">CHE</td>
 <td align="left">teacher</td>
 <td align="left">2001-2015</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">48523.79</td>
-</tr></tbody>
+<td align="right">0.3273289</td>
+<td align="right">48595</td>
+<td align="right">48595.00</td>
+</tr>
+</tbody>
 </table>
 <table class="table">
 <caption>Germany example, aggregate=1920t2020i20</caption>
@@ -5552,15 +6607,53 @@ values.</p>
 <th align="right">value</th>
 <th align="right">value_interp1</th>
 </tr></thead>
-<tbody><tr class="odd">
+<tbody>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1921-1940</td>
+<td align="right">NA</td>
+<td align="right">0.0027073</td>
+<td align="right">NA</td>
+<td align="right">13533.93</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1941-1960</td>
+<td align="right">NA</td>
+<td align="right">0.2892929</td>
+<td align="right">NA</td>
+<td align="right">17449.20</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1961-1980</td>
+<td align="right">NA</td>
+<td align="right">0.4459293</td>
+<td align="right">NA</td>
+<td align="right">25230.31</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">teacher</td>
+<td align="left">1981-2000</td>
+<td align="right">NA</td>
+<td align="right">0.4510770</td>
+<td align="right">NA</td>
+<td align="right">36611.12</td>
+</tr>
+<tr class="odd">
 <td align="left">CHE</td>
 <td align="left">teacher</td>
 <td align="left">2001-2020</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">53633.59</td>
-</tr></tbody>
+<td align="right">0.4961846</td>
+<td align="right">54777</td>
+<td align="right">54777.00</td>
+</tr>
+</tbody>
 </table>
 </div>
 <div class="section level3">
