@@ -1,0 +1,349 @@
+---
+title: "Develop level ratio change elasticity functions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Develop level ratio change elasticity functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(tibble)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(readr)
+library(kableExtra)
+
+library(PrjCompPPTS)
+# If resave outputs to data, only do this during development
+# st_kableformat <- "html"
+st_kableformat <- "latex"
+```
+
+Working through three core functions of [PrjCompPPTS-Issue 7](https://github.com/FanWangEcon/PrjCompPPTS/issues/7). This was developed prior to functionalizing.
+
+## Algorithm outline
+
+### Three core files
+
+We follow the steps below, which produces three separable files, then merge together. Each file's unit of observation are ultimately `locType` x `loc`
+
+Step 1 file, levels and ratios, `flr`:
+
+1. Start with long file, keep all locations and location types, select a subst of years, select `teachers`, `schools`, `students`, `youthpop` so different ratios can be constructed, and levels we want kept
+2. Vars kept from long to wide
+    - unit of obs: locType x loc x time
+3. RATIO/LEVELS: Compute key ratios within time periods, year level/ratio stats done:
+    - Teacher over student: `var_rat_t2s`
+    - Teacher over youthpop: `var_rat_t2y`
+    - School over student: `var_rat_s2s`
+    - School over youthpop: `var_rat_sty`
+
+Step 2 file, percentage change, `fpc`, also contains levels:
+
+1. From levels/ratios file (keep ranks), variables are levels and ratios, convert all vars to long
+    - unit of obs: locType x loc x time x var(level/change)
+2. Generate ranks, grouped by locType x loc x time x var(level/change)
+3. Select subperiods of interest, time from long to wide
+    - unit of obs: locType x loc x var(level/change)
+4. Compute stats ratios over time for level and change vars
+    - 1980 to 2020 change
+    - 80 to 00, 00 to 20
+
+Step 3 file, elasticity, `fel`:
+
+1. From `fpc`, keep percentage changes as stats vars, drop level and rank vars
+2. From percentage change file, variables are changes over time, convert all change spans to long
+    - unit of obs: locType x loc x vars(level/change) x changeSpan
+3. Convert vars(level/change) to wide
+    - unit of obs: locType x loc x changeSpan
+4. ELASTICITY: ratio of percentage changes across vars
+5. Convert to standard format
+    - unit of obs: locType x loc x vars, and year spans as columns
+
+### Output file
+
+We now proceed to outline the development of tables relevant for different components of the paper, corresponding to each paper section.
+
+Global changes in youth population table:
+
+1. From file `flr`, keep levels in 1960, 80, 00, 20, country + 7 regions
+2. From `fpc`, changes 60t80, 80t20, 00t20, country + 7 regions
+3. From file `flr`, keep ranks in 1960, 20, country + 7 regions
+3. Group by region type an region, sort by country, 9 variable/column table
+
+Global children and teachers file, two versions, pupil- and children-based separately:
+
+- Unit of observation: country at selected years
+- var country
+- var (3) children to teacher ratio in 1980, 2000, 2020: from `fpc`, select level col ratio rows
+- var (3) children to teacher ranking in 1980 vs 2020: from `fpc`, select level col ranks row
+- var (1) children to teacher ratio change over time 1980 to 2020: from `fpc`, select change col and ratio row
+- var (1) percentage change in children 1980 to 2020: from `fpc`, select change col and level row
+- var (1) percentage change in teachers 1980 to 2020: from `fpc`, select change col and level row
+- var (1) teacher-children elasticity over time: from `fel`, select changeSpan row
+
+Teachers and Schools vs children and pupil in sub-regions.
+
+## Load data inputs and review
+
+We load in the key file
+
+```{r}
+ppts_code_wrk <- ppts_country_code
+```
+
+We load in the global population data.
+
+```{r}
+ppts_wrk <- ppts_easia_weuro_world_pchg
+colnames(ppts_wrk)
+print(ppts_wrk %>% distinct(variable))
+print(ppts_wrk %>% distinct(location_level))
+print(ppts_wrk %>% distinct(year_bins_type))
+print(ppts_wrk %>% distinct(year_bins, year_bins_type) %>%
+  arrange(year_bins_type, year_bins), n = 200)
+```
+
+We review all unique values in variables. We get all unique "variable" values, drop enroll_ratio
+
+```{r}
+ar_st_vars <- unique(ppts_wrk %>% pull(variable))
+ar_year_bins_type <- unique(ppts_wrk %>% pull(year_bins_type))
+print(ar_st_vars)
+print(ar_year_bins_type)
+```
+
+Conduct some basic sorting and other common operations on the file.
+
+```{r}
+ppts_wrk <- ppts_wrk %>%
+  arrange(location_level, location_code, year_bins)
+# %>%
+# filter(!(location_level %in% c("province", "multiprovince")))
+```
+
+## Implement FLR file
+
+For the FLR file, we proceed as beolow. This is functionalized in [PrjCompPPTS::ff_ppts_lrce_flr()].
+
+First, start with long file, keep all locations and location types, select a subst of years, select `teachers`, `schools`, `students`, `youthpop` so different ratios can be constructed, and levels we want kept
+
+```{r}
+df_ysts <- ppts_wrk %>%
+  filter(variable %in% c(
+    "youthpop", "student",
+    "teacher", "school"
+  )) %>%
+  filter(year_bins_type == "1940t2020i01") %>%
+  mutate(year_bins = as.numeric(year_bins)) %>%
+  filter(year_bins %in% c(1960, 1980, 1990, 2000, 2010, 2020))
+# review years
+print(unique(df_ysts %>% pull(year_bins)))
+```
+
+Second, vars kept from long to wide: unit of obs: locType x loc x time
+
+```{r}
+df_ysts_wide <- df_ysts %>%
+  pivot_wider(
+    id_cols = c("location_code", "location_level", "year_bins"),
+    names_from = variable,
+    names_prefix = "var_lvl_",
+    names_sep = "_",
+    values_from = c(value_interp1)
+  )
+print(glue::glue("dim of youth wide file: {dim(df_ysts_wide)}"))
+```
+
+Third, RATIO/LEVELS: Compute key ratios within time periods, year level/ratio stats done:
+
+- Teacher over student: `var_rat_t2s`
+- Teacher over youthpop: `var_rat_t2y`
+- School over student: `var_rat_s2s`
+- School over youthpop: `var_rat_sty`
+
+```{r}
+df_flr <- df_ysts_wide %>%
+  mutate(
+    var_rat_y2t = var_lvl_youthpop / var_lvl_teacher,
+    var_rat_s2t = var_lvl_student / var_lvl_teacher,
+    var_rat_y2s = var_lvl_youthpop / var_lvl_school,
+    var_rat_s2s = var_lvl_student / var_lvl_school
+  )
+print(colnames(df_flr))
+print(glue::glue("dim of youth wide ratio file: {dim(df_flr)}"))
+```
+
+Review output.
+
+```{r}
+kable(df_flr[1:300,], caption="FLR")
+```
+
+## Implement FPC file
+
+Step 2, we will generate the FPC file. This is functionalized in [PrjCompPPTS::ff_ppts_lrce_fpc()].
+
+First, from levels/ratios file (keep ranks), variables are levels and ratios, convert all vars to long. unit of obs: locType x loc x time x var(level/change).
+
+```{r}
+df_ysts_longer <- df_flr %>%
+  pivot_longer(
+    cols = matches("var"),
+    names_to = c("vartype", "variable"),
+    names_pattern = paste0("var_(.*)_(.*)"),
+    values_to = "stat"
+  ) %>%
+  drop_na(stat)
+print(glue::glue("dim of youth wide ratio file: {dim(df_ysts_longer)}"))
+```
+
+Second, generate ranks, grouped by locType x time x var(level/change). Ranking across locations.
+
+```{r}
+df_ysts_longer_rank <- df_ysts_longer %>%
+  group_by(location_level, variable, year_bins) %>%
+  arrange(stat, ..by_group = TRUE) %>%
+  mutate(rank = row_number()) %>%
+  arrange(location_level, variable, year_bins, location_code) %>%
+  select(-stat, -vartype) %>%
+  mutate(vartype = "rank") %>%
+  rename(stat = rank)
+print(glue::glue("dim of youth wide ratio file: {dim(df_ysts_longer_rank)}"))
+```
+
+Third, select subperiods of interest, time from long to wide: unit of obs: locType x loc x var(level/change).
+
+```{r}
+ar_it_years_chg <- c(1960, 1980, 2000, 2020)
+df_ysts_longer_wide <- bind_rows(df_ysts_longer, df_ysts_longer_rank) %>%
+  filter(year_bins %in% ar_it_years_chg) %>%
+  pivot_wider(
+    id_cols = c("location_code", "location_level", "vartype", "variable"),
+    names_from = year_bins,
+    names_prefix = "year",
+    names_sep = "_",
+    values_from = c(stat)
+  )
+print(glue::glue("dim of youth wide ratio file: {dim(df_ysts_longer_wide)}"))
+```
+
+Fourth, compute stats ratios over time for level and change vars. 1980 to 2020 change, 80 to 00, 00 to 20.
+
+```{r}
+df_fpc <- df_ysts_longer_wide %>%
+  mutate(
+    chg_80v60 = (year1980 - year1960) / year1960,
+    chg_00v80 = (year2000 - year1980) / year1980,
+    chg_20v00 = (year2020 - year2000) / year2000,
+    chg_20v80 = (year2020 - year1980) / year1980
+  )
+print(glue::glue("dim FPC: {dim(df_fpc)}"))
+```
+
+Review output.
+
+```{r}
+kable(df_fpc[1:300,], caption="FPC")
+```
+
+## Implement FEL file
+
+This is functionalized in [PrjCompPPTS::ff_ppts_lrce_fel()].
+
+Note we also generate elasticity information on [Compute Elasticities of School Resources to Changes in Populations](https://fanwangecon.github.io/PrjCompPPTS/articles/ffv_gen_elasticities.html). It is done more automatically there, across all possible combinations of variables, here, we generate a more selected subset of elasticities, note that this is manual because we specify below what the numerator and denominator for each elasticity is.
+
+First, from `fpc`, keep percentage changes as stats vars, drop level and rank vars.
+
+```{r}
+print(df_fpc %>% distinct(vartype))
+df_fpc_base <- df_fpc %>%
+  filter(vartype == "lvl") %>%
+  select(-contains("year"), -vartype)
+print(glue::glue("dim df_fpc_base: {dim(df_fpc_base)}"))
+```
+
+Second, from percentage change file, variables are changes over time, convert all change spans to long. unit of obs: locType x loc x vars(change) x changeSpan.
+
+```{r}
+df_fel_long <- df_fpc_base %>%
+  pivot_longer(
+    cols = matches("chg"),
+    names_to = c("yearcomp"),
+    names_pattern = paste0("chg_(.*)"),
+    values_to = "change"
+  ) %>%
+  drop_na(change)
+print(glue::glue("dim df_fel_long: {dim(df_fel_long)}"))
+```
+
+Third, convert vars(change) to wide. unit of obs: locType x loc x changeSpan.
+
+```{r}
+df_fel_wide <- df_fel_long %>%
+  pivot_wider(
+    id_cols = c("location_code", "location_level", "yearcomp"),
+    names_from = variable,
+    names_prefix = "var_chg_",
+    names_sep = "_",
+    values_from = c(change)
+  )
+print(glue::glue("dim df_fel_wide: {dim(df_fel_wide)}"))
+```
+
+Fourth, following our prior notations, we compute the percentage changes in education resources over percentage changes in the population. When changes in teachers is in the denominator, we call this the population-teacher elasticity. When the number of schools is in the denominator, we call this this population-school elasticity. In labor economics, the labor supply elasticity refers to the change in labor supply given a change in wages, which could also be referred to as the wage-labor-supply elasticity. We follow this form of terminology here.
+
+We use the following variable names for the following elasticities:
+
+- Teacher over student : `var_elsa_t2s`
+- Teacher over youthpop: `var_elas_t2y`
+- School over student: `var_elas_s2s`
+- School over youthpop: `var_elas_sty`
+
+```{r}
+df_fel_elas <- df_fel_wide %>%
+  mutate(
+    var_elas_y2t = var_chg_teacher / var_chg_youthpop,
+    var_elas_s2t = var_chg_teacher / var_chg_student,
+    var_elas_y2s = var_chg_school / var_chg_youthpop,
+    var_elas_s2s = var_chg_school / var_chg_student
+  )
+print(glue::glue("dim df_fel_elas: {dim(df_fel_elas)}"))
+```
+
+Fifth, we clean file and convert to standard format where unit of obs is locType x loc x vars, and year spans are columns.
+
+```{r}
+df_fel <- df_fel_elas %>%
+  select(-contains("var_chg")) %>%
+  pivot_longer(
+    cols = matches("var_elas"),
+    names_to = c("variable"),
+    names_pattern = paste0("var_elas_(.*)"),
+    values_to = "elasticity"
+  ) %>%
+  drop_na(elasticity) %>%
+  pivot_wider(
+    id_cols = c("location_code", "location_level", "variable"),
+    names_from = yearcomp,
+    names_prefix = "elas_",
+    names_sep = "_",
+    values_from = c(elasticity)
+  )
+print(glue::glue("dim FEL: {dim(df_fel)}"))
+```
+
+Review output.
+
+```{r}
+kable(df_fel[1:300,], caption="FEL")
+```

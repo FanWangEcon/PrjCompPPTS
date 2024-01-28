@@ -11,6 +11,12 @@
 # 5. Convert to standard format
 #     - unit of obs: locType x loc x vars, and year spans as columns
 
+library(tibble)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(PrjCompPPTS)
+
 # Note we also generate elasticity information on [Compute Elasticities of School Resources to Changes in Populations](https://fanwangecon.github.io/PrjCompPPTS/articles/ffv_gen_elasticities.html). It is done more automatically there, across all possible combinations of variables, here, we generate a more selected subset of elasticities, note that this is manual because we specify below what the numerator and denominator for each elasticity is.
 
 # Path root and data input file

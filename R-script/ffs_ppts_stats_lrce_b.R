@@ -11,6 +11,12 @@
 #     - 1980 to 2020 change
 #     - 80 to 00, 00 to 20
 
+library(tibble)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(PrjCompPPTS)
+
 # Path root and data input file
 spt_root_prj <- file.path(
     "C:", "Users", "fan",
@@ -86,13 +92,43 @@ if (verbose) {
 }
 
 # Fourth, compute stats ratios over time for level and change vars. 1980 to 2020 change, 80 to 00, 00 to 20.
-df_fpc <- df_ysts_longer_wide %>%
-    mutate(
-        chg_80v60 = (year1980 - year1960) / year1960,
-        chg_00v80 = (year2000 - year1980) / year1980,
-        chg_20v00 = (year2020 - year2000) / year2000,
-        chg_20v80 = (year2020 - year1980) / year1980
-    )
+ls_chg_years <- list(
+    "chg_80v60" = c(1960, 1980),
+    "chg_00v80" = c(1980, 2000),
+    "chg_20v00" = c(2000, 2020),
+    "chg_20v80" = c(1980, 2020)
+)
+ar_st_names <- names(ls_chg_years)
+# Initialize dataframe
+df_fpc <- df_ysts_longer_wide
+for (it_chg_ctr in seq(1, length(ls_chg_years))) {
+    st_chg_var_name <- ar_st_names[it_chg_ctr]
+    ar_it_year_bounds <- ls_chg_years[[it_chg_ctr]]
+    st_var_earlier <- paste0("year", ar_it_year_bounds[1])
+    st_var_later <- paste0("year", ar_it_year_bounds[2])
+
+    df_fpc <- df_fpc %>%
+        mutate(
+            !!sym(st_chg_var_name) :=
+                (!!sym(st_var_later) -
+                    !!sym(st_var_earlier)) / !!sym(st_var_earlier)
+        )
+
+    if (verbose_detail) {
+        print(glue::glue("F-376864, SD3"))
+        print(st_chg_var_name)
+        print(st_var_earlier)
+        print(st_var_later)
+        print(glue::glue("dim FPC: {dim(df_fpc)}"))
+    }
+}
+# df_fpc <- df_ysts_longer_wide %>%
+#     mutate(
+#         chg_80v60 = (year1980 - year1960) / year1960,
+#         chg_00v80 = (year2000 - year1980) / year1980,
+#         chg_20v00 = (year2020 - year2000) / year2000,
+#         chg_20v80 = (year2020 - year1980) / year1980
+#     )
 if (verbose) {
     print(glue::glue("F-376864, S4"))
     print(glue::glue("dim FPC: {dim(df_fpc)}"))
