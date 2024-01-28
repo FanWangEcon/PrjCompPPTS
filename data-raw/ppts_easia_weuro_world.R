@@ -1,3 +1,4 @@
+# Implement https://github.com/FanWangEcon/PrjCompPPTS/issues/10
 ## Code that generates ppts_easia_weuro_world.rda
 # Load library
 library(tidyverse)
