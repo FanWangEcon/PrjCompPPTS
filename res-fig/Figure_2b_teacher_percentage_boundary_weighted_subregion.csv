@@ -1,0 +1,8 @@
+location_code,region,label,pchg_interp1teacher1,pchg_interp1youthpop1,pchg_interp1teacher2,pchg_interp1youthpop2,value_interp1teacher1,value_interp1teacher2,value_interp1youthpop1,value_interp1youthpop2
+"EAS","","East Asia and Pacific",18.635034,-5.6353483,19.684525,-12.944869,9361799,1.12e+07,5.29e+08,4.61e+08
+"ECS","","Europe and Central Asia",14.364103,-10.716286,6.7514816,-2.2003672,3314903,3538708,1.70e+08,1.66e+08
+"LCN","","Latin America and Caribbean",47.904786,17.795168,9.0863805,-7.063358,2768396,3019943,1.68e+08,1.56e+08
+"MEA","","Middle East and North Africa",121.1741,43.222194,39.266357,20.140112,1851570,2578614,1.15e+08,1.38e+08
+"NAC","","North America",9.1770484,17.549014,-.3040865,-.32014866,1805545,1800055,6.71e+07,6.69e+07
+"SAS","","South Asia",79.886948,38.109644,63.346762,2.6048246,3745964,6118911,4.99e+08,5.12e+08
+"SSF","","Sub-Saharan Africa",60.105653,70.49278,138.10564,61.827854,2145483,5108516,2.95e+08,4.77e+08
