@@ -4,7 +4,12 @@
 \alias{ff_ppts_lrce_fel}
 \title{Generate FEL file}
 \usage{
-ff_ppts_lrce_fel(df_fpc, verbose = FALSE)
+ff_ppts_lrce_fel(
+  df_fpc,
+  ls_rat_vars = list(y2t = c("youthpop", "teacher"), s2t = c("student", "teacher"), y2s =
+    c("youthpop", "school"), s2s = c("student", "school")),
+  verbose = FALSE
+)
 }
 \arguments{
 \item{df_fpc}{Dataframe input, output of \code{PrjCompPPTS::ff_ppts_lrce_fpc}

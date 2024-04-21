@@ -8,6 +8,9 @@ ff_ppts_lrce_flr(
   df_ppts,
   st_year_bins_type = "1940t2020i01",
   ar_it_years = c(1960, 1980, 1990, 2000, 2010, 2020),
+  ar_st_vars = c("youthpop", "student", "teacher", "school"),
+  ls_rat_vars = list(y2t = c("youthpop", "teacher"), s2t = c("student", "teacher"), y2s =
+    c("youthpop", "school"), s2s = c("student", "school")),
   verbose = FALSE
 )
 }
@@ -17,6 +20,12 @@ ff_ppts_lrce_flr(
 \item{st_year_bins_type}{String category string}
 
 \item{ar_it_years}{Array of Integers subset of year bins to select}
+
+\item{ar_st_vars}{Array of Strings variables to be selected from \code{df_ppts},
+all variables used in string lists in \code{ls_rat_vars} need to be included.}
+
+\item{ls_rat_vars}{List of Array each array with numerator and denominator
+variables for ratios to be computed list contains new ratio name suffix}
 
 \item{verbose}{Boolean print details}
 }

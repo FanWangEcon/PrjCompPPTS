@@ -5,6 +5,10 @@
 #' @param df_ppts Dataframe input.
 #' @param st_year_bins_type String category string
 #' @param ar_it_years Array of Integers subset of year bins to select
+#' @param ar_st_vars Array of Strings variables to be selected from `df_ppts`,
+#' all variables used in string lists in `ls_rat_vars` need to be included.
+#' @param ls_rat_vars List of Array each array with numerator and denominator
+#' variables for ratios to be computed list contains new ratio name suffix
 #' @param verbose Boolean print details
 #'
 #' @return A dataset with ratios and levels.
@@ -18,13 +22,17 @@ ff_ppts_lrce_flr <- function(
     df_ppts,
     st_year_bins_type = "1940t2020i01",
     ar_it_years = c(1960, 1980, 1990, 2000, 2010, 2020),
+    ar_st_vars = c("youthpop", "student", "teacher", "school"),
+    ls_rat_vars = list(
+        "y2t" = c("youthpop", "teacher"),
+        "s2t" = c("student", "teacher"),
+        "y2s" = c("youthpop", "school"),
+        "s2s" = c("student", "school")
+    ),
     verbose = FALSE) {
     # First, start with long file, keep all locations and location types, select a subst of years, select `teachers`, `schools`, `students`, `youthpop` so different ratios can be constructed, and levels we want kept
     df_ysts <- df_ppts %>%
-        filter(variable %in% c(
-            "youthpop", "student",
-            "teacher", "school"
-        )) %>%
+        filter(variable %in% ar_st_vars) %>%
         # filter(year_bins_type == "1940t2020i01") %>%
         filter(year_bins_type == st_year_bins_type) %>%
         mutate(year_bins = as.numeric(year_bins)) %>%
@@ -51,17 +59,44 @@ ff_ppts_lrce_flr <- function(
     }
 
     # Third, RATIO/LEVELS: Compute key ratios within time periods, year level/ratio stats done:
+    bl_ratio_hardcode <- FALSE
     # - Teacher over student: `var_rat_t2s`
     # - Teacher over youthpop: `var_rat_t2y`
     # - School over student: `var_rat_s2s`
     # - School over youthpop: `var_rat_sty`
-    df_flr <- df_ysts_wide %>%
-        mutate(
-            var_rat_y2t = var_lvl_youthpop / var_lvl_teacher,
-            var_rat_s2t = var_lvl_student / var_lvl_teacher,
-            var_rat_y2s = var_lvl_youthpop / var_lvl_school,
-            var_rat_s2s = var_lvl_student / var_lvl_school
-        )
+    if (bl_ratio_hardcode) {
+        df_flr <- df_ysts_wide %>%
+            mutate(
+                var_rat_y2t = var_lvl_youthpop / var_lvl_teacher,
+                var_rat_s2t = var_lvl_student / var_lvl_teacher,
+                var_rat_y2s = var_lvl_youthpop / var_lvl_school,
+                var_rat_s2s = var_lvl_student / var_lvl_school
+            )
+    } else {
+        # Fourth, compute stats ratios over time for level and change vars. 1980 to 2020 change, 80 to 00, 00 to 20.
+        ar_st_names <- names(ls_rat_vars)
+        # Initialize dataframe
+        df_flr <- df_ysts_wide
+        for (it_rat_ctr in seq(1, length(ls_rat_vars))) {
+            st_rat_var_name <- paste0("var_rat_", ar_st_names[it_rat_ctr])
+            ar_it_vars_ratio <- ls_rat_vars[[it_rat_ctr]]
+            st_var_numerator <- paste0("var_lvl_", ar_it_vars_ratio[1])
+            st_var_denominator <- paste0("var_lvl_", ar_it_vars_ratio[2])
+
+            df_flr <- df_flr %>%
+                mutate(
+                    !!sym(st_rat_var_name) := !!sym(st_var_numerator) / !!sym(st_var_denominator)
+                )
+
+            if (verbose) {
+                print(glue::glue("F-713479, S2"))
+                print(st_rat_var_name)
+                print(st_var_numerator)
+                print(st_var_denominator)
+                print(glue::glue("dim FLR: {dim(df_flr)}"))
+            }
+        }
+    }
     if (verbose) {
         print(glue::glue("F-713479, S3"))
         print(colnames(df_flr))
@@ -148,8 +183,6 @@ ff_ppts_lrce_fpc <- function(
     }
 
     # Fourth, compute stats ratios over time for level and change vars. 1980 to 2020 change, 80 to 00, 00 to 20.
-
-    # Fourth, compute stats ratios over time for level and change vars. 1980 to 2020 change, 80 to 00, 00 to 20.
     ar_st_names <- names(ls_chg_years)
     # Initialize dataframe
     df_fpc <- df_ysts_longer_wide
@@ -197,6 +230,7 @@ ff_ppts_lrce_fpc <- function(
 #'
 #' @param df_fpc Dataframe input, output of `PrjCompPPTS::ff_ppts_lrce_fpc`
 #' \href{https://github.com/FanWangEcon/PrjThaiHFID/issues/1}{PrjThaiHFID-issue-1}.
+#' 
 #' @param verbose Boolean print details
 #'
 #' @return A dataset with ratios, levels, percentage changes, and elasticities.
@@ -208,6 +242,12 @@ ff_ppts_lrce_fpc <- function(
 #'
 ff_ppts_lrce_fel <- function(
     df_fpc,
+    ls_rat_vars = list(
+        "y2t" = c("youthpop", "teacher"),
+        "s2t" = c("student", "teacher"),
+        "y2s" = c("youthpop", "school"),
+        "s2s" = c("student", "school")
+    ),
     verbose = FALSE) {
     # First, from `fpc`, keep percentage changes as stats vars, drop level and rank vars.
     df_fpc_base <- df_fpc %>%
@@ -253,13 +293,40 @@ ff_ppts_lrce_fel <- function(
     # - Teacher over youthpop: `var_elas_t2y`
     # - School over student: `var_elas_s2s`
     # - School over youthpop: `var_elas_sty`
-    df_fel_elas <- df_fel_wide %>%
-        mutate(
-            var_elas_y2t = var_chg_teacher / var_chg_youthpop,
-            var_elas_s2t = var_chg_teacher / var_chg_student,
-            var_elas_y2s = var_chg_school / var_chg_youthpop,
-            var_elas_s2s = var_chg_school / var_chg_student
-        )
+    bl_ratio_hardcode <- FALSE
+    if (bl_ratio_hardcode) {
+        df_fel_elas <- df_fel_wide %>%
+            mutate(
+                var_elas_y2t = var_chg_teacher / var_chg_youthpop,
+                var_elas_s2t = var_chg_teacher / var_chg_student,
+                var_elas_y2s = var_chg_school / var_chg_youthpop,
+                var_elas_s2s = var_chg_school / var_chg_student
+            )
+    } else {
+        # Fourth, compute stats ratios over time for level and change vars. 1980 to 2020 change, 80 to 00, 00 to 20.
+        ar_st_names <- names(ls_rat_vars)
+        # Initialize dataframe
+        df_fel_elas <- df_fel_wide
+        for (it_rat_ctr in seq(1, length(ls_rat_vars))) {
+            st_rat_var_name <- paste0("var_elas_", ar_st_names[it_rat_ctr])
+            ar_it_vars_ratio <- ls_rat_vars[[it_rat_ctr]]
+            st_var_numerator <- paste0("var_chg_", ar_it_vars_ratio[1])
+            st_var_denominator <- paste0("var_chg_", ar_it_vars_ratio[2])
+
+            df_fel_elas <- df_fel_elas %>%
+                mutate(
+                    !!sym(st_rat_var_name) := !!sym(st_var_numerator) / !!sym(st_var_denominator)
+                )
+
+            if (verbose) {
+                print(glue::glue("F-307302, S3"))
+                print(st_rat_var_name)
+                print(st_var_numerator)
+                print(st_var_denominator)
+                print(glue::glue("dim FEL: {dim(df_fel_elas)}"))
+            }
+        }
+    }
     if (verbose) {
         print(glue::glue("F-307302, S4"))
         print(glue::glue("dim df_fel_elas: {dim(df_fel_elas)}"))
