@@ -1,8 +1,8 @@
 ---
-title: "Table: Global youth population and teachers"
+title: "Table: Global students and teachers"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Table: Global youth population and teachers}
+  %\VignetteIndexEntry{Table: Global students and teachers}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -27,7 +27,7 @@ library(PrjCompPPTS)
 verbose <- TRUE
 bl_tex_save <- TRUE
 spt_path_res <- file.path("..", "res-tab", fsep = .Platform$file.sep)
-spn_tex_out <- file.path(spt_path_res, "tab_global_children_teachers.tex", fsep = .Platform$file.sep)
+spn_tex_out <- file.path(spt_path_res, "tab_global_students_teachers.tex", fsep = .Platform$file.sep)
 ```
 
 [Implement PrjCompPPTS-2](https://github.com/FanWangEcon/PrjCompPPTS/issues/2), Summ: Global teachers and students.
@@ -39,9 +39,9 @@ We generate a table with these possible variables:
 - var (3) children to teacher ratio in 1960, 1980, 2000, 2020
 - var (1) global ranking in 2020
 - var (1) percentage change in teachers 1980 to 2020
-- var (1) teacher-population elasticity
+- var (1) teacher-students elasticity
 - var (1) percentage change in teachers 2000 to 2020
-- var (1) teacher-population elasticity
+- var (1) teacher-students elasticity
 
 ## Generate input file
 
@@ -52,7 +52,7 @@ Load file with interpolated data.
 ```{r}
 # Locaiton codes
 ppts_code_wrk <- ppts_country_code
-# We load in the global population data.
+# We load in the global students data.
 df_ppts <- ppts_easia_weuro_world_pchg
 ```
 
@@ -172,9 +172,9 @@ df_lrce_region_country <- bind_rows(
 )
 ```
 
-## Table population and teachers
+## Table students and teachers
 
-Now we develop the table for population to teacher ratio.
+Now we develop the table for students to teacher ratio.
 
 ### Prep table inputs
 
@@ -183,35 +183,35 @@ Select and prep Table 2. Combine national and regional data together.
 First, select ratio and elasticity.
 
 ```{r}
-# Select y2t ratio levels and elasticity
-tab2_y2t_rat_elas <- df_lrce_region_country %>%
+# Select s2t ratio levels and elasticity
+tab2_s2t_rat_elas <- df_lrce_region_country %>%
   filter(
     vartype == "rat",
-    variable == "y2t"
+    variable == "s2t"
   ) %>%
   select(
     -vartype, -variable, -location_level, -location_code,
     -year1960, -contains("chg"), -elas_80v60
   ) %>%
-  rename_at(vars(matches("elas_|year")), ~ paste0(., "_y2t"))
-print(glue::glue("dim tab2_y2t_rat_elas: {dim(tab2_y2t_rat_elas)}"))
+  rename_at(vars(matches("elas_|year")), ~ paste0(., "_s2t"))
+print(glue::glue("dim tab2_s2t_rat_elas: {dim(tab2_s2t_rat_elas)}"))
 ```
 
 Second, ranks.
 
 ```{r}
-# Select y2t ratio levels and elasticity
-tab2_y2t_rat_rank <- df_lrce_region_country %>%
+# Select s2t ratio levels and elasticity
+tab2_s2t_rat_rank <- df_lrce_region_country %>%
   filter(
     vartype == "rank",
-    variable == "y2t"
+    variable == "s2t"
   ) %>%
   select(
     -vartype, -variable, -location_level, -location_code,
     -year1960, -contains("chg"), -contains("elas"),
   ) %>%
-  rename_at(vars(matches("year")), ~ paste0(., "_y2t_rank"))
-print(glue::glue("dim tab2_y2t_rat_rank: {dim(tab2_y2t_rat_rank)}"))
+  rename_at(vars(matches("year")), ~ paste0(., "_s2t_rank"))
+print(glue::glue("dim tab2_s2t_rat_rank: {dim(tab2_s2t_rat_rank)}"))
 ```
 
 Second, select percentage changes.
@@ -247,7 +247,7 @@ Third, combine information together
 ```{r}
 tab_2_global_pop_teacher <- tab2_youthstudentteacher_lvl %>%
   left_join(
-    tab2_y2t_rat_elas,
+    tab2_s2t_rat_elas,
     by = c(
       "location_name_full" = "location_name_full",
       "location_region_group" = "location_region_group",
@@ -255,7 +255,7 @@ tab_2_global_pop_teacher <- tab2_youthstudentteacher_lvl %>%
     )
   ) %>%
   left_join(
-    tab2_y2t_rat_rank,
+    tab2_s2t_rat_rank,
     by = c(
       "location_name_full" = "location_name_full",
       "location_region_group" = "location_region_group",
@@ -269,21 +269,21 @@ Fourth, select a subset of variables for visualizations. Include the following:
 - var country
 - var (3) children to teacher ratio in 1980, 2000, 2020
 - var (1) global ranking in 2020
-- var (1) percentage change in youth 1980 to 2020
+- var (1) percentage change in student 1980 to 2020
 - var (1) percentage change in teachers 1980 to 2020
-- var (1) teacher-population elasticity
+- var (1) teacher-students elasticity
 
 ```{r}
 # Select data
-tab_2_global_pop_teacher_v1 <- tab_2_global_pop_teacher %>%
+tab_2_global_student_teacher_v1 <- tab_2_global_pop_teacher %>%
   select(
     contains("location"),
-    year1980_y2t, year2000_y2t, year2020_y2t,
-    chg_20v00_youthpop, chg_20v00_teacher, elas_20v00_y2t,
-    chg_20v80_youthpop, chg_20v80_teacher, elas_20v80_y2t
+    year1980_s2t, year2000_s2t, year2020_s2t,
+    chg_20v00_student, chg_20v00_teacher, elas_20v00_s2t,
+    chg_20v80_student, chg_20v80_teacher, elas_20v80_s2t
   )
 # drop no data rows
-tab_2_global_pop_teacher_v1 <- tab_2_global_pop_teacher_v1 %>%
+tab_2_global_student_teacher_v1 <- tab_2_global_student_teacher_v1 %>%
   mutate(
     avg_stats = base::rowMeans(
       dplyr::pick(matches("year|chg|elas")),
@@ -297,7 +297,7 @@ tab_2_global_pop_teacher_v1 <- tab_2_global_pop_teacher_v1 %>%
 Fourth, count variables in regional groups.
 
 ```{r}
-df_region_counts <- tab_2_global_pop_teacher_v1 %>%
+df_region_counts <- tab_2_global_student_teacher_v1 %>%
   group_by(
     location_region_group_code, location_region_group
   ) %>%
@@ -312,7 +312,7 @@ Third, format variables and replace NAs.
 
 ```{r}
 # Format variables
-tab_2_global_pop_teacher_v1 <- tab_2_global_pop_teacher_v1 %>%
+tab_2_global_student_teacher_v1 <- tab_2_global_student_teacher_v1 %>%
   select(-location_region_group, -location_region_group_code) %>%
   mutate_at(
     vars(contains("year")),
@@ -337,7 +337,7 @@ tab_2_global_pop_teacher_v1 <- tab_2_global_pop_teacher_v1 %>%
     ))
   )
 # Replace NAs
-tab_2_global_pop_teacher_v1 <- tab_2_global_pop_teacher_v1 %>%
+tab_2_global_student_teacher_v1 <- tab_2_global_student_teacher_v1 %>%
   mutate_at(vars(starts_with("chg")), ~ str_replace(., "NA%", "")) %>%
   mutate_at(vars(starts_with("year")), ~ str_replace(., "NA", "")) %>%
   mutate_at(vars(starts_with("elas")), ~ str_replace(., "NA", ""))
@@ -356,10 +356,10 @@ for (st_kableformat in ar_st_kableformat) {
     "1980",
     "2000",
     "2020",
-    "Youth",
+    "Students",
     "Teachers",
     "$\\Delta$\\%T/$\\Delta$\\%Y",
-    "Youth",
+    "Students",
     "Teachers",
     "$\\Delta$\\%T/$\\Delta$\\%Y"
   )
@@ -376,19 +376,19 @@ for (st_kableformat in ar_st_kableformat) {
   )
   ar_st_col_groups_l2 <- c(
     " " = 1,
-    "Youth to teacher" = 3,
+    "Student to teacher" = 3,
     "2000 to 2020" = 3,
     "1980 to 2020" = 3
   )
 
   # Second, we construct main table, and add styling.
-  bk_youth_teacher_rela <- kbl(
-    tab_2_global_pop_teacher_v1 %>%
+  bk_student_teacher_rela <- kbl(
+    tab_2_global_student_teacher_v1 %>%
       select(
         location_name_full,
-        year1980_y2t, year2000_y2t, year2020_y2t,
-        chg_20v00_youthpop, chg_20v00_teacher, elas_20v00_y2t,
-        chg_20v80_youthpop, chg_20v80_teacher, elas_20v80_y2t
+        year1980_s2t, year2000_s2t, year2020_s2t,
+        chg_20v00_student, chg_20v00_teacher, elas_20v00_s2t,
+        chg_20v80_student, chg_20v80_teacher, elas_20v80_s2t
       ),
     format = st_kableformat,
     # escape = F,
@@ -396,7 +396,7 @@ for (st_kableformat in ar_st_kableformat) {
     booktabs = T,
     longtable = T,
     align = "c",
-    caption = "Global changes in youth (Age 0-14) and primary teachers",
+    caption = "Global changes in primary students and teachers",
     col.names = ar_st_col_names
   ) %>%
     # see https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html#Bootstrap_table_classes
@@ -406,7 +406,7 @@ for (st_kableformat in ar_st_kableformat) {
     )
 
   # Third, we add in column groups.
-  bk_youth_teacher_rela <- bk_youth_teacher_rela %>%
+  bk_student_teacher_rela <- bk_student_teacher_rela %>%
     add_header_above(ar_st_col_groups_l1) %>%
     add_header_above(ar_st_col_groups_l2)
 
@@ -420,7 +420,7 @@ for (st_kableformat in ar_st_kableformat) {
     it_region_count_end <- df_region_counts[[it_region, "region_count_end"]]
 
     # Add to table
-    bk_youth_teacher_rela <- bk_youth_teacher_rela %>%
+    bk_student_teacher_rela <- bk_student_teacher_rela %>%
       pack_rows(
         st_loc, it_region_count_start, it_region_count_end,
         latex_gap_space = "1em",
@@ -432,7 +432,7 @@ for (st_kableformat in ar_st_kableformat) {
   # Fifth, column formatting.
   fl_width_country <- 3.4
   st_width_country <- paste0(fl_width_country, "cm")
-  bk_youth_teacher_rela <- bk_youth_teacher_rela %>%
+  bk_student_teacher_rela <- bk_student_teacher_rela %>%
     column_spec(1, width = st_width_country) %>%
     column_spec(2:10, width = "0.9cm")
 
@@ -444,46 +444,46 @@ for (st_kableformat in ar_st_kableformat) {
     "\\multicolumn{10}{r}{\\emph{Continued on next page}}\\\\\n",
     "\\endfoot\\endlastfoot"
   )
-  bk_youth_teacher_rela <- sub(bk_youth_teacher_rela,
+  bk_student_teacher_rela <- sub(bk_student_teacher_rela,
     pattern = "\\midrule", replacement = st_headend,
     fixed = TRUE
   )
   # country-names left-align
-  bk_youth_teacher_rela <- gsub(bk_youth_teacher_rela,
+  bk_student_teacher_rela <- gsub(bk_student_teacher_rela,
     pattern = paste0("\\centering\\arraybackslash}p{", st_width_country, "}"),
     replacement = paste0("\\raggedright\\arraybackslash}p{", st_width_country, "}"),
     fixed = TRUE
   )
   # midrule replacing hline
-  bk_youth_teacher_rela <- gsub(bk_youth_teacher_rela,
+  bk_student_teacher_rela <- gsub(bk_student_teacher_rela,
     pattern = "hline",
     replacement = "midrule", fixed = TRUE
   )
   # Backslash replace
-  bk_youth_teacher_rela <- gsub(bk_youth_teacher_rela,
+  bk_student_teacher_rela <- gsub(bk_student_teacher_rela,
     pattern = "\\textbackslash{}Delta", replacement = "\\Delta", fixed = TRUE
   )
-  bk_youth_teacher_rela <- gsub(bk_youth_teacher_rela,
+  bk_student_teacher_rela <- gsub(bk_student_teacher_rela,
     pattern = "\\textbackslash{}", replacement = "", fixed = TRUE
   )
-  bk_youth_teacher_rela <- gsub(bk_youth_teacher_rela,
+  bk_student_teacher_rela <- gsub(bk_student_teacher_rela,
     pattern = "\\$", replacement = "$", fixed = TRUE
   )
-  # bk_youth_teacher_rela <- gsub(bk_youth_teacher_rela,
+  # bk_student_teacher_rela <- gsub(bk_student_teacher_rela,
   #   pattern = "\\%Y",  replacement = "%Y", fixed = TRUE
   # )
-  # bk_youth_teacher_rela <- gsub(bk_youth_teacher_rela,
+  # bk_student_teacher_rela <- gsub(bk_student_teacher_rela,
   #   pattern = "\\% change",  replacement = "% change", fixed = TRUE
   # )
 
   # Sixth, display.
   # pl_bk_asset_count <- bk_asset_count %>% as_image()
   if (st_kableformat == "html") {
-    print(bk_youth_teacher_rela)
+    print(bk_student_teacher_rela)
   } else {
     if (bl_tex_save) {
       fileConn <- file(spn_tex_out)
-      writeLines(bk_youth_teacher_rela, fileConn)
+      writeLines(bk_student_teacher_rela, fileConn)
       close(fileConn)
       if (verbose) {
         print(glue::glue("Latex saved: {spn_tex_out}"))
