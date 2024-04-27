@@ -422,11 +422,149 @@ bin-type=1920t2020i10</caption>
 </table>
 </div>
 <div class="section level3">
+<h3 id="elasticities-in-switzerland">Elasticities in Switzerland<a class="anchor" aria-label="anchor" href="#elasticities-in-switzerland"></a>
+</h3>
+<p>In Switerland, elasticity of teachers to students, schools to
+students, every 10 years</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Display</span></span>
+<span><span class="va">st_year_bin_type</span> <span class="op">&lt;-</span> <span class="st">"1920t2020i10"</span></span>
+<span><span class="va">st_cur_col_var</span> <span class="op">&lt;-</span> <span class="st">"teacher"</span></span>
+<span><span class="co"># print(ppts_wrk_jnt_long[1:50,])</span></span>
+<span><span class="va">st_caption</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Switerland:"</span>,</span>
+<span>  <span class="st">"Elastiicty with percentage change in students in the denominator "</span>, </span>
+<span>  <span class="st">"and percentage change in "</span>, <span class="va">st_cur_col_var</span>, <span class="st">" in the numerator, "</span>, </span>
+<span>  <span class="st">"using as bin-type="</span>, <span class="va">st_year_bin_type</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ppts_wrk_jnt_long_interp1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">location_code</span> <span class="op">==</span> <span class="st">'CHE'</span> <span class="op">&amp;</span> </span>
+<span>                 <span class="va">variable</span> <span class="op">==</span> <span class="st">'student'</span> <span class="op">&amp;</span> </span>
+<span>                 <span class="va">year_bins_type</span> <span class="op">==</span> <span class="va">st_year_bin_type</span> <span class="op">&amp;</span></span>
+<span>                 <span class="va">variable_numerator</span> <span class="op">==</span> <span class="va">st_cur_col_var</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">location_level</span>, <span class="op">-</span><span class="va">year_bins_type</span>, </span>
+<span>               <span class="op">-</span><span class="va">value_interp1</span><span class="op">)</span>,</span>
+<span>      caption <span class="op">=</span> <span class="va">st_caption</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<caption>Switerland:Elastiicty with percentage change in students in the
+denominator and percentage change in teacher in the numerator, using as
+bin-type=1920t2020i10</caption>
+<colgroup>
+<col width="13%">
+<col width="8%">
+<col width="9%">
+<col width="12%">
+<col width="17%">
+<col width="21%">
+<col width="17%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">location_code</th>
+<th align="left">variable</th>
+<th align="left">year_bins</th>
+<th align="right">pchg_interp1</th>
+<th align="left">variable_numerator</th>
+<th align="right">pchg_interp1_numerator</th>
+<th align="right">elasticity_interp1</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">student</td>
+<td align="left">1921-1930</td>
+<td align="right">-0.1088153</td>
+<td align="left">teacher</td>
+<td align="right">-0.0167073</td>
+<td align="right">0.1535385</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">student</td>
+<td align="left">1931-1940</td>
+<td align="right">-0.0422086</td>
+<td align="left">teacher</td>
+<td align="right">0.0197445</td>
+<td align="right">-0.4677836</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">student</td>
+<td align="left">1941-1950</td>
+<td align="right">0.0277636</td>
+<td align="left">teacher</td>
+<td align="right">0.0594144</td>
+<td align="right">2.1400096</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">student</td>
+<td align="left">1951-1960</td>
+<td align="right">0.2337117</td>
+<td align="left">teacher</td>
+<td align="right">0.2169864</td>
+<td align="right">0.9284365</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">student</td>
+<td align="left">1961-1970</td>
+<td align="right">-0.0725023</td>
+<td align="left">teacher</td>
+<td align="right">0.2003332</td>
+<td align="right">-2.7631297</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">student</td>
+<td align="left">1971-1980</td>
+<td align="right">-0.1714082</td>
+<td align="left">teacher</td>
+<td align="right">0.2046066</td>
+<td align="right">-1.1936806</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">student</td>
+<td align="left">1981-1990</td>
+<td align="right">-0.0664079</td>
+<td align="left">teacher</td>
+<td align="right">0.2046066</td>
+<td align="right">-3.0810588</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">student</td>
+<td align="left">1991-2000</td>
+<td align="right">0.1522173</td>
+<td align="left">teacher</td>
+<td align="right">0.2046066</td>
+<td align="right">1.3441745</td>
+</tr>
+<tr class="odd">
+<td align="left">CHE</td>
+<td align="left">student</td>
+<td align="left">2001-2010</td>
+<td align="right">-0.0795079</td>
+<td align="left">teacher</td>
+<td align="right">0.2046066</td>
+<td align="right">-2.5734116</td>
+</tr>
+<tr class="even">
+<td align="left">CHE</td>
+<td align="left">student</td>
+<td align="left">2011-2020</td>
+<td align="right">0.2159203</td>
+<td align="left">teacher</td>
+<td align="right">0.2420525</td>
+<td align="right">1.1210273</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
 <h3 id="elasticities-in-austria">Elasticities in Austria<a class="anchor" aria-label="anchor" href="#elasticities-in-austria"></a>
 </h3>
-<p>In Austria, elasticity of teachers to students, schools to students,
-every 20 years</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p>In Austria, elasticity of schools to students, every 20 years</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display</span></span>
 <span><span class="va">st_year_bin_type</span> <span class="op">&lt;-</span> <span class="st">"1920t2020i20"</span></span>
 <span><span class="va">st_cur_col_var</span> <span class="op">&lt;-</span> <span class="st">"school"</span></span>
@@ -520,7 +658,7 @@ bin-type=1920t2020i20</caption>
 </h3>
 <p>In Busan, Korea, elasticity of teachers to students, schools to
 students, every 10 years</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display</span></span>
 <span><span class="va">st_year_bin_type</span> <span class="op">&lt;-</span> <span class="st">"1920t2020i10"</span></span>
 <span><span class="va">st_cur_col_var</span> <span class="op">&lt;-</span> <span class="st">"teacher"</span></span>
@@ -616,7 +754,7 @@ students</caption>
 <div class="section level2">
 <h2 id="save-elasticity-file">Save elasticity file<a class="anchor" aria-label="anchor" href="#save-elasticity-file"></a>
 </h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Review file variable names</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">ppts_wrk_jnt_long</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "location_code"          "location_level"         "variable"              </span></span>
