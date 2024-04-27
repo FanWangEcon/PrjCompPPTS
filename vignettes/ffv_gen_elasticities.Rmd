@@ -187,11 +187,33 @@ kable(ppts_wrk_jnt_long_interp1 %>%
                -value_interp1),
       caption = st_caption)
 ```
+### Elasticities in Switzerland
 
+In Switerland, elasticity of teachers to students, schools to students, every 10 years
+
+```{r}
+# Display
+st_year_bin_type <- "1920t2020i10"
+st_cur_col_var <- "teacher"
+# print(ppts_wrk_jnt_long[1:50,])
+st_caption <- paste0(
+  "Switerland:",
+  "Elastiicty with percentage change in students in the denominator ", 
+  "and percentage change in ", st_cur_col_var, " in the numerator, ", 
+  "using as bin-type=", st_year_bin_type)
+kable(ppts_wrk_jnt_long_interp1 %>% 
+        filter(location_code == 'CHE' & 
+                 variable == 'student' & 
+                 year_bins_type == st_year_bin_type &
+                 variable_numerator == st_cur_col_var) %>%
+        select(-location_level, -year_bins_type, 
+               -value_interp1),
+      caption = st_caption)
+```
 
 ### Elasticities in Austria
 
-In Austria, elasticity of teachers to students, schools to students, every 20 years
+In Austria, elasticity of schools to students, every 20 years
 
 ```{r}
 # Display

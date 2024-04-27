@@ -24,8 +24,6 @@ library(kableExtra)
 
 library(PrjCompPPTS)
 # If resave outputs to data, only do this during development
-# st_kableformat <- "html"
-st_kableformat <- "latex"
 ```
 
 Working through three core functions of [PrjCompPPTS-Issue 7](https://github.com/FanWangEcon/PrjCompPPTS/issues/7). This was developed prior to functionalizing.
