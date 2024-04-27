@@ -1,0 +1,267 @@
+location_name,location_code,location_region_group,location_income_group,location_wblend_group,location_region_group_code,location_code_adj
+Aruba,ABW,Latin America & Caribbean (LCN),High income,,3LCN,ABW
+Afghanistan,AFG,South Asia (SAS),Low income,IDA,5SAS,AFG
+Angola,AGO,Sub-Saharan Africa (SSF),Lower middle income,IBRD,1SSF,AGO
+Albania,ALB,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,ALB
+Andorra,AND,Europe & Central Asia (ECS),High income,,6ECS,AND
+United Arab Emirates,ARE,Middle East & North Africa (MEA),High income,,2MEA,ARE
+Argentina,ARG,Latin America & Caribbean (LCN),Upper middle income,IBRD,3LCN,ARG
+Armenia,ARM,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,ARM
+American Samoa,ASM,East Asia & Pacific (EAS),High income,,7EAS,ASM
+Antigua and Barbuda,ATG,Latin America & Caribbean (LCN),High income,IBRD,3LCN,ATG
+Australia,AUS,East Asia & Pacific (EAS),High income,,7EAS,AUS
+Austria,AUT,Europe & Central Asia (ECS),High income,,6ECS,AUT
+Azerbaijan,AZE,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,AZE
+Burundi,BDI,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,BDI
+Belgium,BEL,Europe & Central Asia (ECS),High income,,6ECS,BEL
+Benin,BEN,Sub-Saharan Africa (SSF),Lower middle income,IDA,1SSF,BEN
+Burkina Faso,BFA,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,BFA
+Bangladesh,BGD,South Asia (SAS),Lower middle income,IDA,5SAS,BGD
+Bulgaria,BGR,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,BGR
+Bahrain,BHR,Middle East & North Africa (MEA),High income,,2MEA,BHR
+"Bahamas, The",BHS,Latin America & Caribbean (LCN),High income,,3LCN,BHS
+Bosnia and Herzegovina,BIH,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,BIH
+Belarus,BLR,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,BLR
+Belize,BLZ,Latin America & Caribbean (LCN),Upper middle income,IBRD,3LCN,BLZ
+Bermuda,BMU,North America (NAC),High income,,4NAC,BMU
+Bolivia,BOL,Latin America & Caribbean (LCN),Lower middle income,IBRD,3LCN,BOL
+Brazil,BRA,Latin America & Caribbean (LCN),Upper middle income,IBRD,3LCN,BRA
+Barbados,BRB,Latin America & Caribbean (LCN),High income,,3LCN,BRB
+Brunei Darussalam,BRN,East Asia & Pacific (EAS),High income,,7EAS,BRN
+Bhutan,BTN,South Asia (SAS),Lower middle income,IDA,5SAS,BTN
+Botswana,BWA,Sub-Saharan Africa (SSF),Upper middle income,IBRD,1SSF,BWA
+Central African Republic,CAF,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,CAF
+Canada,CAN,North America (NAC),High income,,4NAC,CAN
+Switzerland,CHE,Europe & Central Asia (ECS),High income,,6ECS,CHE
+Channel Islands,CHI,Europe & Central Asia (ECS),High income,,6ECS,CHI
+Chile,CHL,Latin America & Caribbean (LCN),High income,IBRD,3LCN,CHL
+China,CHN,East Asia & Pacific (EAS),Upper middle income,IBRD,7EAS,CHN
+Côte d'Ivoire,CIV,Sub-Saharan Africa (SSF),Lower middle income,IDA,1SSF,CIV
+Cameroon,CMR,Sub-Saharan Africa (SSF),Lower middle income,Blend,1SSF,CMR
+"Congo, Dem. Rep.",COD,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,COD
+"Congo, Rep.",COG,Sub-Saharan Africa (SSF),Lower middle income,Blend,1SSF,COG
+Colombia,COL,Latin America & Caribbean (LCN),Upper middle income,IBRD,3LCN,COL
+Comoros,COM,Sub-Saharan Africa (SSF),Lower middle income,IDA,1SSF,COM
+Cabo Verde,CPV,Sub-Saharan Africa (SSF),Lower middle income,Blend,1SSF,CPV
+Costa Rica,CRI,Latin America & Caribbean (LCN),Upper middle income,IBRD,3LCN,CRI
+Cuba,CUB,Latin America & Caribbean (LCN),Upper middle income,,3LCN,CUB
+Curaçao,CUW,Latin America & Caribbean (LCN),High income,,3LCN,CUW
+Cayman Islands,CYM,Latin America & Caribbean (LCN),High income,,3LCN,CYM
+Cyprus,CYP,Europe & Central Asia (ECS),High income,,6ECS,CYP
+Czechia,CZE,Europe & Central Asia (ECS),High income,,6ECS,CZE
+Germany,DEU,Europe & Central Asia (ECS),High income,,6ECS,DEU
+Djibouti,DJI,Middle East & North Africa (MEA),Lower middle income,IDA,2MEA,DJI
+Dominica,DMA,Latin America & Caribbean (LCN),Upper middle income,Blend,3LCN,DMA
+Denmark,DNK,Europe & Central Asia (ECS),High income,,6ECS,DNK
+Dominican Republic,DOM,Latin America & Caribbean (LCN),Upper middle income,IBRD,3LCN,DOM
+Algeria,DZA,Middle East & North Africa (MEA),Lower middle income,IBRD,2MEA,DZA
+Ecuador,ECU,Latin America & Caribbean (LCN),Upper middle income,IBRD,3LCN,ECU
+Egypt,EGY,Middle East & North Africa (MEA),Lower middle income,IBRD,2MEA,EGY
+Eritrea,ERI,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,ERI
+Spain,ESP,Europe & Central Asia (ECS),High income,,6ECS,ESP
+Estonia,EST,Europe & Central Asia (ECS),High income,,6ECS,EST
+Ethiopia,ETH,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,ETH
+Finland,FIN,Europe & Central Asia (ECS),High income,,6ECS,FIN
+Fiji,FJI,East Asia & Pacific (EAS),Upper middle income,Blend,7EAS,FJI
+France,FRA,Europe & Central Asia (ECS),High income,,6ECS,FRA
+Faroe Islands,FRO,Europe & Central Asia (ECS),High income,,6ECS,FRO
+Micronesia,FSM,East Asia & Pacific (EAS),Lower middle income,IDA,7EAS,FSM
+Gabon,GAB,Sub-Saharan Africa (SSF),Upper middle income,IBRD,1SSF,GAB
+United Kingdom,GBR,Europe & Central Asia (ECS),High income,,6ECS,GBR
+Georgia,GEO,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,GEO
+Ghana,GHA,Sub-Saharan Africa (SSF),Lower middle income,IDA,1SSF,GHA
+Gibraltar,GIB,Europe & Central Asia (ECS),High income,,6ECS,GIB
+Guinea,GIN,Sub-Saharan Africa (SSF),Lower middle income,IDA,1SSF,GIN
+Gambia,GMB,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,GMB
+Guinea-Bissau,GNB,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,GNB
+Equatorial Guinea,GNQ,Sub-Saharan Africa (SSF),Upper middle income,IBRD,1SSF,GNQ
+Greece,GRC,Europe & Central Asia (ECS),High income,,6ECS,GRC
+Grenada,GRD,Latin America & Caribbean (LCN),Upper middle income,Blend,3LCN,GRD
+Greenland,GRL,Europe & Central Asia (ECS),High income,,6ECS,GRL
+Guatemala,GTM,Latin America & Caribbean (LCN),Upper middle income,IBRD,3LCN,GTM
+Guam,GUM,East Asia & Pacific (EAS),High income,,7EAS,GUM
+Guyana,GUY,Latin America & Caribbean (LCN),High income,IDA,3LCN,GUY
+"Hong Kong SAR, China",HKG,East Asia & Pacific (EAS),High income,,7EAS,HKG
+Honduras,HND,Latin America & Caribbean (LCN),Lower middle income,IDA,3LCN,HND
+Croatia,HRV,Europe & Central Asia (ECS),High income,IBRD,6ECS,HRV
+Haiti,HTI,Latin America & Caribbean (LCN),Lower middle income,IDA,3LCN,HTI
+Hungary,HUN,Europe & Central Asia (ECS),High income,,6ECS,HUN
+Indonesia,IDN,East Asia & Pacific (EAS),Upper middle income,IBRD,7EAS,IDN
+Isle of Man,IMN,Europe & Central Asia (ECS),High income,,6ECS,IMN
+India,IND,South Asia (SAS),Lower middle income,IBRD,5SAS,IND
+Ireland,IRL,Europe & Central Asia (ECS),High income,,6ECS,IRL
+Iran,IRN,Middle East & North Africa (MEA),Lower middle income,IBRD,2MEA,IRN
+Iraq,IRQ,Middle East & North Africa (MEA),Upper middle income,IBRD,2MEA,IRQ
+Iceland,ISL,Europe & Central Asia (ECS),High income,,6ECS,ISL
+Israel,ISR,Middle East & North Africa (MEA),High income,,2MEA,ISR
+Italy,ITA,Europe & Central Asia (ECS),High income,,6ECS,ITA
+Jamaica,JAM,Latin America & Caribbean (LCN),Upper middle income,IBRD,3LCN,JAM
+Jordan,JOR,Middle East & North Africa (MEA),Lower middle income,IBRD,2MEA,JOR
+Japan,JPN,East Asia & Pacific (EAS),High income,,7EAS,JPN
+Kazakhstan,KAZ,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,KAZ
+Kenya,KEN,Sub-Saharan Africa (SSF),Lower middle income,Blend,1SSF,KEN
+Kyrgyz Republic,KGZ,Europe & Central Asia (ECS),Lower middle income,IDA,6ECS,KGZ
+Cambodia,KHM,East Asia & Pacific (EAS),Lower middle income,IDA,7EAS,KHM
+Kiribati,KIR,East Asia & Pacific (EAS),Lower middle income,IDA,7EAS,KIR
+St. Kitts and Nevis,KNA,Latin America & Caribbean (LCN),High income,IBRD,3LCN,KNA
+"Korea, Rep.",KOR,East Asia & Pacific (EAS),High income,,7EAS,KOR
+Kuwait,KWT,Middle East & North Africa (MEA),High income,,2MEA,KWT
+Lao PDR,LAO,East Asia & Pacific (EAS),Lower middle income,IDA,7EAS,LAO
+Lebanon,LBN,Middle East & North Africa (MEA),Lower middle income,IBRD,2MEA,LBN
+Liberia,LBR,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,LBR
+Libya,LBY,Middle East & North Africa (MEA),Upper middle income,IBRD,2MEA,LBY
+St. Lucia,LCA,Latin America & Caribbean (LCN),Upper middle income,Blend,3LCN,LCA
+Liechtenstein,LIE,Europe & Central Asia (ECS),High income,,6ECS,LIE
+Sri Lanka,LKA,South Asia (SAS),Lower middle income,IDA,5SAS,LKA
+Lesotho,LSO,Sub-Saharan Africa (SSF),Lower middle income,IDA,1SSF,LSO
+Lithuania,LTU,Europe & Central Asia (ECS),High income,,6ECS,LTU
+Luxembourg,LUX,Europe & Central Asia (ECS),High income,,6ECS,LUX
+Latvia,LVA,Europe & Central Asia (ECS),High income,,6ECS,LVA
+"Macao SAR, China",MAC,East Asia & Pacific (EAS),High income,,7EAS,MAC
+St. Martin (French part),MAF,Latin America & Caribbean (LCN),High income,,3LCN,MAF
+Morocco,MAR,Middle East & North Africa (MEA),Lower middle income,IBRD,2MEA,MAR
+Monaco,MCO,Europe & Central Asia (ECS),High income,,6ECS,MCO
+Moldova,MDA,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,MDA
+Madagascar,MDG,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,MDG
+Maldives,MDV,South Asia (SAS),Upper middle income,IDA,5SAS,MDV
+Mexico,MEX,Latin America & Caribbean (LCN),Upper middle income,IBRD,3LCN,MEX
+Marshall Islands,MHL,East Asia & Pacific (EAS),Upper middle income,IDA,7EAS,MHL
+North Macedonia,MKD,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,MKD
+Mali,MLI,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,MLI
+Malta,MLT,Middle East & North Africa (MEA),High income,,2MEA,MLT
+Myanmar,MMR,East Asia & Pacific (EAS),Lower middle income,IDA,7EAS,MMR
+Montenegro,MNE,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,MNE
+Mongolia,MNG,East Asia & Pacific (EAS),Lower middle income,IBRD,7EAS,MNG
+Northern Mariana Islands,MNP,East Asia & Pacific (EAS),High income,,7EAS,MNP
+Mozambique,MOZ,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,MOZ
+Mauritania,MRT,Sub-Saharan Africa (SSF),Lower middle income,IDA,1SSF,MRT
+Mauritius,MUS,Sub-Saharan Africa (SSF),Upper middle income,IBRD,1SSF,MUS
+Malawi,MWI,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,MWI
+Malaysia,MYS,East Asia & Pacific (EAS),Upper middle income,IBRD,7EAS,MYS
+Namibia,NAM,Sub-Saharan Africa (SSF),Upper middle income,IBRD,1SSF,NAM
+New Caledonia,NCL,East Asia & Pacific (EAS),High income,,7EAS,NCL
+Niger,NER,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,NER
+Nigeria,NGA,Sub-Saharan Africa (SSF),Lower middle income,Blend,1SSF,NGA
+Nicaragua,NIC,Latin America & Caribbean (LCN),Lower middle income,IDA,3LCN,NIC
+Netherlands,NLD,Europe & Central Asia (ECS),High income,,6ECS,NLD
+Norway,NOR,Europe & Central Asia (ECS),High income,,6ECS,NOR
+Nepal,NPL,South Asia (SAS),Lower middle income,IDA,5SAS,NPL
+Nauru,NRU,East Asia & Pacific (EAS),High income,IBRD,7EAS,NRU
+New Zealand,NZL,East Asia & Pacific (EAS),High income,,7EAS,NZL
+Oman,OMN,Middle East & North Africa (MEA),High income,,2MEA,OMN
+Pakistan,PAK,South Asia (SAS),Lower middle income,Blend,5SAS,PAK
+Panama,PAN,Latin America & Caribbean (LCN),High income,IBRD,3LCN,PAN
+Peru,PER,Latin America & Caribbean (LCN),Upper middle income,IBRD,3LCN,PER
+Philippines,PHL,East Asia & Pacific (EAS),Lower middle income,IBRD,7EAS,PHL
+Palau,PLW,East Asia & Pacific (EAS),Upper middle income,IBRD,7EAS,PLW
+Papua New Guinea,PNG,East Asia & Pacific (EAS),Lower middle income,Blend,7EAS,PNG
+Poland,POL,Europe & Central Asia (ECS),High income,IBRD,6ECS,POL
+Puerto Rico,PRI,Latin America & Caribbean (LCN),High income,,3LCN,PRI
+"Korea, Dem. People's Rep.",PRK,East Asia & Pacific (EAS),Low income,,7EAS,PRK
+Portugal,PRT,Europe & Central Asia (ECS),High income,,6ECS,PRT
+Paraguay,PRY,Latin America & Caribbean (LCN),Upper middle income,IBRD,3LCN,PRY
+West Bank and Gaza,PSE,Middle East & North Africa (MEA),Upper middle income,,2MEA,PSE
+French Polynesia,PYF,East Asia & Pacific (EAS),High income,,7EAS,PYF
+Qatar,QAT,Middle East & North Africa (MEA),High income,,2MEA,QAT
+Romania,ROU,Europe & Central Asia (ECS),High income,IBRD,6ECS,ROU
+Russian Federation,RUS,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,RUS
+Rwanda,RWA,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,RWA
+Saudi Arabia,SAU,Middle East & North Africa (MEA),High income,,2MEA,SAU
+Sudan,SDN,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,SDN
+Senegal,SEN,Sub-Saharan Africa (SSF),Lower middle income,IDA,1SSF,SEN
+Singapore,SGP,East Asia & Pacific (EAS),High income,,7EAS,SGP
+Solomon Islands,SLB,East Asia & Pacific (EAS),Lower middle income,IDA,7EAS,SLB
+Sierra Leone,SLE,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,SLE
+El Salvador,SLV,Latin America & Caribbean (LCN),Upper middle income,IBRD,3LCN,SLV
+San Marino,SMR,Europe & Central Asia (ECS),High income,,6ECS,SMR
+Somalia,SOM,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,SOM
+Serbia,SRB,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,SRB
+South Sudan,SSD,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,SSD
+São Tomé and Príncipe,STP,Sub-Saharan Africa (SSF),Lower middle income,IDA,1SSF,STP
+Suriname,SUR,Latin America & Caribbean (LCN),Upper middle income,IBRD,3LCN,SUR
+Slovak Republic,SVK,Europe & Central Asia (ECS),High income,,6ECS,SVK
+Slovenia,SVN,Europe & Central Asia (ECS),High income,,6ECS,SVN
+Sweden,SWE,Europe & Central Asia (ECS),High income,,6ECS,SWE
+Eswatini,SWZ,Sub-Saharan Africa (SSF),Lower middle income,IBRD,1SSF,SWZ
+Sint Maarten (Dutch part),SXM,Latin America & Caribbean (LCN),High income,,3LCN,SXM
+Seychelles,SYC,Sub-Saharan Africa (SSF),High income,IBRD,1SSF,SYC
+Syrian Arab Republic,SYR,Middle East & North Africa (MEA),Low income,IDA,2MEA,SYR
+Turks and Caicos Islands,TCA,Latin America & Caribbean (LCN),High income,,3LCN,TCA
+Chad,TCD,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,TCD
+Togo,TGO,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,TGO
+Thailand,THA,East Asia & Pacific (EAS),Upper middle income,IBRD,7EAS,THA
+Tajikistan,TJK,Europe & Central Asia (ECS),Lower middle income,IDA,6ECS,TJK
+Turkmenistan,TKM,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,TKM
+Timor-Leste,TLS,East Asia & Pacific (EAS),Lower middle income,Blend,7EAS,TLS
+Tonga,TON,East Asia & Pacific (EAS),Upper middle income,IDA,7EAS,TON
+Trinidad and Tobago,TTO,Latin America & Caribbean (LCN),High income,IBRD,3LCN,TTO
+Tunisia,TUN,Middle East & North Africa (MEA),Lower middle income,IBRD,2MEA,TUN
+Türkiye,TUR,Europe & Central Asia (ECS),Upper middle income,IBRD,6ECS,TUR
+Tuvalu,TUV,East Asia & Pacific (EAS),Upper middle income,IDA,7EAS,TUV
+Taiwan,TWN,East Asia & Pacific (EAS),High income,,7EAS,TWN
+Tanzania,TZA,Sub-Saharan Africa (SSF),Lower middle income,IDA,1SSF,TZA
+Uganda,UGA,Sub-Saharan Africa (SSF),Low income,IDA,1SSF,UGA
+Ukraine,UKR,Europe & Central Asia (ECS),Lower middle income,IBRD,6ECS,UKR
+Uruguay,URY,Latin America & Caribbean (LCN),High income,IBRD,3LCN,URY
+United States,USA,North America (NAC),High income,,4NAC,USA
+Uzbekistan,UZB,Europe & Central Asia (ECS),Lower middle income,Blend,6ECS,UZB
+St. Vincent,VCT,Latin America & Caribbean (LCN),Upper middle income,Blend,3LCN,VCT
+Venezuela,VEN,Latin America & Caribbean (LCN),,IBRD,3LCN,VEN
+British Virgin Islands,VGB,Latin America & Caribbean (LCN),High income,,3LCN,VGB
+Virgin Islands (U.S.),VIR,Latin America & Caribbean (LCN),High income,,3LCN,VIR
+Vietnam,VNM,East Asia & Pacific (EAS),Lower middle income,IBRD,7EAS,VNM
+Vanuatu,VUT,East Asia & Pacific (EAS),Lower middle income,IDA,7EAS,VUT
+Samoa,WSM,East Asia & Pacific (EAS),Lower middle income,IDA,7EAS,WSM
+Kosovo,XKX,Europe & Central Asia (ECS),Upper middle income,IDA,6ECS,XKX
+Yemen,YEM,Middle East & North Africa (MEA),Low income,IDA,2MEA,YEM
+South Africa,ZAF,Sub-Saharan Africa (SSF),Upper middle income,IBRD,1SSF,ZAF
+Zambia,ZMB,Sub-Saharan Africa (SSF),Lower middle income,IDA,1SSF,ZMB
+Zimbabwe,ZWE,Sub-Saharan Africa (SSF),Lower middle income,Blend,1SSF,ZWE
+Africa Eastern and Southern,AFE,,,,,AFE
+Africa Western and Central,AFW,,,,,AFW
+Arab World,ARB,,,,,ARB
+Caribbean small states,CSS,,,,,CSS
+Central Europe and the Baltics,CEB,,,,,CEB
+Early-demographic dividend,EAR,,,,,EAR
+East Asia & Pacific,EAS,,,,,0WORLD_7EAS
+East Asia & Pacific (excluding high income),EAP,,,,,EAP
+East Asia & Pacific (IDA & IBRD),TEA,,,,,TEA
+Euro area,EMU,,,,,EMU
+Europe & Central Asia,ECS,,,,,0WORLD_6ECS
+Europe & Central Asia (excluding high income),ECA,,,,,ECA
+Europe & Central Asia (IDA & IBRD),TEC,,,,,TEC
+European Union,EUU,,,,,EUU
+Fragile and conflict affected situations,FCS,,,,,FCS
+Heavily indebted poor countries (HIPC),HPC,,,,,HPC
+High income,HIC,,,,,HIC
+IBRD only,IBD,,,,,IBD
+IDA & IBRD total,IBT,,,,,IBT
+IDA blend,IDB,,,,,IDB
+IDA only,IDX,,,,,IDX
+IDA total,IDA,,,,,IDA
+Late-demographic dividend,LTE,,,,,LTE
+Latin America & Caribbean,LCN,,,,,0WORLD_3LCN
+Latin America & Caribbean (excluding high income),LAC,,,,,LAC
+Latin America & Caribbean (IDA & IBRD),TLA,,,,,TLA
+Least developed countries: UN classification,LDC,,,,,LDC
+Low & middle income,LMY,,,,,LMY
+Low income,LIC,,,,,LIC
+Lower middle income,LMC,,,,,LMC
+Middle East & North Africa,MEA,,,,,0WORLD_2MEA
+Middle East & North Africa (excluding high income),MNA,,,,,MNA
+Middle East & North Africa (IDA & IBRD),TMN,,,,,TMN
+Middle income,MIC,,,,,MIC
+North America,NAC,,,,,0WORLD_4NAC
+OECD members,OED,,,,,OED
+Other small states,OSS,,,,,OSS
+Pacific island small states,PSS,,,,,PSS
+Post-demographic dividend,PST,,,,,PST
+Pre-demographic dividend,PRE,,,,,PRE
+Small states,SST,,,,,SST
+South Asia,SAS,,,,,0WORLD_5SAS
+South Asia (IDA & IBRD),TSA,,,,,TSA
+Sub-Saharan Africa,SSF,,,,,0WORLD_1SSF
+Sub-Saharan Africa (excluding high income),SSA,,,,,SSA
+Sub-Saharan Africa (IDA & IBRD),TSS,,,,,TSS
+Upper middle income,UMC,,,,,UMC
+World,WLD,,,,,WLD

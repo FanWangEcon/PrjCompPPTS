@@ -76,5 +76,5 @@ ppts_country_code <- ppts_country_code %>%
 print(ppts_country_code, n=300)
 
 # Save
-write_csv(ppts_country_code, "data/ppts_easia_weuro_world.csv", na = "")
+write_csv(ppts_country_code, "data/ppts_country_code.csv", na = "")
 usethis::use_data(ppts_country_code, overwrite = TRUE)
