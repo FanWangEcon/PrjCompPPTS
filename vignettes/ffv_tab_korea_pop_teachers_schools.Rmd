@@ -28,11 +28,11 @@ bl_tex_save <- TRUE
 verbose <- TRUE
 
 # Latex output file
-spt_path_res <- file.path("res-tab", fsep = .Platform$file.sep)
+spt_path_res <- file.path("..", "res-tab", fsep = .Platform$file.sep)
 spn_tex_out <- file.path(spt_path_res, "tab_korea_lrce.tex", fsep = .Platform$file.sep)
 ```
 
-[Implement PrjCompPPTS-11](https://github.com/FanWangEcon/PrjCompPPTS/issues/11), summaries for Korea.
+[Implement PrjCompPPTS-13](https://github.com/FanWangEcon/PrjCompPPTS/issues/13), summaries for Korea.
 
 ## Generate input file 
 
@@ -467,7 +467,7 @@ print(df_typevar_counts, n = 100)
 Now we generate the table. 
 
 ```{r}
-ar_st_kableformat <- c("html", "latex")
+ar_st_kableformat <- c("latex", "html")
 for (st_kableformat in ar_st_kableformat) {
   # j_China, j_Japan, j_Korea, j_Taiwan,
   # j_Austria, j_Germany, j_France, j_Netherlands, j_Switzerland
@@ -512,6 +512,7 @@ for (st_kableformat in ar_st_kableformat) {
   bk_korea <- kbl(
     tab3_korea_jnt_kbl,
     format = st_kableformat,
+    label = "main:tab:korea:pop:teachers:schools",
     # escape = F,
     linesep = "",
     booktabs = T,
@@ -609,7 +610,7 @@ for (st_kableformat in ar_st_kableformat) {
   # bk_korea
   # Save tex to file.
   if (st_kableformat == "html") {
-    print(bk_korea)
+    print(dim(bk_korea))
   } else {
     if (bl_tex_save) {
       fileConn <- file(spn_tex_out)
@@ -622,4 +623,5 @@ for (st_kableformat in ar_st_kableformat) {
     }
   }
 }
+bk_korea
 ```

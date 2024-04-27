@@ -419,7 +419,7 @@ print(df_typevar_counts, n = 100)
 Now we generate the table. 
 
 ```{r}
-ar_st_kableformat <- c("html", "latex")
+ar_st_kableformat <- c("latex", "html")
 for (st_kableformat in ar_st_kableformat) {
   # j_China, j_Japan, j_Korea, j_Taiwan,
   # j_Austria, j_Germany, j_France, j_Netherlands, j_Switzerland
@@ -449,6 +449,7 @@ for (st_kableformat in ar_st_kableformat) {
     tab3_weea_jnt %>%
       select(-type, -variable, -variable_sort),
     format = st_kableformat,
+    label = "main:tab:weaa:pop:teachers:schools",
     # escape = F,
     linesep = "",
     booktabs = T,
@@ -519,7 +520,7 @@ for (st_kableformat in ar_st_kableformat) {
   # Sixth, display.
   # pl_bk_asset_count <- bk_asset_count %>% as_image()
   if (st_kableformat == "html") {
-    print(bk_weea)
+    print(dim(bk_weea))
   } else {
     if (bl_tex_save) {
       fileConn <- file(spn_tex_out)
@@ -532,4 +533,5 @@ for (st_kableformat in ar_st_kableformat) {
     }
   }
 }
+bk_weea
 ```

@@ -1,6 +1,7 @@
 url: https://fanwangecon.github.io/PrjCompPPTS/
 template:
   bootstrap: 5
+  number_sections: yes
 
 reference:
 - title: Change statistics
@@ -10,5 +11,4 @@ reference:
 - title: Data files 
   desc: Input data and benchmark analysis data
   contents:
-  - starts_with("ppts")
-  
+  - starts_with("ppts") 

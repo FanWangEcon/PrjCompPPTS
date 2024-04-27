@@ -348,7 +348,7 @@ tab_2_global_pop_teacher_v1 <- tab_2_global_pop_teacher_v1 %>%
 Now we generate the table.
 
 ```{r}
-ar_st_kableformat <- c("html", "latex")
+ar_st_kableformat <- c("latex", "html")
 for (st_kableformat in ar_st_kableformat) {
   # Column names
   ar_st_col_names <- c(
@@ -391,6 +391,7 @@ for (st_kableformat in ar_st_kableformat) {
         chg_20v80_youthpop, chg_20v80_teacher, elas_20v80_y2t
       ),
     format = st_kableformat,
+    label = "main:tab:global:pop:teachers",
     # escape = F,
     linesep = "",
     booktabs = T,
@@ -479,7 +480,7 @@ for (st_kableformat in ar_st_kableformat) {
   # Sixth, display.
   # pl_bk_asset_count <- bk_asset_count %>% as_image()
   if (st_kableformat == "html") {
-    print(bk_youth_teacher_rela)
+    print(dim(bk_youth_teacher_rela))
   } else {
     if (bl_tex_save) {
       fileConn <- file(spn_tex_out)
@@ -491,4 +492,5 @@ for (st_kableformat in ar_st_kableformat) {
     }
   }
 }
+bk_youth_teacher_rela
 ```
