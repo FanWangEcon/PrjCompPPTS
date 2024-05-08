@@ -4,9 +4,14 @@ template:
   number_sections: yes
 
 reference:
+- title: Interpolate
+  desc: Linear interpolation generate data in gap dates with missing data
+  contents:
+  - starts_with("ff_ppts_interp")
 - title: Change statistics
   desc: Generate ratios, percentage changes, and elasticities
   contents:
+  - starts_with("ff_ppts_pchg")
   - starts_with("ff_ppts_lrce")
 - title: Data files 
   desc: Input data and benchmark analysis data

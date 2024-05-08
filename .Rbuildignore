@@ -5,3 +5,12 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+
+^data-temp$
+^_notes$
+^R-sandbox$
+^R-script$
+^res-fig$
+^res-tab$
+^stata-script$
+^vignettes-sandbox$
