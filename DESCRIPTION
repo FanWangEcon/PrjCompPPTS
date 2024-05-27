@@ -1,6 +1,6 @@
 Package: PrjCompPPTS
 Title: Global changes in school age popultion, teachers, and schools
-Version: 0.1.0
+Version: 1.0.0
 Authors@R:
     c(person(given="Emily", 
              family="Hannum",              
