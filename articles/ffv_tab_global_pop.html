@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">PrjCompPPTS</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,8 +95,9 @@
 <span><span class="co">#&gt;     filter, lag</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/" class="external-link">kableExtra</a></span><span class="op">)</span></span>
@@ -104,8 +105,9 @@
 <span><span class="co">#&gt; Attaching package: 'kableExtra'</span></span>
 <span><span class="co">#&gt; The following object is masked from 'package:dplyr':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     group_rows</span></span>
-<span></span>
+<span><span class="co">#&gt;     group_rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/FanWangEcon/PrjCompPPTS" class="external-link">PrjCompPPTS</a></span><span class="op">)</span></span>
 <span><span class="co"># If resave outputs to data, only do this during development</span></span>
 <span><span class="va">verbose</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
@@ -132,7 +134,7 @@ PrjCompPPTS-5</a>, Summ: Global child population.</p>
 <h3 id="load-prepped-all-location-level-files">Load prepped all location level files<a class="anchor" aria-label="anchor" href="#load-prepped-all-location-level-files"></a>
 </h3>
 <p>Load file with interpolated data.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Locaiton codes</span></span>
 <span><span class="va">ppts_code_wrk</span> <span class="op">&lt;-</span> <span class="va">ppts_country_code</span></span>
 <span><span class="co"># We load in the global population data.</span></span>
@@ -142,7 +144,7 @@ PrjCompPPTS-5</a>, Summ: Global child population.</p>
 <h3 id="run-prjcompppts-functions">Run PrjCompPPTS functions<a class="anchor" aria-label="anchor" href="#run-prjcompppts-functions"></a>
 </h3>
 <p>Run functions to generate FLR, FPC, and FEL files. Run FLR.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generate PLR</span></span>
 <span><span class="va">df_flr</span> <span class="op">&lt;-</span> <span class="fu">PrjCompPPTS</span><span class="fu">::</span><span class="fu"><a href="../reference/ff_ppts_lrce_flr.html">ff_ppts_lrce_flr</a></span><span class="op">(</span></span>
 <span>  <span class="va">df_ppts</span>,</span>
@@ -186,7 +188,7 @@ PrjCompPPTS-5</a>, Summ: Global child population.</p>
 <span><span class="co">#&gt; dim of youth wide ratio file: 1616</span></span>
 <span><span class="co">#&gt; dim of youth wide ratio file: 11</span></span></code></pre></div>
 <p>Run FPC.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generate FPC</span></span>
 <span><span class="va">df_fpc</span> <span class="op">&lt;-</span> <span class="fu">PrjCompPPTS</span><span class="fu">::</span><span class="fu"><a href="../reference/ff_ppts_lrce_fpc.html">ff_ppts_lrce_fpc</a></span><span class="op">(</span></span>
 <span>  <span class="va">df_flr</span>,</span>
@@ -235,7 +237,7 @@ PrjCompPPTS-5</a>, Summ: Global child population.</p>
 <span><span class="co">#&gt; dim FPC: 2728</span></span>
 <span><span class="co">#&gt; dim FPC: 12</span></span></code></pre></div>
 <p>Run FEL.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generate FEL</span></span>
 <span><span class="va">df_fel</span> <span class="op">&lt;-</span> <span class="fu">PrjCompPPTS</span><span class="fu">::</span><span class="fu"><a href="../reference/ff_ppts_lrce_fel.html">ff_ppts_lrce_fel</a></span><span class="op">(</span></span>
 <span>  <span class="va">df_fpc</span>,</span>
@@ -287,7 +289,7 @@ PrjCompPPTS-5</a>, Summ: Global child population.</p>
 <p>Now we combine the level and change information from FPC with the
 elasticity results from FEL.</p>
 <p>We have the LRCE file, level, ratio, change, and elasticity.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_lrce</span> <span class="op">&lt;-</span> <span class="va">df_fpc</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span></span>
 <span>  <span class="va">df_fel</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>vartype <span class="op">=</span> <span class="st">"rat"</span><span class="op">)</span>,</span>
 <span>  by <span class="op">=</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -302,7 +304,7 @@ elasticity results from FEL.</p>
 <span><span class="co">#&gt; dim df_lrce: 16</span></span></code></pre></div>
 <p>Finally, merge in country key info to FPC, country-level
 information.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_lrce_country</span> <span class="op">&lt;-</span> <span class="va">df_lrce</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">location_level</span> <span class="op">!=</span> <span class="st">"multicountry"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span></span>
@@ -319,7 +321,7 @@ information.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">location_name_full</span>, <span class="va">location_region_group</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">location_region_group_code</span>, <span class="va">location_name_full</span><span class="op">)</span></span></code></pre></div>
 <p>FPC regional information, same variables.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ar_st_wb7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SSF"</span>, <span class="st">"MEA"</span>, <span class="st">"LCN"</span>, <span class="st">"NAC"</span>, <span class="st">"SAS"</span>, <span class="st">"ECS"</span>, <span class="st">"EAS"</span><span class="op">)</span></span>
 <span><span class="va">df_lrce_region</span> <span class="op">&lt;-</span> <span class="va">df_lrce</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">location_level</span> <span class="op">==</span> <span class="st">"multicountry"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -344,7 +346,7 @@ information.</p>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">location_region_group_code</span>, <span class="va">location_code</span><span class="op">)</span></span></code></pre></div>
 <p>Combine region and country.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_lrce_region_country</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
 <span>  <span class="va">df_lrce_region</span>,</span>
 <span>  <span class="va">df_lrce_country</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">location_level</span> <span class="op">==</span> <span class="st">"country"</span><span class="op">)</span>,</span>
@@ -359,7 +361,7 @@ information.</p>
 </h3>
 <p>Select and prep Table 1. Combine national and regional data
 together.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Select variables</span></span>
 <span><span class="va">tab1_global_pop</span> <span class="op">&lt;-</span> <span class="va">df_lrce_region_country</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
@@ -371,7 +373,7 @@ together.</p>
 <span>    <span class="op">-</span><span class="va">chg_80v60</span>, <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"elas_"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p>Second, count variables in regional groups.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_region_counts</span> <span class="op">&lt;-</span> <span class="va">tab1_global_pop</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span></span>
 <span>    <span class="va">location_region_group_code</span>, <span class="va">location_region_group</span></span>
@@ -384,7 +386,7 @@ together.</p>
 <span><span class="co">#&gt; `summarise()` has grouped output by 'location_region_group_code'. You can</span></span>
 <span><span class="co">#&gt; override using the `.groups` argument.</span></span></code></pre></div>
 <p>Third, format variables.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Format variables</span></span>
 <span><span class="va">tab1_global_pop</span> <span class="op">&lt;-</span> <span class="va">tab1_global_pop</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">location_region_group</span>, <span class="op">-</span><span class="va">location_region_group_code</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -409,7 +411,7 @@ together.</p>
 <h3 id="generate-table">Generate table<a class="anchor" aria-label="anchor" href="#generate-table"></a>
 </h3>
 <p>Now we generate the table.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ar_st_kableformat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"latex"</span>, <span class="st">"html"</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">st_kableformat</span> <span class="kw">in</span> <span class="va">ar_st_kableformat</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Column names</span></span>
@@ -541,8 +543,9 @@ together.</p>
 <span><span class="co">#&gt;                                     use label_row_css instead.</span></span>
 <span><span class="co">#&gt; Warning in pack_rows(., st_loc, it_region_count_start, it_region_count_end, : latex_align parameter is not used in HTML Mode,</span></span>
 <span><span class="co">#&gt;                                     use label_row_css instead.</span></span>
-<span><span class="co">#&gt; NULL</span></span>
-<span><span class="va">bk_youthpop</span></span></code></pre></div>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bk_youthpop</span></span></code></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive" style="width: auto !important; ">
 <caption>
 Global youth population

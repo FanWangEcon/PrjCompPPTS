@@ -16,7 +16,7 @@ for Western European and Eastern Asian countries."><!-- mathjax --><script src="
     
     <a class="navbar-brand me-2" href="../index.html">PrjCompPPTS</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,19 +107,43 @@ for Western European and Eastern Asian countries.</p>
 </dl></div>
     <div class="section level2">
     <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
-    <p><a href="Cross-nationa%20data%20on%20school%20age%20popultion,%20students,%20teachers,%20and%20schools">https://fanwangecon.github.io/</a></p>
+    <p><a href="https://jeonghyeok-kim.github.io/assets/GlobalChildrenTeachersSchools_HannumKimWang.pdf" class="external-link">See online appendix B of Hannum, Kim, and Wang (2024).</a></p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Aggregate national for countries except in the case of Korea.</p>
-<p>For Korea, have with-in country data aggregated to compare between
-metropolitan and non-metropolitan areas. Also has data available in
-Korea for all regions</p>
+<p>For Korea, within country data aggregated to compare between
+metropolitan and non-metropolitan areas as well as province-specific data.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_world</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_world</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      location_name   location_code         location_level </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Switzerland                :  157   CHE    :  157   country      :13529  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Austria                    :   98   AUT    :   98   multicountry : 3100  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Japan                      :   75   JPN    :   75   multiprovince:  114  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  China                      :   73   CHN    :   73   province     :  969  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Afghanistan                :   62   ABW    :   62                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Africa Eastern and Southern:   62   AFE    :   62                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (Other)                    :17185   (Other):17185                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       year      stats_youthpop      stats_student       stats_teacher     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :1864   Min.   :1.272e+04   Min.   :     1008   Min.   :      40  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:1975   1st Qu.:7.113e+05   1st Qu.:   180278   1st Qu.:    7402  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :1991   Median :2.704e+06   Median :   814673   Median :   35938  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :1990   Mean   :7.559e+07   Mean   : 28134713   Mean   : 1210151  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:2006   3rd Qu.:1.745e+07   3rd Qu.:  5809414   3rd Qu.:  340705  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :2022   Max.   :1.977e+09   Max.   :742831104   Max.   :32652932  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 NA's   :3067        NA's   :6165        NA's   :7885      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   stats_school         stats_gdp      stats_enroll_ratio</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Min.   :     22.0   Min.   :   144   Min.   :  3.00    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1st Qu.:    184.2   1st Qu.:  1277   1st Qu.: 93.00    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Median :    559.0   Median :  3424   Median :101.00    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mean   :  34613.1   Mean   : 10500   Mean   : 97.21    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3rd Qu.:   3521.5   3rd Qu.: 11308   3rd Qu.:107.00    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Max.   :1681939.0   Max.   :181709   Max.   :222.00    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  NA's   :16190       NA's   :5585     NA's   :7392      </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_world</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 17,712 × 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    location_name location_code location_level  year stats_youthpop stats_student</span>

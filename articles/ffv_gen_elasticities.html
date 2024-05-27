@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">PrjCompPPTS</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,8 +95,9 @@
 <span><span class="co">#&gt;     filter, lag</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/" class="external-link">kableExtra</a></span><span class="op">)</span></span>
@@ -104,8 +105,9 @@
 <span><span class="co">#&gt; Attaching package: 'kableExtra'</span></span>
 <span><span class="co">#&gt; The following object is masked from 'package:dplyr':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     group_rows</span></span>
-<span></span>
+<span><span class="co">#&gt;     group_rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/FanWangEcon/PrjCompPPTS" class="external-link">PrjCompPPTS</a></span><span class="op">)</span></span>
 <span><span class="co"># If resave outputs to data, only do this during development</span></span>
 <span><span class="va">bl_resave_to_data</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
@@ -121,7 +123,7 @@ in the school-age population.</p>
 <h2 id="load-data-inputs-and-review">Load data inputs and review<a class="anchor" aria-label="anchor" href="#load-data-inputs-and-review"></a>
 </h2>
 <p>We load in the global population data.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># File use</span></span>
 <span><span class="va">bl_interp</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span><span class="va">ppts_wrk</span> <span class="op">&lt;-</span> <span class="va">ppts_easia_weuro_world_pchg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -140,13 +142,14 @@ in the school-age population.</p>
 <span><span class="co">#&gt;  $ value_interp1 : num [1:25765] 14653 27884 29367 31246 29670 ...</span></span></code></pre></div>
 <p>We review all unique values in variables. We get all unique
 “variable” values, drop enroll_ratio</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ar_st_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ppts_wrk</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">variable</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ar_year_bins_type</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">ppts_wrk</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">year_bins_type</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ar_st_vars</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] gdp      student  teacher  youthpop school  </span></span>
-<span><span class="co">#&gt; Levels: gdp school student teacher youthpop</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ar_year_bins_type</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Levels: gdp school student teacher youthpop</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ar_year_bins_type</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 1920t2020i05 1920t2020i10 1920t2020i20 1925t2015i15</span></span>
 <span><span class="co">#&gt; Levels: 1920t2020i05 1920t2020i10 1920t2020i20 1925t2015i15 1940t2020i01</span></span></code></pre></div>
 </div>
@@ -159,7 +162,7 @@ numerators, and the original column will be the denominator.</p>
 <p>Then, we reshape the file just created, so that all “numerators” will
 be in the same column.</p>
 <p>We compute elasticities after</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">it_avg_type</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">it_avg_type</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
@@ -249,7 +252,7 @@ these are the elasticity measures.</p>
 </h3>
 <p>We do not have data on schools. We show elasticity of teachers with
 respect to students, per decade.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display</span></span>
 <span><span class="va">st_year_bin_type</span> <span class="op">&lt;-</span> <span class="st">"1920t2020i10"</span></span>
 <span><span class="va">st_cur_col_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"teacher"</span><span class="op">)</span></span>
@@ -350,7 +353,7 @@ as bin-type=1920t2020i10</caption>
 <div class="section level3">
 <h3 id="elasticities-in-germany">Elasticities in Germany<a class="anchor" aria-label="anchor" href="#elasticities-in-germany"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display</span></span>
 <span><span class="va">st_year_bin_type</span> <span class="op">&lt;-</span> <span class="st">"1920t2020i10"</span></span>
 <span><span class="va">st_cur_col_var</span> <span class="op">&lt;-</span> <span class="st">"school"</span></span>
@@ -426,7 +429,7 @@ bin-type=1920t2020i10</caption>
 </h3>
 <p>In Switerland, elasticity of teachers to students, schools to
 students, every 10 years</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display</span></span>
 <span><span class="va">st_year_bin_type</span> <span class="op">&lt;-</span> <span class="st">"1920t2020i10"</span></span>
 <span><span class="va">st_cur_col_var</span> <span class="op">&lt;-</span> <span class="st">"teacher"</span></span>
@@ -564,7 +567,7 @@ bin-type=1920t2020i10</caption>
 <h3 id="elasticities-in-austria">Elasticities in Austria<a class="anchor" aria-label="anchor" href="#elasticities-in-austria"></a>
 </h3>
 <p>In Austria, elasticity of schools to students, every 20 years</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display</span></span>
 <span><span class="va">st_year_bin_type</span> <span class="op">&lt;-</span> <span class="st">"1920t2020i20"</span></span>
 <span><span class="va">st_cur_col_var</span> <span class="op">&lt;-</span> <span class="st">"school"</span></span>
@@ -658,7 +661,7 @@ bin-type=1920t2020i20</caption>
 </h3>
 <p>In Busan, Korea, elasticity of teachers to students, schools to
 students, every 10 years</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display</span></span>
 <span><span class="va">st_year_bin_type</span> <span class="op">&lt;-</span> <span class="st">"1920t2020i10"</span></span>
 <span><span class="va">st_cur_col_var</span> <span class="op">&lt;-</span> <span class="st">"teacher"</span></span>
@@ -754,14 +757,15 @@ students</caption>
 <div class="section level2">
 <h2 id="save-elasticity-file">Save elasticity file<a class="anchor" aria-label="anchor" href="#save-elasticity-file"></a>
 </h2>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Review file variable names</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">ppts_wrk_jnt_long</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "location_code"          "location_level"         "variable"              </span></span>
 <span><span class="co">#&gt;  [4] "year_bins_type"         "year_bins"              "pchg_interp1"          </span></span>
 <span><span class="co">#&gt;  [7] "value_interp1"          "variable_numerator"     "pchg_interp1_numerator"</span></span>
-<span><span class="co">#&gt; [10] "elasticity_interp1"</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">ppts_wrk_jnt_long</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [10] "elasticity_interp1"</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">ppts_wrk_jnt_long</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; tibble [128,825 × 10] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ location_code         : Factor w/ 286 levels "ABW","AFE","AFG",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ location_level        : Factor w/ 4 levels "country","multicountry",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
@@ -773,8 +777,9 @@ students</caption>
 <span><span class="co">#&gt;  $ variable_numerator    : chr [1:128825] "gdp" "student" "teacher" "youthpop" ...</span></span>
 <span><span class="co">#&gt;  $ pchg_interp1_numerator: num [1:128825] 1.2489 NA NA -0.0298 NA ...</span></span>
 <span><span class="co">#&gt;  $ elasticity_interp1    : num [1:128825] 1 NA NA -0.0239 NA ...</span></span>
-<span><span class="co">#&gt; NULL</span></span>
-<span><span class="co"># Save file</span></span>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Save file</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">bl_resave_to_data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">ppts_easia_weuro_world_elas_interp1</span> <span class="op">&lt;-</span> <span class="va">ppts_wrk_jnt_long_interp1</span></span>
 <span>  <span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_world_elas_interp1</span>, <span class="st">"../data/ppts_easia_weuro_world_elas_interp1.csv"</span><span class="op">)</span></span>

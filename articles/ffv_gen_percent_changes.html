@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">PrjCompPPTS</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,16 +95,18 @@
 <span><span class="co">#&gt;     filter, lag</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/" class="external-link">kableExtra</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'kableExtra'</span></span>
 <span><span class="co">#&gt; The following object is masked from 'package:dplyr':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     group_rows</span></span>
-<span></span>
+<span><span class="co">#&gt;     group_rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/FanWangEcon/PrjCompPPTS" class="external-link">PrjCompPPTS</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># If resave outputs to data, only do this during development</span></span>
@@ -134,7 +136,7 @@ interpolate to obtain more annualized predictions.</p>
 <div class="section level2">
 <h2 id="load-and-select">Load and select<a class="anchor" aria-label="anchor" href="#load-and-select"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># A. Load and select ----</span></span>
 <span><span class="va">ppts_easia_weuro_sel</span> <span class="op">&lt;-</span> <span class="va">ppts_easia_weuro_world</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">location_code</span>, <span class="va">location_level</span>, <span class="va">year</span>,</span>
@@ -143,7 +145,7 @@ interpolate to obtain more annualized predictions.</p>
 <div class="section level2">
 <h2 id="transform-data">Transform data<a class="anchor" aria-label="anchor" href="#transform-data"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># B. Long to wide ----</span></span>
 <span><span class="va">ppts_easia_weuro_long</span> <span class="op">&lt;-</span> <span class="va">ppts_easia_weuro_sel</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">'stats'</span><span class="op">)</span>,</span>
@@ -156,8 +158,9 @@ interpolate to obtain more annualized predictions.</p>
 <span><span class="co">#&gt;  $ location_level: Factor w/ 4 levels "country","multicountry",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ year          : num [1:88560] 1960 1960 1960 1960 1960 ...</span></span>
 <span><span class="co">#&gt;  $ variable      : chr [1:88560] "youthpop" "student" "teacher" "school" ...</span></span>
-<span><span class="co">#&gt;  $ value         : num [1:88560] 23769 NA NA NA NA ...</span></span>
-<span><span class="co"># View(ppts_easia_weuro_long)</span></span>
+<span><span class="co">#&gt;  $ value         : num [1:88560] 23769 NA NA NA NA ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># View(ppts_easia_weuro_long)</span></span>
 <span></span>
 <span><span class="co"># C sort and group ----</span></span>
 <span><span class="va">ppts_easia_weuro_long</span> <span class="op">&lt;-</span> <span class="va">ppts_easia_weuro_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -173,7 +176,7 @@ interpolate to obtain more annualized predictions.</p>
 <h3 id="raw-percentage-changes">Raw percentage changes<a class="anchor" aria-label="anchor" href="#raw-percentage-changes"></a>
 </h3>
 <p>We compute annual percentage changes below. Note that</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># D. Annual percentage changes ----</span></span>
 <span><span class="co"># Compute these</span></span>
 <span><span class="co"># - annual: for all possible consecutive years</span></span>
@@ -696,7 +699,7 @@ interpolate to obtain more annualized predictions.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">location_code</span> <span class="op">==</span> <span class="st">'KOR_Busan'</span> <span class="op">&amp;</span> <span class="va">variable</span> <span class="op">==</span> <span class="st">'school'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -1193,7 +1196,7 @@ immediately after. But it is based growth trend “linear” interpolation
 when we have years of missing data in between.</p>
 <p>We use the interpolated annual percentage changes to fill in gaps in
 levels.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># D.2 annual_interp1</span></span>
 <span><span class="co"># D.2.1 compute linearly interpolated annual change</span></span>
 <span><span class="co"># create new sorting var, to take difference across years even if not</span></span>
@@ -1253,8 +1256,9 @@ levels.</p>
 <span><span class="co">#&gt;  $ year            : num [1:52118] 1987 1988 1989 1990 1991 ...</span></span>
 <span><span class="co">#&gt;  $ variable        : chr [1:52118] "gdp" "gdp" "gdp" "gdp" ...</span></span>
 <span><span class="co">#&gt;  $ pchg_yr1_interp1: num [1:52118] 0.176 0.2014 0.122 0.0209 0.0384 ...</span></span>
-<span><span class="co">#&gt;  $ value_interp1   : num [1:52118] 20263 24343 27313 27884 28954 ...</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_interp1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">location_level</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="co">#&gt;  $ value_interp1   : num [1:52118] 20263 24343 27313 27884 28954 ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_interp1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">location_level</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">location_code</span> <span class="op">==</span> <span class="st">'AFG'</span> <span class="op">&amp;</span> <span class="va">variable</span> <span class="op">==</span> <span class="st">'student'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -1614,7 +1618,7 @@ levels.</p>
 <div class="section level3">
 <h3 id="merge-raw-and-interpolated-results-together">Merge raw and interpolated results together<a class="anchor" aria-label="anchor" href="#merge-raw-and-interpolated-results-together"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Only consider years in this range</span></span>
 <span><span class="va">it_min_year</span> <span class="op">&lt;-</span> <span class="fl">1920</span></span>
 <span><span class="va">it_max_year</span> <span class="op">&lt;-</span> <span class="fl">2020</span></span>
@@ -1663,7 +1667,7 @@ above terimal data availability time. Then do the same going backwards,
 but there, value = lead(value, n=1) / lead(1 + change, n=2)</p>
 <p>First, we generate end and start years and interpolating percentages,
 etc.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generate start and end times</span></span>
 <span><span class="va">ppts_easia_weuro_extrapolate</span> <span class="op">&lt;-</span> <span class="va">ppts_easia_weuro_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -1677,7 +1681,7 @@ etc.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">location_code</span>, <span class="va">location_level</span>, <span class="va">variable</span>, </span>
 <span>         <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"_start"</span><span class="op">)</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"_end"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Second extrapolate.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># How many years to extrapolate back</span></span>
 <span><span class="va">it_year_extrplt_backmost</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="va">it_year_extrplt_fordmost</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
@@ -1805,7 +1809,7 @@ etc.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># kable(ppts_easia_weuro_extrapolate %&gt;% select(-location_level) %&gt;%</span></span>
 <span><span class="co">#         filter(location_code == 'KOR_Busan' &amp; variable == 'school'))</span></span></code></pre></div>
 </div>
@@ -1814,7 +1818,7 @@ etc.</p>
 results<a class="anchor" aria-label="anchor" href="#merge-raw-and-interpolated-results-together-with-extrapolated-results"></a>
 </h3>
 <p>Merge extrpolated results back to main dataframe.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Merge</span></span>
 <span><span class="va">ppts_easia_weuro_long</span> <span class="op">&lt;-</span> <span class="va">ppts_easia_weuro_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_extrapolate</span>,</span>
@@ -1849,7 +1853,7 @@ change between 2000 and 2020, 2010 and 2020, etc. We are also able to
 see levels in 2020. These percentages and levels were not available
 without interpolation/extrapolation. We can see that our data for
 Afghanistan is much more complete after interpolating/extrapolating.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># str(ppts_easia_weuro_long)</span></span>
 <span><span class="co"># print</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -2395,7 +2399,7 @@ starts in 1923 (meaning any measures of any information is available in
 1923), but the school count data starts in 1925, we would extrapolate
 back 2 years to 1923. Austrian data for initial decades is spotty, hence
 we interpolate to fill in the gaps.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># str(ppts_easia_weuro_long)</span></span>
 <span><span class="co"># print</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -3315,7 +3319,7 @@ we interpolate to fill in the gaps.</p>
 </h3>
 <p>We have some historical data on Switzerland, and also some recent
 data.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># str(ppts_easia_weuro_long)</span></span>
 <span><span class="co"># print</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -4262,7 +4266,7 @@ data.</p>
 </h3>
 <p>Germany reunified in 1992, we extrapolate to obtain data predictions
 for 1990 to facilitate computing percentage changes.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># str(ppts_easia_weuro_long)</span></span>
 <span><span class="co"># print</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -4608,7 +4612,7 @@ for 1990 to facilitate computing percentage changes.</p>
 because the data is available for school counts between 1965 and 2020,
 the min and max years of the Korean data, and data is available every
 single year.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># str(ppts_easia_weuro_long)</span></span>
 <span><span class="co"># print</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -5152,7 +5156,7 @@ results</caption>
 </h2>
 <p>We now consider several different cuts, over the end-points of which
 we compute percentage changes.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Every five years from 1940 until 2020</span></span>
 <span><span class="va">ar_it_cuts_1940t2020_i05</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1920</span>, <span class="fl">2020</span>, length.out <span class="op">=</span> <span class="fl">21</span><span class="op">)</span></span>
 <span><span class="va">st_cuts_1940t2020_i05</span> <span class="op">&lt;-</span> <span class="st">"1920t2020i05"</span></span>
@@ -5166,7 +5170,7 @@ we compute percentage changes.</p>
 <span><span class="va">ar_it_cuts_1940t2020_i20</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1920</span>, <span class="fl">2020</span>, length.out <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">st_cuts_1940t2020_i20</span> <span class="op">&lt;-</span> <span class="st">"1920t2020i20"</span></span></code></pre></div>
 <p>We put the cuts and the associated string names into two lists.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List of cuts</span></span>
 <span><span class="va">ls_ar_it_cuts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  <span class="va">ar_it_cuts_1940t2020_i05</span>,</span>
@@ -5197,7 +5201,7 @@ we compute percentage changes.</p>
 <span><span class="co">#&gt; bins=c(1920, 1940, 1960, 1980, 2000, 2020)</span></span></code></pre></div>
 <p>Generate percentage changes across start end end points of each bin,
 for bins of varying length. For both raw and interpolated data.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># E. Generate cuts -----</span></span>
 <span><span class="va">it_avg_type</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="va">it_cut_type</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
@@ -5316,7 +5320,7 @@ for bins of varying length. For both raw and interpolated data.</p>
 </h3>
 <p>After generating percentage changes over different spans, merge
 again.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># D.3 merge together</span></span>
 <span><span class="co"># full_join same as left_join, </span></span>
 <span><span class="va">ppts_easia_weuro_world_pchg</span> <span class="op">&lt;-</span> <span class="va">ppts_easia_weuro_pchg_interp1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -5351,15 +5355,16 @@ again.</p>
 <span><span class="co">#&gt;  $ pchg          : num [1:82685] NA NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ pchg_interp1  : num [1:82685] 0.176 0.176 0.176 0.176 0.176 ...</span></span>
 <span><span class="co">#&gt;  $ value         : num [1:82685] NA NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ value_interp1 : num [1:82685] 7662 9010 10596 12460 14653 ...</span></span>
-<span><span class="co"># print(ppts_easia_weuro_world_pchg[1:50,])</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ value_interp1 : num [1:82685] 7662 9010 10596 12460 14653 ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># print(ppts_easia_weuro_world_pchg[1:50,])</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="sort-and-display">Sort and Display<a class="anchor" aria-label="anchor" href="#sort-and-display"></a>
 </h2>
 <p>We sort variables for more clearly organized output file.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Arrange results </span></span>
 <span><span class="va">ppts_easia_weuro_world_pchg</span> <span class="op">&lt;-</span> <span class="va">ppts_easia_weuro_world_pchg</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">year_bins_type</span>, </span>
@@ -5374,7 +5379,7 @@ interval-percentage changes after interpolation, given filled out values
 at key years. We use student count as example.</p>
 <p>Note that the “value” column shows value at the last year in the
 interval, if this was observed.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># print</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">st_cuts_name</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ls_ar_it_cuts</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
@@ -5709,7 +5714,7 @@ interval, if this was observed.</p>
 <p>Below we illustrate with Austria as example, showing data for school
 count. We are able to fill out some initial decades/years a little bit
 more with interpolation.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># print</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">st_cuts_name</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ls_ar_it_cuts</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
@@ -6187,7 +6192,7 @@ more with interpolation.</p>
 </h3>
 <p>Below we illustrate with Germany as example, where we filled in
 values.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># print</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">st_cuts_name</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ls_ar_it_cuts</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
@@ -6665,7 +6670,7 @@ values.</p>
 </h3>
 <p>Below we illustrate with Germany as example, where we filled in
 values.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># print</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">st_cuts_name</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ls_ar_it_cuts</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
@@ -6909,7 +6914,7 @@ values.</p>
 <h2 id="store-to-file">Store to file<a class="anchor" aria-label="anchor" href="#store-to-file"></a>
 </h2>
 <p>Finally, we save results to file in the data folder.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Write to CSV and write to rda</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">bl_resave_to_data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span><span class="va">ppts_easia_weuro_world_pchg</span>, <span class="st">"../data/ppts_easia_weuro_world_pchg.csv"</span>, na<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
