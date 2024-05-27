@@ -1,6 +1,6 @@
 This is [website](https://fanwangecon.github.io/PrjCompPPTS/) for [Hannum, Kim, and Wang (2024)](https://jeonghyeok-kim.github.io/assets/GlobalChildrenTeachersSchools_HannumKimWang.pdf) (HKW).
 
-On this project repository, we provide (1) the HKW children, teachers, and schools database, (2) programs ands scripts used to process and analyze data, and (3) scripts used to generate graphical and tabular outputs presented in the paper.
+On this project repository, we provide (1) the HKW children, teachers, and schools database, (2) programs and scripts used to process and analyze data, and (3) scripts used to generate graphical and tabular outputs presented in the paper.
 
 ## Raw data cleaning and aggregation
 
@@ -12,7 +12,7 @@ Third, [data-raw/ppts_easia_weuro_world.R](https://github.com/FanWangEcon/PrjCom
 
 ## Interpolation and computing statistics of changes
 
-First, we develope functions for data interpolation: [R/ffp_ppts_interp.R](https://fanwangecon.github.io/PrjCompPPTS/reference/ff_ppts_interp_linear.html). When there are gaps in population, teacher, or school data measurements, we use the rate of change between the closest dates in which there is data to linearly interpolate the missing values.
+First, we develop functions for data interpolation: [R/ffp_ppts_interp.R](https://fanwangecon.github.io/PrjCompPPTS/reference/ff_ppts_interp_linear.html). When there are gaps in population, teacher, or school data measurements, we use the rate of change between the closest dates in which there is data to linearly interpolate the missing values.
 
 Second, we implement the interpolation routine, along with also a close-boundary extrapolation routine, in the vignette [ffv_gen_percent_changes](https://fanwangecon.github.io/PrjCompPPTS/articles/ffv_gen_percent_changes.html) with our global dataset on child population, students, teachers, and schools. This generates the output file [ppts_easia_weuro_world_pchg.rda](https://github.com/FanWangEcon/PrjCompPPTS/blob/master/data/ppts_easia_weuro_world_pchg.rda).
 
@@ -29,7 +29,7 @@ We also have three functions that compute levels, ratios, changes, and elasticit
 
 ### Visual comparisons of changes and trends
 
-THe following scripts generate visualizations for the paper:
+The following scripts generate visualizations for the paper:
 
 1. [stata-script/02_Global_youth_population_trends.do](https://github.com/FanWangEcon/PrjCompPPTS/blob/master/stata-script/02_Global_youth_population_trends.do)
 2. [stata-script/03_Global_education_responses.do](https://github.com/FanWangEcon/PrjCompPPTS/blob/master/stata-script/03_Global_education_responses.do)
@@ -50,5 +50,5 @@ The following vignettes generate the tables contained in the appendix of the pap
    - [Table: Global students and teachers](https://fanwangecon.github.io/PrjCompPPTS/articles/ffv_tab_global_students_teachers.html)
 3. Western Europe East Asia youth, students, teachers, and schools:
    - [Table: Western Europe East Asia youth, students, teachers, and schools](https://fanwangecon.github.io/PrjCompPPTS/articles/ffv_tab_weea_pop_teachers_schools.html)
-4. Korean youth, studetns, teachers, and schoos:
+4. Korean youth, students, teachers, and schools:
    - [Table: Korea youth, students, teachers, and schools](https://fanwangecon.github.io/PrjCompPPTS/articles/ffv_tab_korea_pop_teachers_schools.html)
