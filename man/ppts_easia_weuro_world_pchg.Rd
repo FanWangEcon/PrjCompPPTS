@@ -3,15 +3,15 @@
 \docType{data}
 \name{ppts_easia_weuro_world_pchg}
 \alias{ppts_easia_weuro_world_pchg}
-\title{Level and changes, interpolated and extraplated}
+\title{Interpolated and extrapolated levels and changes panel across time bins}
 \format{
 A data frame with 266 rows and 7 variables:
 \describe{
 \item{location_code}{Short string code for country and regions}
 \item{location_level}{Country, or regional or sub-country}
 \item{variable}{Statistical variable}
-\item{year_bins_type}{The type of year binning}
-\item{year_bins}{Year bins given year binning}
+\item{year_bins_type}{The type of year binning, 1 year, 10 years, 20 years, etc.}
+\item{year_bins}{Year bins given year binning, labels of different years, decades, bi-decades, etc.}
 \item{value}{Level at start to end of bin}
 \item{value_interp1}{\code{value} with interpolation and extrapolation}
 \item{pchg}{Percentage change from start to end of bin}
@@ -19,16 +19,17 @@ A data frame with 266 rows and 7 variables:
 }
 }
 \source{
-World bank, national statistics websites of W. Europe and E. Asia countries
+\href{https://fanwangecon.github.io/PrjCompPPTS/articles/ffv_gen_percent_changes.html}{articles/ffv_gen_percent_changes}, \href{https://jeonghyeok-kim.github.io/assets/GlobalChildrenTeachersSchools_HannumKimWang.pdf}{See online appendix C of Hannum, Kim, and Wang (2024).}
 }
 \usage{
 ppts_easia_weuro_world_pchg
 }
 \description{
-Level and changes, interpolated and extraplated
+Panel data on school age population, students, teachers, and schools, levels and changes, interpolated and extrapolated
 }
 \examples{
 data(ppts_easia_weuro_world_pchg)
+summary(ppts_easia_weuro_world_pchg)
 print(ppts_easia_weuro_world_pchg)
 }
 \keyword{datasets}

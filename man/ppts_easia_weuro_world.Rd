@@ -19,7 +19,7 @@ A data frame with 9 rows and 5 variables:
 }
 }
 \source{
-\href{Cross-nationa data on school age popultion, students, teachers, and schools}{https://fanwangecon.github.io/}
+\href{https://jeonghyeok-kim.github.io/assets/GlobalChildrenTeachersSchools_HannumKimWang.pdf}{See online appendix B of Hannum, Kim, and Wang (2024).}
 }
 \usage{
 ppts_easia_weuro_world
@@ -34,12 +34,12 @@ for Western European and Eastern Asian countries.
 \details{
 Aggregate national for countries except in the case of Korea.
 
-For Korea, have with-in country data aggregated to compare between
-metropolitan and non-metropolitan areas. Also has data available in
-Korea for all regions
+For Korea, within country data aggregated to compare between
+metropolitan and non-metropolitan areas as well as province-specific data.
 }
 \examples{
 data(ppts_easia_weuro_world)
+summary(ppts_easia_weuro_world)
 print(ppts_easia_weuro_world)
 }
 \keyword{datasets}

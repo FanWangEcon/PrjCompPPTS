@@ -3,7 +3,7 @@
 \docType{data}
 \name{ppts_country_code}
 \alias{ppts_country_code}
-\title{Country, region and subcountry code and names}
+\title{Country, region, and subcountry code and names}
 \format{
 A data frame with 266 rows and 7 variables:
 \describe{
@@ -23,10 +23,11 @@ World bank
 ppts_country_code
 }
 \description{
-Country, region and subcountry code and names
+Country, region, and subcountry code and names
 }
 \examples{
 data(ppts_country_code)
+summary(ppts_country_code)
 print(ppts_country_code)
 }
 \keyword{datasets}
