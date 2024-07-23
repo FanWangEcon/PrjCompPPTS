@@ -26,7 +26,7 @@ library(PrjCompPPTS)
 # If resave outputs to data, only do this during development
 # Latex output file
 verbose <- TRUE
-bl_tex_save <- TRUE
+bl_tex_save <- FALSE
 spt_path_res <- file.path("..", "res-tab", fsep = .Platform$file.sep)
 spn_tex_out <- file.path(spt_path_res, "tab_weea_lrce.tex", fsep = .Platform$file.sep)
 ```

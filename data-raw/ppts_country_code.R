@@ -2,11 +2,12 @@
 # Load library
 library(tidyverse)
 
-# Import
-ppts_country_code <- read_csv("data-raw/ppts_country_code.csv")
+
+ppts_country_code_raw <- read_csv("data-raw/ppts_country_code.csv")
+print(ppts_country_code_raw, n =300)
 
 # Convert
-ppts_country_code <- ppts_country_code %>%
+ppts_country_code <- ppts_country_code_raw %>%
     rename(
         location_code = Code,
         location_name = Economy,
