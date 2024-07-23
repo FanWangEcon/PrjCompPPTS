@@ -1,6 +1,6 @@
 This is the Project [website](https://fanwangecon.github.io/PrjCompPPTS) and [repository](https://github.com/FanWangEcon/PrjCompPPTS) for [Hannum, Kim, and Wang (2024)](https://jeonghyeok-kim.github.io/assets/GlobalChildrenTeachersSchools_HannumKimWang.pdf) (HKW).
 
-On this project repository, we provide (1) the HKW children, teachers, and schools database, (2) programs ands scripts used to process and analyze data, and (3) scripts used to generate graphical and tabular outputs presented in the paper.
+On this project repository, we provide (1) the HKW children, teachers, and schools database, (2) programs and scripts used to process and analyze data, and (3) scripts used to generate graphical and tabular outputs presented in the paper.
 
 ## Raw data cleaning and aggregation
 
@@ -28,7 +28,7 @@ We also have three functions that compute levels, ratios, changes, and elasticit
 
 ### Visual comparisons of changes and trends
 
-THe following scripts generate visualizations for the paper:
+The following scripts generate visualizations for the paper:
 
 1. [stata-script/02_Global_youth_population_trends.do](https://github.com/FanWangEcon/PrjCompPPTS/blob/master/stata-script/02_Global_youth_population_trends.do)
 2. [stata-script/03_Global_education_responses.do](https://github.com/FanWangEcon/PrjCompPPTS/blob/master/stata-script/03_Global_education_responses.do)
@@ -47,7 +47,7 @@ The following vignettes generate the tables contained in the appendix of the pap
    - [Table: Global youth population and teachers](https://fanwangecon.github.io/PrjCompPPTS/articles/ffv_tab_global_pop_teachers.html) 
 3. Western Europe East Asia youth, students, teachers, and schools:
    - [Table: Western Europe East Asia youth, students, teachers, and schools](https://fanwangecon.github.io/PrjCompPPTS/articles/ffv_tab_weea_pop_teachers_schools.html)
-4. Korean youth, studetns, teachers, and schoos:
+4. Korean youth, students, teachers, and schools:
    - [Table: Korea youth, students, teachers, and schools](https://fanwangecon.github.io/PrjCompPPTS/articles/ffv_tab_korea_pop_teachers_schools.html)
 
 Due to limited space in the paper document, we also present on this website additional statistics in tables not included in the paper PDF:
