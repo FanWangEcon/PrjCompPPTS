@@ -1,9 +1,10 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   ffv_dev_child_teacher_ratio: ffv_dev_child_teacher_ratio.html
   ffv_gen_elasticities: ffv_gen_elasticities.html
+  ffv_gen_percent_changes_summ: ffv_gen_percent_changes_summ.html
   ffv_gen_percent_changes: ffv_gen_percent_changes.html
   ffv_tab_global_pop_teachers: ffv_tab_global_pop_teachers.html
   ffv_tab_global_pop: ffv_tab_global_pop.html
@@ -11,8 +12,7 @@ articles:
   ffv_tab_global_students: ffv_tab_global_students.html
   ffv_tab_korea_pop_teachers_schools: ffv_tab_korea_pop_teachers_schools.html
   ffv_tab_weea_pop_teachers_schools: ffv_tab_weea_pop_teachers_schools.html
-last_built: 2024-06-02T02:59Z
+last_built: 2024-07-24T08:46Z
 urls:
   reference: https://fanwangecon.github.io/PrjCompPPTS/reference
   article: https://fanwangecon.github.io/PrjCompPPTS/articles
-
