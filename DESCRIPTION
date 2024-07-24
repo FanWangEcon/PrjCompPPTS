@@ -1,5 +1,5 @@
 Package: PrjCompPPTS
-Title: Global changes in school age popultion, teachers, and schools
+Title: From Population Growth to Demographic Scarcity: Emerging Challenges to Global Primary Education Provision in the Twenty-first Century
 Version: 1.0.0
 Authors@R:
     c(person(given="Emily", 
@@ -33,6 +33,7 @@ Suggests:
 VignetteBuilder: knitr
 Imports: 
     dplyr,
+    ggplot2,
     kableExtra,
     readr,
     stringr,
