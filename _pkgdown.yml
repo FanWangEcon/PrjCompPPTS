@@ -3,6 +3,24 @@ template:
   bootstrap: 5
   number_sections: yes
 
+navbar:
+  title: "Hannum, Kim, and Wang"
+  left:
+    - text: "Functions"
+      href: reference/index.html
+    - text: "Examples and Tables"
+      href: articles/index.html
+    - text: "Paper"
+      href: https://jeonghyeok-kim.github.io/assets/GlobalChildrenTeachersSchools_HannumKimWang.pdf
+    - text: "Links"
+      menu:
+        - text: "Emily Hannum"
+          href: https://sociology.sas.upenn.edu/people/emily-hannum
+        - text: "Jeonghyeok Kim"
+          href: https://www.jeonghyeok-kim.com/
+        - text: "Fan Wang"
+          href: https://fanwangecon.github.io/
+
 reference:
 - title: Interpolate
   desc: Linear interpolation generate data in gap dates with missing data
@@ -17,3 +35,19 @@ reference:
   desc: Input data and benchmark analysis data
   contents:
   - starts_with("ppts") 
+
+articles:
+- title: Data generating vignettes
+  desc: Vignettes for augmenting admin data with interpolation
+  contents:
+  - ffv_gen_percent_changes
+  - ffv_gen_percent_changes_summ
+- title: Statistics generating vignettes
+  desc: Vignettes for computing statistics of changes over time
+  contents:
+  - ffv_dev_child_teacher_ratio
+  - ffv_gen_elasticities
+- title: Table vignettes
+  desc: Vignettes generating appendix tables for Hannum, Kim, and Wang
+  contents:
+  - starts_with("ffv_tab")

@@ -14,3 +14,5 @@
 ^res-tab$
 ^stata-script$
 ^vignettes-sandbox$
+^doc$
+^Meta$
