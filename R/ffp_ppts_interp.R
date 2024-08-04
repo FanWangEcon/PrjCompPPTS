@@ -98,8 +98,8 @@ ff_ppts_interp_linear <- function(df_data,
     ls_svr_group_merge[[svr_group]] <- svr_group
   }
   ls_svr_group_merge[[svr_date]] <- svr_date
-  df_data_interp1 <- df_interp1 %>%
-    left_join(df_data, by = (ls_svr_group_merge)) %>%
+  df_data_interp1 <- df_data %>%
+    left_join(df_interp1, by = (ls_svr_group_merge)) %>%
     rename(!!sym(svr_interp) := value_interp1) %>%
     mutate(!!sym(svr_interp) := if_else(
       !is.na(!!sym(svr_data)) &

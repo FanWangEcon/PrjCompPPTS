@@ -119,7 +119,9 @@ where, the percentage change is for all $t \le t' \le t+\tau-1$.
 
 The annual percentage change is exact where we know the level of schools, teachers, or students in the the current year and the year immediately after. But it is based growth trend "linear" interpolation when we have years of missing data in between.
 
-We use the interpolated annual percentage changes to fill in gaps in levels.
+We use the interpolated annual percentage changes to fill in gaps in levels. We interpolate with this function: [ff_ppts_interp_linear](https://fanwangecon.github.io/PrjCompPPTS/reference/ff_ppts_interp_linear.html). We test out the contents of the function via scripts below, and then confirm that the script and the function produce the same result. We first proceed with the script, and then the function. 
+
+Construct script-based results:
 
 ```{r}
 # D.2 annual_interp1
@@ -173,33 +175,60 @@ ppts_easia_weuro_interp1 <- ppts_easia_weuro_interp1 %>%
   ungroup() %>%
   select(-gap_ctr, -span_yr_dup, -value)
 
-# Print
-str(ppts_easia_weuro_interp1)
-kable(ppts_easia_weuro_interp1 %>% select(-location_level) %>%
-        filter(location_code == 'AFG' & variable == 'student'))
-```
-
-### Merge raw and interpolated results together
-
-```{r}
-# Only consider years in this range
-it_min_year <- 1920
-it_max_year <- 2020
 # D.3 merge together
-ppts_easia_weuro_long <- ppts_easia_weuro_long %>%
+ppts_easia_weuro_interp1_script <- ppts_easia_weuro_long %>%
   left_join(ppts_easia_weuro_interp1,
             by = (c('location_code' = 'location_code',
                     'location_level' = 'location_level',
                     'year' = 'year',
                     'variable' = 'variable'))) %>%
-    filter(year <= it_max_year & year >= it_min_year) %>%
   # add in data from the first year of raw data availability
   mutate(value_interp1 = case_when(
     !is.na(value) & is.na(value_interp1) ~ value,
     TRUE ~ value_interp1
     ))
+
+# Print interpolated results
+str(ppts_easia_weuro_interp1)
+kable(ppts_easia_weuro_interp1 %>% select(-location_level) %>%
+        filter(location_code == 'AFG' & variable == 'student'))
 ```
 
+Functionalizing the script, we have the function output below: 
+
+```{r}
+# Function parameters
+df_data <- ppts_easia_weuro_long
+ar_svr_group <- c("location_code", "location_level", "variable")
+svr_data <- c("value")
+svr_date <- c("year")
+svr_interp <- c("value_interp1_func")
+# Run function
+ppts_easia_weuro_interp1_func <- PrjCompPPTS::ff_ppts_interp_linear(
+  df_data,
+  ar_svr_group = ar_svr_group,
+  svr_data = svr_data,
+  svr_date = svr_date,
+  svr_interp = svr_interp,
+  verbose = FALSE
+) %>% rename(value_interp1 = value_interp1_func)
+# Test if identical
+bl_func_script_consistency <- identical(
+  ppts_easia_weuro_interp1_func, ppts_easia_weuro_interp1_script)
+print(glue::glue("bl_func_script_consistency = {bl_func_script_consistency}"))
+```
+
+Year selection:
+
+```{r}
+# Only consider years in this range
+it_min_year <- 1920
+it_max_year <- 2020
+ppts_easia_weuro_long <- ppts_easia_weuro_interp1_func
+ppts_easia_weuro_long <- ppts_easia_weuro_long %>%
+    filter(year <= it_max_year & year >= it_min_year)
+```
+  
 ### Extrapolating 
 
 We will extrapolate for several years before the start and after the end of the data timeframes. Extrapolation will not exceed going 5 years forward and going 5 years backwards. And extrapolation will only happen within years in which there is at least one variable, among variables for the country, has non-NA values. In cases where a country's data is available only starting after 1980, we allow for extrapolation back to up to 1980 for 5 years. 
