@@ -1,6 +1,6 @@
 Package: PrjCompPPTS
 Title: From Population Growth to Demographic Scarcity: Emerging Challenges to Global Primary Education Provision in the Twenty-first Century
-Version: 1.0.0
+Version: 1.1.0
 Authors@R:
     c(person(given="Emily", 
              family="Hannum",              
